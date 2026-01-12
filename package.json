@@ -1,5 +1,5 @@
 {
-  "name": "--typescript",
+  "name": "pretty-webapp",
   "private": true,
   "type": "module",
   "scripts": {
