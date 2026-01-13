@@ -46,7 +46,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <section className="relative h-screen w-full overflow-hidden bg-background pt-20">
       <div
         ref={scrollRef}
         className="flex h-full items-center gap-6 overflow-x-hidden overflow-y-hidden px-8"
@@ -79,10 +79,6 @@ export default function Hero() {
           </div>
         ))}
       </div>
-
-      {/* Gradient overlays para efecto fade */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-slate-900 to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-slate-900 to-transparent" />
     </section>
   );
 }
