@@ -40,8 +40,8 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="text-center mt-6 text-muted-foreground">
-          © Pretty All Rights Reserved
+        <div className="text-center mt-6 text-muted-foreground text-sm">
+          © Pretty Todos los derechos reservados
         </div>
       </div>
     </footer>
