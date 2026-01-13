@@ -1,10 +1,10 @@
 import { Title } from "@solidjs/meta";
 
-export default function Home() {
+export default function Productos() {
   return (
     <main class="container mx-auto px-4 py-8">
-      <Title>Hello World</Title>
-      <h1>¡Bienvenido!</h1>
+      <Title>Productos</Title>
+      <h1>Productos</h1>
     </main>
   );
 }
