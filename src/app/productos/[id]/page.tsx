@@ -19,7 +19,7 @@ interface ProductPageProps {
 export default function ProductPage({ params }: ProductPageProps) {
   const { id } = use(params);
   const productId = parseInt(id);
-  const product = products[productId];
+  const product = products.find(p => p.id === productId);
 
   if (!product) {
     notFound();

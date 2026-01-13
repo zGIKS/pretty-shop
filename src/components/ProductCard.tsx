@@ -5,13 +5,12 @@ import { Button } from "@/components/ui/button";
 
 interface ProductCardProps {
   product: Product;
-  productId: number;
 }
 
-export default function ProductCard({ product, productId }: ProductCardProps) {
+export default function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="flex flex-col h-full">
-      <Link href={`/productos/${productId}`}>
+      <Link href={`/productos/${product.id}`}>
         <div className="relative w-full h-64 overflow-hidden rounded-sm group">
           <Image
             src={product.image}
@@ -22,7 +21,7 @@ export default function ProductCard({ product, productId }: ProductCardProps) {
         </div>
       </Link>
       <div className="flex flex-col flex-grow pt-3 space-y-2">
-        <Link href={`/productos/${productId}`}>
+        <Link href={`/productos/${product.id}`}>
           <h3 className="text-lg font-semibold hover:underline">{product.title}</h3>
         </Link>
         <p className="text-sm text-muted-foreground">S/ {product.price}</p>
