@@ -8,10 +8,10 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center">
           {/* Navigation */}
           <div className="flex flex-col md:flex-row gap-4 md:gap-8 mb-4 md:mb-0">
-            <Link href="#productos" className="hover:text-muted-foreground">
+            <Link href="/productos" className="hover:text-muted-foreground">
               Productos
             </Link>
-            <Link href="#contacto" className="hover:text-muted-foreground">
+            <Link href="/contacto" className="hover:text-muted-foreground">
               Contacto
             </Link>
           </div>
@@ -19,10 +19,10 @@ export default function Footer() {
           {/* Legal and Social */}
           <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-center">
             <div className="flex flex-col md:flex-row gap-4 md:gap-8 mb-4 md:mb-0">
-              <Link href="#terms" className="hover:text-muted-foreground text-sm">
+              <Link href="/terms" className="hover:text-muted-foreground text-sm">
                 Términos y Condiciones
               </Link>
-              <Link href="#privacy" className="hover:text-muted-foreground text-sm">
+              <Link href="/privacy" className="hover:text-muted-foreground text-sm">
                 Política de Privacidad
               </Link>
             </div>
