@@ -17,32 +17,35 @@ export default function Hero() {
     { src: "/assets/pack4/2.png", alt: "Pack 4 - Image 2", height: "h-[28vh]" },
   ];
 
-  // Duplicar imágenes muchas veces para efecto infinito
+  // Duplicar imágenes muchas veces para efecto infinito suave
   const allImages = [...images, ...images, ...images, ...images, ...images, ...images];
 
-  // Auto-scroll horizontal infinito
+  // Auto-scroll horizontal infinito sin saltos
   useEffect(() => {
     const scrollContainer = scrollRef.current;
     if (!scrollContainer) return;
 
-    let scrollPosition = 0;
-    const scrollSpeed = 1.5; // Velocidad del scroll
+    let animationFrameId: number;
+    const scrollSpeed = 1; // Velocidad del scroll
 
     const scroll = () => {
-      scrollPosition += scrollSpeed;
+      if (!scrollContainer) return;
+
+      scrollContainer.scrollLeft += scrollSpeed;
       
-      // Reiniciar cuando llegue a 1/6 del total (porque duplicamos 6 veces)
-      const maxScroll = scrollContainer.scrollWidth / 6;
-      if (scrollPosition >= maxScroll) {
-        scrollPosition = 0;
+      // Resetear suavemente cuando llegue a 1/3 del contenido (después de 2 copias completas)
+      const maxScroll = scrollContainer.scrollWidth / 3;
+      if (scrollContainer.scrollLeft >= maxScroll) {
+        // Resetear al inicio sin salto visual
+        scrollContainer.scrollLeft = 0;
       }
       
-      scrollContainer.scrollLeft = scrollPosition;
+      animationFrameId = requestAnimationFrame(scroll);
     };
 
-    const intervalId = setInterval(scroll, 20);
+    animationFrameId = requestAnimationFrame(scroll);
 
-    return () => clearInterval(intervalId);
+    return () => cancelAnimationFrame(animationFrameId);
   }, []);
 
   return (
