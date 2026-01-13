@@ -13,7 +13,7 @@ export default function Header() {
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md backdrop-blur-sm bg-white/95">
-      <header className="container mx-auto flex items-center justify-between p-6">
+      <header className="max-w-7xl mx-auto flex items-center justify-between p-6">
         <Link href="/">
           <Image src="/pretty.png" alt="Pretty Logo" width={50} height={16} />
         </Link>
