@@ -2,23 +2,13 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import { beautyImages } from "@/data/images";
 
 export default function Hero() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const images = [
-    { src: "/assets/pack1/1.png", alt: "Pack 1 - Image 1", height: "h-[28vh]" },
-    { src: "/assets/pack1/2.png", alt: "Pack 1 - Image 2", height: "h-[35vh]" },
-    { src: "/assets/pack2/1.png", alt: "Pack 2 - Image 1", height: "h-[31vh]" },
-    { src: "/assets/pack2/2.png", alt: "Pack 2 - Image 2", height: "h-[26vh]" },
-    { src: "/assets/pack3/1.png", alt: "Pack 3 - Image 1", height: "h-[38vh]" },
-    { src: "/assets/pack3/2.png", alt: "Pack 3 - Image 2", height: "h-[30vh]" },
-    { src: "/assets/pack4/1.png", alt: "Pack 4 - Image 1", height: "h-[33vh]" },
-    { src: "/assets/pack4/2.png", alt: "Pack 4 - Image 2", height: "h-[28vh]" },
-  ];
-
-  // Duplicar imágenes muchas veces para efecto infinito suave
-  const allImages = [...images, ...images, ...images, ...images, ...images, ...images];
+  // Duplicar imágenes para efecto infinito suave
+  const allImages = [...beautyImages, ...beautyImages];
 
   // Auto-scroll horizontal infinito sin saltos
   useEffect(() => {
@@ -33,8 +23,8 @@ export default function Hero() {
 
       scrollContainer.scrollLeft += scrollSpeed;
       
-      // Resetear suavemente cuando llegue a 1/3 del contenido (después de 2 copias completas)
-      const maxScroll = scrollContainer.scrollWidth / 3;
+      // Resetear suavemente cuando llegue a la mitad (después de 1 copia completa)
+      const maxScroll = scrollContainer.scrollWidth / 2;
       if (scrollContainer.scrollLeft >= maxScroll) {
         // Resetear al inicio sin salto visual
         scrollContainer.scrollLeft = 0;
@@ -76,6 +66,7 @@ export default function Hero() {
                     className="object-cover"
                     sizes="240px"
                     priority={colIndex < 2}
+                    unoptimized
                   />
                 </div>
               ))}
