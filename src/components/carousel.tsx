@@ -39,7 +39,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-background pt-20">
+    <section className="relative h-[1200px] w-full overflow-hidden bg-background py-16">
       <div
         ref={scrollRef}
         className="flex h-full items-center gap-6 overflow-x-hidden overflow-y-hidden px-8"
@@ -57,7 +57,8 @@ export default function Hero() {
               .map((image, imgIndex) => (
                 <div
                   key={`img-${colIndex}-${imgIndex}`}
-                  className={`relative ${image.height} w-[180px] md:w-[240px] flex-shrink-0 overflow-hidden rounded-lg shadow-xl transition-transform hover:scale-105`}
+                  className={`relative ${image.height} flex-shrink-0 overflow-hidden rounded-lg shadow-xl transition-transform hover:scale-105`}
+                  style={{ width: '240px' }}
                 >
                   <Image
                     src={image.src}

@@ -18,14 +18,13 @@ export default function LotusFlower() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center w-[250px] h-[250px]">
       {animationData && (
         <Lottie
           animationData={animationData}
           loop={true}
           autoplay={true}
-          style={{ width: '100%', maxWidth: '250px', height: 'auto' }}
-          className="object-contain"
+          style={{ width: '250px', height: '250px' }}
         />
       )}
     </div>
