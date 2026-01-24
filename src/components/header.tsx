@@ -7,11 +7,11 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { Package, Mail, Menu, Briefcase } from "lucide-react";
 import PrettyIcon from "@/components/icon/pretty";
 
-export default function Header() {
+export default function Header({ fixed = true }: { fixed?: boolean }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 shadow-md backdrop-blur-sm bg-white/95">
+    <div className={`${fixed ? 'fixed top-0 left-0 right-0 z-50' : ''} shadow-md backdrop-blur-sm bg-white/95`}>
       <header className="max-w-7xl mx-auto flex items-center justify-between p-6">
         <Link href="/">
           <PrettyIcon className="w-18 h-16" />
