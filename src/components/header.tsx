@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Package, Mail, Menu, Briefcase } from "lucide-react";
 import SearchBar from "@/components/SearchBar";
+import PrettyIcon from "@/components/icon/pretty";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -15,7 +16,7 @@ export default function Header() {
     <div className="fixed top-0 left-0 right-0 z-50 shadow-md backdrop-blur-sm bg-white/95">
       <header className="max-w-7xl mx-auto flex items-center justify-between p-6">
         <Link href="/">
-          <Image src="/pretty.png" alt="Pretty Logo" width={50} height={16} />
+          <PrettyIcon className="w-18 h-16" />
         </Link>
         <div className="hidden md:flex items-center gap-4">
           <SearchBar className="w-64" />
