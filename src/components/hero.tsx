@@ -1,6 +1,5 @@
 "use client";
 
-import { Package, Briefcase } from "lucide-react";
 import LotusFlower from "./flower-animation";
 
 export default function Hero() {
@@ -19,7 +18,7 @@ export default function Hero() {
           </div>
 
           {/* Animación a la derecha */}
-          <div className="flex justify-center lg:justify-end">
+          <div className="flex justify-center items-center">
             <LotusFlower />
           </div>
         </div>

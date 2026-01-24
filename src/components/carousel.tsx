@@ -39,7 +39,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative h-[1200px] w-full overflow-hidden bg-background py-16">
+    <section className="relative h-[1200px] w-full overflow-hidden bg-background py-16 mt-16">
       <div
         ref={scrollRef}
         className="flex h-full items-center gap-6 overflow-x-hidden overflow-y-hidden px-8"

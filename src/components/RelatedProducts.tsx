@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import ProductCard from "@/components/ProductCard";
 import { Product } from "@/data/products";
 
@@ -7,11 +8,13 @@ interface RelatedProductsProps {
 }
 
 export default function RelatedProducts({ currentProductIndex, products }: RelatedProductsProps) {
-  // Obtener 4 productos aleatorios excluyendo el actual
-  const relatedProducts = products
-    .filter((product) => product.id !== currentProductIndex)
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 4);
+  // Obtener 4 productos relacionados excluyendo el actual, ordenados por id descendente
+  const relatedProducts = useMemo(() => {
+    return products
+      .filter((product) => product.id !== currentProductIndex)
+      .sort((a, b) => b.id - a.id)
+      .slice(0, 4);
+  }, [products, currentProductIndex]);
 
   return (
     <div className="mt-16">
