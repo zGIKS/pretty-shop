@@ -1,12 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Package, Mail, Menu, Briefcase } from "lucide-react";
-import SearchBar from "@/components/SearchBar";
 import PrettyIcon from "@/components/icon/pretty";
 
 export default function Header() {
@@ -18,27 +16,26 @@ export default function Header() {
         <Link href="/">
           <PrettyIcon className="w-18 h-16" />
         </Link>
-        <div className="hidden md:flex items-center gap-4">
-          <SearchBar className="w-64" />
-           <Button variant="ghost" className="flex items-center gap-2" asChild>
-             <Link href="/productos">
-               <Package size={20} />
-               Productos
-             </Link>
-           </Button>
-           <Button variant="ghost" className="flex items-center gap-2" asChild>
-             <Link href="/servicios">
-               <Briefcase size={20} />
-               Servicios
-             </Link>
-           </Button>
-           <Button variant="ghost" className="flex items-center gap-2" asChild>
-             <Link href="/contacto">
-               <Mail size={20} />
-               Contacto
-             </Link>
-           </Button>
-        </div>
+         <div className="hidden md:flex items-center gap-4">
+            <Button variant="ghost" className="flex items-center gap-2" asChild>
+              <Link href="/servicios">
+                <Briefcase size={20} />
+                Servicios
+              </Link>
+            </Button>
+            <Button variant="ghost" className="flex items-center gap-2" asChild>
+              <Link href="/productos">
+                <Package size={20} />
+                Productos
+              </Link>
+            </Button>
+            <Button variant="ghost" className="flex items-center gap-2" asChild>
+              <Link href="/contacto">
+                <Mail size={20} />
+                Contacto
+              </Link>
+            </Button>
+         </div>
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild className="md:hidden">
             <Button variant="ghost" size="icon">
@@ -49,27 +46,26 @@ export default function Header() {
             <SheetHeader>
               <SheetTitle>Menu</SheetTitle>
             </SheetHeader>
-            <div className="flex flex-col gap-4 mt-4 p-4">
-              <SearchBar className="w-full" onResultClick={() => setOpen(false)} />
-               <Button variant="ghost" className="w-full justify-start" onClick={() => setOpen(false)} asChild>
-                 <Link href="/productos">
-                   <Package size={20} className="mr-2" />
-                   Productos
-                 </Link>
-               </Button>
-               <Button variant="ghost" className="w-full justify-start" onClick={() => setOpen(false)} asChild>
-                 <Link href="/servicios">
-                   <Briefcase size={20} className="mr-2" />
-                   Servicios
-                 </Link>
-               </Button>
-               <Button variant="ghost" className="w-full justify-start" onClick={() => setOpen(false)} asChild>
-                 <Link href="/contacto">
-                   <Mail size={20} className="mr-2" />
-                   Contacto
-                 </Link>
-               </Button>
-            </div>
+             <div className="flex flex-col gap-4 mt-4 p-4">
+                <Button variant="ghost" className="w-full justify-start" onClick={() => setOpen(false)} asChild>
+                  <Link href="/servicios">
+                    <Briefcase size={20} className="mr-2" />
+                    Servicios
+                  </Link>
+                </Button>
+                <Button variant="ghost" className="w-full justify-start" onClick={() => setOpen(false)} asChild>
+                  <Link href="/productos">
+                    <Package size={20} className="mr-2" />
+                    Productos
+                  </Link>
+                </Button>
+                <Button variant="ghost" className="w-full justify-start" onClick={() => setOpen(false)} asChild>
+                  <Link href="/contacto">
+                    <Mail size={20} className="mr-2" />
+                    Contacto
+                  </Link>
+                </Button>
+             </div>
           </SheetContent>
         </Sheet>
       </header>

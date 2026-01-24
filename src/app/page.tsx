@@ -1,5 +1,6 @@
 import Header from "@/components/header";
-import Hero from "@/components/section1";
+import Carousel from "@/components/carousel";
+import Hero from "@/components/hero";
 import Footer from "@/components/footer";
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
     <>
       <Header />
       <Hero />
+      <Carousel />
       <Footer />
     </>
   );

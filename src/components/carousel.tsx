@@ -74,15 +74,6 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* Texto centrado sobre las imágenes */}
-      <div className="absolute inset-0 flex items-center justify-center z-10">
-        <div className="text-center bg-black/40 p-6 rounded-lg backdrop-blur-sm">
-          <h1 className="text-4xl font-bold text-white">Belleza Sin Esfuerzo</h1>
-          <p className="text-lg text-gray-200 mt-4">
-            Luces y te sientes lo mejor sin complicaciones, mantén estas piezas a mano.
-          </p>
-        </div>
-      </div>
     </section>
   );
 }
