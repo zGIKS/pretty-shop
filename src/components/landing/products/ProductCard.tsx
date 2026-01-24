@@ -20,7 +20,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           />
         </div>
       </Link>
-      <div className="flex flex-col flex-grow pt-3 space-y-2">
+      <div className="flex flex-col grow pt-3 space-y-2">
         <Link href={`/productos/${product.id}`}>
           <h3 className="text-lg font-semibold hover:underline">{product.title}</h3>
         </Link>

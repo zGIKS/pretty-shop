@@ -1,7 +1,7 @@
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import ContactInfo from "@/components/ContactInfo";
-import BusinessHours from "@/components/BusinessHours";
+import ContactInfo from "@/components/landing/contact/ContactInfo";
+import BusinessHours from "@/components/landing/contact/BusinessHours";
 
 export default function Contacto() {
   return (

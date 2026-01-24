@@ -1,8 +1,8 @@
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { products } from "@/data/products";
-import ProductCard from "@/components/ProductCard";
-import SearchBar from "@/components/SearchBar";
+import ProductCard from "@/components/landing/products/ProductCard";
+import SearchBar from "@/components/landing/products/SearchBar";
 
 export default function Productos() {
   return (

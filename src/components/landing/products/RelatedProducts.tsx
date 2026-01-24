@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import ProductCard from "@/components/ProductCard";
+import ProductCard from "@/components/landing/products/ProductCard";
 import { Product } from "@/data/products";
 
 interface RelatedProductsProps {

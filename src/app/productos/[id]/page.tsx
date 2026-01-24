@@ -7,7 +7,7 @@ import Link from "next/link";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { products } from "@/data/products";
-import RelatedProducts from "@/components/RelatedProducts";
+import RelatedProducts from "@/components/landing/products/RelatedProducts";
 import { Button } from "@/components/ui/button";
 
 interface ProductPageProps {

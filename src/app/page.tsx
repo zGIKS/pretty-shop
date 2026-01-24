@@ -1,8 +1,8 @@
 import Header from "@/components/header";
-import Section2 from "@/components/section2";
-import Section3 from "@/components/section3";
-import Carousel from "@/components/carousel";
-import Hero from "@/components/hero";
+import Section2 from "@/components/landing/home/section2";
+import Section3 from "@/components/landing/home/section3";
+import Carousel from "@/components/landing/home/carousel";
+import Hero from "@/components/landing/home/hero";
 import Footer from "@/components/footer";
 
 export default function Home() {

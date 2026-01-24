@@ -18,7 +18,7 @@ export default function LotusFlower() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center w-[250px] h-[250px]">
+    <div className="flex items-center justify-center w-62.5 h-62.5">
       {animationData && (
         <Lottie
           animationData={animationData}
