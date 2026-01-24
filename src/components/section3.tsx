@@ -12,7 +12,7 @@ export default function Section3() {
           </div>
           <div className="w-full md:w-1/2">
             <h3 className="text-lg md:text-2xl font-semibold text-primary mb-2 md:mb-4">
-              En Pretty Studio, celebramos la belleza natural.
+              En Pretty Studio, celebramos la belleza natural
             </h3>
             <p className="text-sm md:text-lg text-muted-foreground mb-4 md:mb-6">
               Creemos que la verdadera belleza viene de dentro y se refleja en el exterior. Nuestros productos están diseñados para realzar tu belleza natural sin compromisos.
