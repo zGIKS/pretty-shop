@@ -5,7 +5,7 @@ import ContactSocials from "@/components/landing/contact/ContactSocials";
 
 export default function ContactInfo() {
   return (
-    <Card className="h-full min-h-[520px]">
+    <Card className="h-full min-h-130">
       <CardHeader>
         <CardTitle>Contáctanos</CardTitle>
       </CardHeader>

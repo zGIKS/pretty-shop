@@ -4,11 +4,9 @@ import PrettyIcon from "@/components/icon/pretty";
 
 export default function Footer() {
   const servicios = [
-    "Cuidado de la piel",
-    "Rostro",
-    "Ojos",
-    "Labios",
-    "Accesorios de belleza",
+    "Tratamientos Faciales",
+    "Tratamientos Corporales",
+    "Podología",
   ];
 
   const navegacion = [

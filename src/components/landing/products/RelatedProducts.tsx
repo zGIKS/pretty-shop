@@ -5,16 +5,45 @@ import { Product } from "@/data/products";
 interface RelatedProductsProps {
   currentProductIndex: number;
   products: Product[];
+  selectedCategory: string;
+  sortBy: "relevance" | "price-asc" | "price-desc" | "name-asc" | "name-desc";
 }
 
-export default function RelatedProducts({ currentProductIndex, products }: RelatedProductsProps) {
+export default function RelatedProducts({
+  currentProductIndex,
+  products,
+  selectedCategory,
+  sortBy,
+}: RelatedProductsProps) {
   // Obtener 4 productos relacionados excluyendo el actual, ordenados por id descendente
   const relatedProducts = useMemo(() => {
-    return products
-      .filter((product) => product.id !== currentProductIndex)
-      .sort((a, b) => b.id - a.id)
-      .slice(0, 4);
-  }, [products, currentProductIndex]);
+    let filtered = products.filter((product) => product.id !== currentProductIndex);
+
+    if (selectedCategory !== "all") {
+      filtered = filtered.filter((product) => product.category === selectedCategory);
+    }
+
+    const sorted = [...filtered];
+    switch (sortBy) {
+      case "price-asc":
+        sorted.sort((a, b) => a.price - b.price);
+        break;
+      case "price-desc":
+        sorted.sort((a, b) => b.price - a.price);
+        break;
+      case "name-asc":
+        sorted.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case "name-desc":
+        sorted.sort((a, b) => b.title.localeCompare(a.title));
+        break;
+      default:
+        sorted.sort((a, b) => b.id - a.id);
+        break;
+    }
+
+    return sorted.slice(0, 4);
+  }, [products, currentProductIndex, selectedCategory, sortBy]);
 
   return (
     <div className="mt-16">

@@ -8,12 +8,8 @@ export default function ContactHours() {
         <div className="w-full space-y-2">
           <div className="font-semibold">Horarios</div>
           <div className="flex items-center justify-between text-muted-foreground">
-            <span>Lunes - Viernes</span>
-            <span>9:00 AM - 8:00 PM</span>
-          </div>
-          <div className="flex items-center justify-between text-muted-foreground">
-            <span>Sábado</span>
-            <span>9:00 AM - 6:00 PM</span>
+            <span>Lunes - Sábado</span>
+            <span>10:00 AM - 7:00 PM</span>
           </div>
           <div className="flex items-center justify-between text-muted-foreground">
             <span>Domingo</span>
