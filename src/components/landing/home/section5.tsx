@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export default function Section5() {
@@ -18,14 +19,14 @@ export default function Section5() {
           </div>
           <div className="divide-y">
             {items.map((item) => (
-              <button
+              <Link
                 key={item}
-                type="button"
+                href={{ pathname: "/productos", query: { category: item } }}
                 className="w-full flex items-center justify-between py-4 text-base md:text-lg font-medium text-left hover:opacity-80 transition-opacity"
               >
                 <span>{item}</span>
                 <ArrowRight className="h-4 w-4" aria-hidden />
-              </button>
+              </Link>
             ))}
           </div>
         </div>
