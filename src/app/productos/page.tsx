@@ -1,13 +1,16 @@
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import ProductsSection from "@/components/landing/products/ProductsSection";
+import { Suspense } from "react";
 
 export default function Productos() {
   return (
     <>
       <Header />
       <main className="min-h-screen pt-32 pb-16">
-        <ProductsSection />
+        <Suspense fallback={null}>
+          <ProductsSection />
+        </Suspense>
       </main>
       <Footer />
     </>

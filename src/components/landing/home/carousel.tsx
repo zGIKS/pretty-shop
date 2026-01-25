@@ -58,7 +58,7 @@ export default function Hero() {
   }, [isVisible]);
 
   return (
-    <section className="relative h-[900px] md:h-[1200px] w-full overflow-hidden bg-background py-12 md:py-16 mt-6 md:mt-16">
+    <section className="relative h-225 md:h-300 w-full overflow-hidden bg-background py-12 md:py-16 mt-6 md:mt-16">
       <div
         ref={scrollRef}
         className="flex h-full items-center gap-6 overflow-x-hidden overflow-y-hidden px-8"
@@ -68,7 +68,7 @@ export default function Hero() {
         {Array.from({ length: Math.ceil(allImages.length / 3) }).map((_, colIndex) => (
           <div 
             key={`col-${colIndex}`} 
-            className="flex flex-col gap-4 flex-shrink-0"
+            className="flex flex-col gap-4 shrink-0"
             style={{ paddingTop: `${(colIndex % 3) * 60}px` }}
           >
             {allImages
@@ -76,7 +76,7 @@ export default function Hero() {
               .map((image, imgIndex) => (
                 <div
                   key={`img-${colIndex}-${imgIndex}`}
-                  className={`relative ${image.height} flex-shrink-0 overflow-hidden rounded-lg shadow-xl transition-transform hover:scale-105`}
+                  className={`relative ${image.height} shrink-0 overflow-hidden rounded-lg shadow-xl transition-transform hover:scale-105`}
                   style={{ width: '240px' }}
                 >
                   <Image
