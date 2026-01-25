@@ -2,6 +2,7 @@
 
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Section2() {
   return (
@@ -13,18 +14,24 @@ export default function Section2() {
             <p className="text-sm md:text-lg text-muted-foreground mb-4 md:mb-6">
               Descubre la belleza natural con nuestros productos premium de cuidado de la piel y cosméticos de alta calidad.
             </p>
-            <Button className="text-sm md:text-base">Contáctanos</Button>
+            <Button asChild className="text-sm md:text-base">
+              <Link href="/contacto">Contáctanos</Link>
+            </Button>
           </div>
           <div className="w-full md:w-1/2 flex flex-col space-y-3 md:space-y-4">
             <h3 className="text-lg md:text-2xl font-semibold text-primary mb-2 md:mb-4">Belleza y Cuidado</h3>
-            <div className="flex items-center justify-between p-3 md:p-4 bg-muted rounded-lg hover:bg-muted/80 transition-colors cursor-pointer">
-              <span className="text-sm md:text-lg font-medium">Servicios</span>
-              <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
-            </div>
-            <div className="flex items-center justify-between p-3 md:p-4 bg-muted rounded-lg hover:bg-muted/80 transition-colors cursor-pointer">
-              <span className="text-sm md:text-lg font-medium">Productos</span>
-              <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
-            </div>
+            <Link href="/servicios">
+              <div className="flex items-center justify-between p-3 md:p-4 bg-muted rounded-lg hover:bg-muted/80 transition-colors cursor-pointer">
+                <span className="text-sm md:text-lg font-medium">Servicios</span>
+                <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
+              </div>
+            </Link>
+            <Link href="/productos">
+              <div className="flex items-center justify-between p-3 md:p-4 bg-muted rounded-lg hover:bg-muted/80 transition-colors cursor-pointer">
+                <span className="text-sm md:text-lg font-medium">Productos</span>
+                <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
+              </div>
+            </Link>
           </div>
         </div>
       </div>
