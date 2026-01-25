@@ -7,7 +7,13 @@ import { FootTreatment as FootTreatmentIcon } from "@/components/icon/foot-treat
 export default function Podologia() {
   return (
     <div className="bg-card border border-border rounded-lg p-5 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-      <div className="w-full md:w-1/2">
+      <div className="w-full md:w-1/2 flex items-center justify-center order-1 md:order-2">
+        <FootTreatmentIcon
+          className="h-[8.25rem] w-[8.25rem] md:h-[13.5rem] md:w-[13.5rem] text-[#D78589]"
+          aria-hidden="true"
+        />
+      </div>
+      <div className="w-full md:w-1/2 order-2 md:order-1">
         <h2 className="text-2xl md:text-3xl font-bold text-primary mb-3 md:mb-4">
           Podología
         </h2>
@@ -19,13 +25,6 @@ export default function Podologia() {
           <Link href="/contacto">Ver más</Link>
         </Button>
       </div>
-      <div className="w-full md:w-1/2 flex items-center justify-center">
-        <FootTreatmentIcon
-          className="h-[8.25rem] w-[8.25rem] md:h-[13.5rem] md:w-[13.5rem] text-[#D78589]"
-          aria-hidden="true"
-        />
-      </div>
     </div>
   );
 }
-
