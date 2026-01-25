@@ -3,9 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Package, Mail, Menu, Briefcase, ChevronDown } from "lucide-react";
 import PrettyIcon from "@/components/icon/pretty";
+import MobileHeaderMenu from "@/components/mobile-header-menu";
 
 export default function Header({ fixed = true }: { fixed?: boolean }) {
   const [open, setOpen] = useState(false);
@@ -77,50 +77,33 @@ export default function Header({ fixed = true }: { fixed?: boolean }) {
               </div>
             </div>
 
-            <Button
-              variant="ghost"
-              className="flex items-center gap-2 hover:bg-transparent"
-              asChild
-            >
-              <Link href="/contacto" className="hover:underline underline-offset-4">
-                <Mail size={20} />
-                Contacto
-              </Link>
-            </Button>
+            <div className="pb-2">
+              <Button
+                variant="ghost"
+                className="flex items-center gap-2 hover:bg-transparent"
+                asChild
+              >
+                <Link href="/contacto" className="hover:underline underline-offset-4">
+                  <Mail size={20} />
+                  Contacto
+                </Link>
+              </Button>
+            </div>
          </div>
-        <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon">
-              <Menu className="h-6 w-6" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="right">
-            <SheetHeader>
-              <SheetTitle>Menu</SheetTitle>
-            </SheetHeader>
-             <div className="flex flex-col gap-4 mt-4 p-4">
-                <Button variant="ghost" className="w-full justify-start" onClick={() => setOpen(false)} asChild>
-                  <Link href="/servicios">
-                    <Briefcase size={20} className="mr-2" />
-                    Servicios
-                  </Link>
-                </Button>
-                <Button variant="ghost" className="w-full justify-start" onClick={() => setOpen(false)} asChild>
-                  <Link href="/productos">
-                    <Package size={20} className="mr-2" />
-                    Productos
-                  </Link>
-                </Button>
-                <Button variant="ghost" className="w-full justify-start" onClick={() => setOpen(false)} asChild>
-                  <Link href="/contacto">
-                    <Mail size={20} className="mr-2" />
-                    Contacto
-                  </Link>
-                </Button>
-             </div>
-          </SheetContent>
-        </Sheet>
+        <div className="md:hidden">
+          <Button
+            variant="ghost"
+            size="icon"
+            type="button"
+            aria-label="Abrir menú"
+            onClick={() => setOpen(true)}
+          >
+            <Menu className="h-6 w-6" />
+          </Button>
+        </div>
       </header>
+
+      <MobileHeaderMenu open={open} onClose={() => setOpen(false)} />
     </div>
   );
 }
