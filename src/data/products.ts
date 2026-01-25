@@ -4,147 +4,144 @@ export interface Product {
   title: string;
   price: number;
   description: string;
+  category: string;
 }
 
 export const products: Product[] = [
   {
     id: 0,
     image: "https://res.cloudinary.com/dhwxayqeg/image/upload/v1768277819/8_fvssij.jpg",
-    title: "Shampoo Japonés Hidratante",
-    price: 25,
-    description: "Shampoo japonés con extractos naturales para hidratar profundamente el cabello."
+    title: "Protector Solar Japan Sakura Sunscreen",
+    price: 35,
+    description: "Protector solar japonés con fórmula ligera y de alta protección para cuidar tu piel del sol.",
+    category: "Cuidado de la piel"
   },
   {
     id: 1,
     image: "https://res.cloudinary.com/dhwxayqeg/image/upload/v1768277819/8_fvssij.jpg",
-    title: "Acondicionador Japonés Reparador",
-    price: 28,
-    description: "Acondicionador japonés que repara y fortalece el cabello dañado."
+    title: "Body Mist Splash Corporal",
+    price: 20,
+    description: "Bruma corporal refrescante que hidrata y perfuma la piel con un aroma delicado.",
+    category: "Cuidado de la piel"
   },
   {
     id: 2,
     image: "https://res.cloudinary.com/dhwxayqeg/image/upload/v1768277819/8_fvssij.jpg",
-    title: "Máscara Capilar Japonesa",
-    price: 35,
-    description: "Máscara capilar japonesa para un brillo intenso y suavidad duradera."
+    title: "Polvo Suelto Revel Professional",
+    price: 12,
+    description: "Polvo suelto profesional para fijar el maquillaje y dar un acabado natural.",
+    category: "Rostro"
   },
   {
     id: 3,
     image: "https://res.cloudinary.com/dhwxayqeg/image/upload/v1768277819/8_fvssij.jpg",
-    title: "Aceite para Cabello Japonés",
-    price: 30,
-    description: "Aceite japonés que nutre y protege el cabello de daños externos."
+    title: "Polvo Suelto Revel Professional Natural Finish",
+    price: 18,
+    description: "Polvo suelto con acabado natural para una piel perfecta y mate.",
+    category: "Rostro"
   },
   {
     id: 4,
     image: "https://res.cloudinary.com/dhwxayqeg/image/upload/v1768277819/8_fvssij.jpg",
-    title: "Suero para Cabello Japonés",
-    price: 32,
-    description: "Suero japonés que controla el frizz y da volumen al cabello."
+    title: "Polvo Suelto Revel Professional Studio Fix",
+    price: 12,
+    description: "Polvo suelto de larga duración para fijar el maquillaje en sesiones fotográficas.",
+    category: "Rostro"
   },
   {
     id: 5,
     image: "https://res.cloudinary.com/dhwxayqeg/image/upload/v1768277819/8_fvssij.jpg",
-    title: "Champú Anticaspa Japonés",
-    price: 26,
-    description: "Champú japonés especializado en eliminar la caspa y calmar el cuero cabelludo."
+    title: "Polvo Compacto Revel Professional Matte",
+    price: 12,
+    description: "Polvo compacto mate para controlar el brillo y fijar el maquillaje.",
+    category: "Rostro"
   },
   {
     id: 6,
     image: "https://res.cloudinary.com/dhwxayqeg/image/upload/v1768277819/8_fvssij.jpg",
-    title: "Tratamiento Capilar Japonés",
-    price: 40,
-    description: "Tratamiento intensivo japonés para cabello seco y maltratado."
+    title: "Base de Maquillaje Revel Professional Foundation Matte BB Liquid",
+    price: 14,
+    description: "Base líquida BB mate para una cobertura natural y piel uniforme.",
+    category: "Rostro"
   },
   {
     id: 7,
     image: "https://res.cloudinary.com/dhwxayqeg/image/upload/v1768277819/8_fvssij.jpg",
-    title: "Spray para Cabello Japonés",
-    price: 22,
-    description: "Spray japonés que fija el peinado sin apelmazar el cabello."
+    title: "Corrector Líquido Revel Professional Perfect Cover",
+    price: 10,
+    description: "Corrector líquido de alta cobertura para ocultar imperfecciones.",
+    category: "Rostro"
   },
   {
     id: 8,
     image: "https://res.cloudinary.com/dhwxayqeg/image/upload/v1768277819/8_fvssij.jpg",
-    title: "Crema para Peinar Japonesa",
-    price: 24,
-    description: "Crema japonesa para peinar que da textura y control al cabello."
+    title: "Blush Revel Professional Hot Kiss",
+    price: 9,
+    description: "Rubor en polvo para dar color y vitalidad a las mejillas.",
+    category: "Rostro"
   },
   {
     id: 9,
     image: "https://res.cloudinary.com/dhwxayqeg/image/upload/v1768277819/8_fvssij.jpg",
-    title: "Gel para Cabello Japonés",
-    price: 20,
-    description: "Gel japonés de fijación fuerte para estilos duraderos."
+    title: "Spray Fijador Revel Professional Natural Skin",
+    price: 10,
+    description: "Spray fijador para mantener el maquillaje intacto durante todo el día.",
+    category: "Rostro"
   },
   {
     id: 10,
     image: "https://res.cloudinary.com/dhwxayqeg/image/upload/v1768277819/8_fvssij.jpg",
-    title: "Laca para Cabello Japonesa",
-    price: 23,
-    description: "Laca japonesa que mantiene el peinado intacto todo el día."
+    title: "Rímel Revel Professional Long Lasting Volume",
+    price: 10,
+    description: "Rímel de larga duración que da volumen y curvatura a las pestañas.",
+    category: "Ojos"
   },
   {
     id: 11,
     image: "https://res.cloudinary.com/dhwxayqeg/image/upload/v1768277819/8_fvssij.jpg",
-    title: "Tinte para Cabello Japonés",
-    price: 45,
-    description: "Tinte japonés de alta calidad que cubre canas perfectamente."
+    title: "Rímel Volumen Revel Professional Barbie Eye",
+    price: 10,
+    description: "Rímel voluminizador para pestañas dramáticas y definidas.",
+    category: "Ojos"
   },
   {
     id: 12,
     image: "https://res.cloudinary.com/dhwxayqeg/image/upload/v1768277819/8_fvssij.jpg",
-    title: "Mascarilla Facial Japonesa",
-    price: 38,
-    description: "Mascarilla facial japonesa con ingredientes naturales para piel radiante."
+    title: "Delineador Líquido Revel Professional Eyeliner Super Black",
+    price: 8,
+    description: "Delineador líquido negro intenso para definir y resaltar los ojos.",
+    category: "Ojos"
   },
   {
     id: 13,
     image: "https://res.cloudinary.com/dhwxayqeg/image/upload/v1768277819/8_fvssij.jpg",
-    title: "Crema Hidratante Japonesa",
-    price: 29,
-    description: "Crema hidratante japonesa que nutre la piel en profundidad."
+    title: "Lápiz Labial Revel Professional",
+    price: 10,
+    description: "Lápiz labial cremoso para labios definidos y duraderos.",
+    category: "Labios"
   },
   {
     id: 14,
     image: "https://res.cloudinary.com/dhwxayqeg/image/upload/v1768277819/8_fvssij.jpg",
-    title: "Sérum Facial Japonés",
-    price: 42,
-    description: "Sérum japonés anti-envejecimiento con vitamina C."
+    title: "Brillo Labial Revel Professional Lip Gloss Love Velvet",
+    price: 11,
+    description: "Brillo labial aterciopelado para labios hidratados y brillantes.",
+    category: "Labios"
   },
   {
     id: 15,
     image: "https://res.cloudinary.com/dhwxayqeg/image/upload/v1768277819/8_fvssij.jpg",
-    title: "Exfoliante Corporal Japonés",
-    price: 27,
-    description: "Exfoliante japonés que elimina células muertas suavemente."
+    title: "Ganchos de Moda Florales",
+    price: 7,
+    description: "Ganchos para el cabello con diseño floral elegante y moderno.",
+    category: "Accesorios de belleza"
   },
   {
     id: 16,
     image: "https://res.cloudinary.com/dhwxayqeg/image/upload/v1768277819/8_fvssij.jpg",
-    title: "Jabón Facial Japonés",
-    price: 18,
-    description: "Jabón facial japonés purificante para piel limpia y fresca."
-  },
-  {
-    id: 17,
-    image: "https://res.cloudinary.com/dhwxayqeg/image/upload/v1768277819/8_fvssij.jpg",
-    title: "Aceite para Cuerpo Japonés",
-    price: 33,
-    description: "Aceite corporal japonés que hidrata y relaja la piel."
-  },
-  {
-    id: 18,
-    image: "https://res.cloudinary.com/dhwxayqeg/image/upload/v1768277819/8_fvssij.jpg",
-    title: "Perfume Japonés Floral",
-    price: 50,
-    description: "Perfume japonés con notas florales delicadas y duraderas."
-  },
-  {
-    id: 19,
-    image: "https://res.cloudinary.com/dhwxayqeg/image/upload/v1768277819/8_fvssij.jpg",
-    title: "Kit de Belleza Japonés",
-    price: 60,
-    description: "Kit completo japonés con productos para cabello y piel."
+    title: "Vinchas de Felpa con Lentejuelas",
+    price: 6,
+    description: "Vinchas suaves con lentejuelas para un toque de brillo en tu look.",
+    category: "Accesorios de belleza"
   }
 ];

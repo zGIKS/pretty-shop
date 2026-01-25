@@ -1,17 +1,36 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { beautyImages } from "@/data/images";
 
 export default function Hero() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   // Duplicar imágenes para efecto infinito suave
   const allImages = [...beautyImages, ...beautyImages];
 
-  // Auto-scroll horizontal infinito sin saltos
+  // Detectar si el componente está visible
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 } // Al menos 10% visible
+    );
+
+    if (scrollRef.current) {
+      observer.observe(scrollRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Auto-scroll horizontal infinito sin saltos, solo cuando es visible
+  useEffect(() => {
+    if (!isVisible) return;
+
     const scrollContainer = scrollRef.current;
     if (!scrollContainer) return;
 
@@ -19,7 +38,7 @@ export default function Hero() {
     const scrollSpeed = 1; // Velocidad del scroll
 
     const scroll = () => {
-      if (!scrollContainer) return;
+      if (!scrollContainer || !isVisible) return;
 
       scrollContainer.scrollLeft += scrollSpeed;
       
@@ -36,10 +55,10 @@ export default function Hero() {
     animationFrameId = requestAnimationFrame(scroll);
 
     return () => cancelAnimationFrame(animationFrameId);
-  }, []);
+  }, [isVisible]);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-background pt-20">
+    <section className="relative h-[900px] md:h-[1200px] w-full overflow-hidden bg-background py-12 md:py-16 mt-6 md:mt-16">
       <div
         ref={scrollRef}
         className="flex h-full items-center gap-6 overflow-x-hidden overflow-y-hidden px-8"
@@ -57,7 +76,8 @@ export default function Hero() {
               .map((image, imgIndex) => (
                 <div
                   key={`img-${colIndex}-${imgIndex}`}
-                  className={`relative ${image.height} w-[180px] md:w-[240px] flex-shrink-0 overflow-hidden rounded-lg shadow-xl transition-transform hover:scale-105`}
+                  className={`relative ${image.height} flex-shrink-0 overflow-hidden rounded-lg shadow-xl transition-transform hover:scale-105`}
+                  style={{ width: '240px' }}
                 >
                   <Image
                     src={image.src}
@@ -74,15 +94,6 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* Texto centrado sobre las imágenes */}
-      <div className="absolute inset-0 flex items-center justify-center z-10">
-        <div className="text-center bg-black/40 p-6 rounded-lg backdrop-blur-sm">
-          <h1 className="text-4xl font-bold text-white">Belleza Sin Esfuerzo</h1>
-          <p className="text-lg text-gray-200 mt-4">
-            Luces y te sientes lo mejor sin complicaciones, mantén estas piezas a mano.
-          </p>
-        </div>
-      </div>
     </section>
   );
 }
