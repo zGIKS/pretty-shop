@@ -148,12 +148,14 @@ export default function ProductPage({ params }: ProductPageProps) {
           </div>
           {/* Detalles del producto */}
           <div className="grid md:grid-cols-2 gap-8 mb-16">
-            <div className="relative w-full h-96 overflow-hidden rounded-sm">
+            <div className="relative w-full overflow-hidden rounded-sm">
               <Image
                 src={product.image}
                 alt={product.title}
-                fill
-                className="object-cover"
+                width={1200}
+                height={1200}
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="h-auto w-full"
               />
             </div>
             <div className="flex flex-col justify-center">
