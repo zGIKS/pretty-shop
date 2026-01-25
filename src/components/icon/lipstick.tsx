@@ -1,8 +1,6 @@
 import { cn } from "@/lib/utils"
 
-interface LipstickIconProps extends React.SVGProps<SVGSVGElement> {}
-
-export const LipstickIcon = ({ className, ...props }: LipstickIconProps) => (
+export const LipstickIcon = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => (
   <svg
     width="24"
     height="24"
