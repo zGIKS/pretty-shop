@@ -18,11 +18,11 @@ export default function BodyTreatment() {
           Tratamientos Corporales
         </h2>
         <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6">
-          Moldea, reafirma y relaja tu cuerpo con tratamientos pensados para
-          mejorar tu bienestar y tu piel.
+          Spa para tu cuerpo. Sesiones pensadas para reducir, drenar y relajar,
+          ayudándote a moldear tu figura con confort y bienestar.
         </p>
         <Button asChild variant="outline" className="text-sm md:text-base">
-          <Link href="/contacto">Ver más</Link>
+          <Link href="/servicios/corporales">Ver más</Link>
         </Button>
       </div>
     </div>

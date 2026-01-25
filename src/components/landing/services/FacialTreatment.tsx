@@ -18,11 +18,11 @@ export default function FacialTreatment() {
           Tratamientos Faciales
         </h2>
         <p className="text-sm md:text-lg text-muted-foreground mb-4 md:mb-6">
-          Limpieza profunda, hidratación y tratamientos especializados para
-          realzar tu piel con el cuidado que se merece.
+          Spa para tu rostro. Descubre tratamientos premium para iluminar,
+          hidratar y rejuvenecer tu piel con protocolos personalizados.
         </p>
         <Button asChild variant="outline" className="text-sm md:text-base">
-          <Link href="/contacto">Ver más</Link>
+          <Link href="/servicios/faciales">Ver más</Link>
         </Button>
       </div>
     </div>

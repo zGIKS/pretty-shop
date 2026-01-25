@@ -18,11 +18,11 @@ export default function Podologia() {
           Podología
         </h2>
         <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6">
-          Cuidado profesional de tus pies: prevención, tratamiento y bienestar
-          para que camines con comodidad.
+          Spa para tus pies. Atención profesional para aliviar molestias,
+          cuidar tus uñas y ayudarte a caminar con comodidad.
         </p>
         <Button asChild variant="outline" className="text-sm md:text-base">
-          <Link href="/contacto">Ver más</Link>
+          <Link href="/servicios/podologia">Ver más</Link>
         </Button>
       </div>
     </div>
