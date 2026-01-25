@@ -1,0 +1,31 @@
+"use client";
+
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { FootTreatment as FootTreatmentIcon } from "@/components/icon/foot-treatment";
+
+export default function Podologia() {
+  return (
+    <div className="bg-card border border-border rounded-lg p-5 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <div className="w-full md:w-1/2">
+        <h2 className="text-2xl md:text-3xl font-bold text-primary mb-3 md:mb-4">
+          Podología
+        </h2>
+        <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6">
+          Cuidado profesional de tus pies: prevención, tratamiento y bienestar
+          para que camines con comodidad.
+        </p>
+        <Button asChild variant="outline" className="text-sm md:text-base">
+          <Link href="/contacto">Ver más</Link>
+        </Button>
+      </div>
+      <div className="w-full md:w-1/2 flex items-center justify-center">
+        <FootTreatmentIcon
+          className="h-[8.25rem] w-[8.25rem] md:h-[13.5rem] md:w-[13.5rem] text-[#D78589]"
+          aria-hidden="true"
+        />
+      </div>
+    </div>
+  );
+}
+
