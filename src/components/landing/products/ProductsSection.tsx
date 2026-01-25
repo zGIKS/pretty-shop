@@ -48,11 +48,8 @@ export default function ProductsSection() {
 
   useEffect(() => {
     const categoryParam = searchParams.get("category");
-    if (categoryParam) {
-      setSelectedCategory(categoryParam);
-    } else {
-      setSelectedCategory("all");
-    }
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setSelectedCategory(categoryParam || "all");
   }, [searchParams]);
 
   return (

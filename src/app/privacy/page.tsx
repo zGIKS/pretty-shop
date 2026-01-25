@@ -211,7 +211,7 @@ export default function Privacy() {
                 Nos reservamos el derecho de actualizar esta Política de
                 Privacidad periódicamente. Le notificaremos sobre cambios
                 significativos publicando la nueva política en nuestro sitio web
-                y actualizando la fecha de "última actualización". Le
+                y actualizando la fecha de &quot;última actualización&quot;. Le
                 recomendamos revisar esta política regularmente.
               </p>
             </section>
