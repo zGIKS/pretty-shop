@@ -1,47 +1,97 @@
 import Link from "next/link";
-import { Music, MessageCircle } from "lucide-react";
+import { MapPin, Phone, Music, MessageCircle } from "lucide-react";
+import PrettyIcon from "@/components/icon/pretty";
 
 export default function Footer() {
+  const servicios = [
+    "Tratamientos Faciales",
+    "Tratamientos Corporales",
+    "Podología",
+  ];
+
+  const navegacion = [
+    { label: "Servicios", href: "/servicios" },
+    { label: "Productos", href: "/productos" },
+    { label: "Contacto", href: "/contacto" },
+  ];
+
   return (
-    <footer className="bg-background text-foreground py-8 border-t border-border">
+    <footer className="bg-background text-foreground py-10 border-t border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          {/* Navigation */}
-          <div className="flex flex-col md:flex-row gap-4 md:gap-8 mb-4 md:mb-0">
-            <Link href="/productos" className="hover:text-muted-foreground">
-              Productos
-            </Link>
-            <Link href="/contacto" className="hover:text-muted-foreground">
-              Contacto
-            </Link>
+        <div className="grid grid-cols-1 md:grid-cols-[1.2fr_2.8fr] gap-8">
+          <div className="flex items-start">
+            <PrettyIcon className="h-16 w-auto" />
           </div>
 
-          {/* Legal and Social */}
-          <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-center">
-            <div className="flex flex-col md:flex-row gap-4 md:gap-8 mb-4 md:mb-0">
-              <Link href="/terms" className="hover:text-muted-foreground text-sm">
-                Términos y Condiciones
-              </Link>
-              <Link href="/privacy" className="hover:text-muted-foreground text-sm">
-                Política de Privacidad
-              </Link>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div>
+              <h3 className="font-semibold mb-3">Servicios</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                {servicios.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
             </div>
 
-            {/* Social Media */}
-            <div className="flex space-x-4">
-              <Link href="https://tiktok.com/@pretty.podoestetica" className="hover:text-muted-foreground">
-                <Music size={24} />
-              </Link>
-              <Link href="https://wa.me/51943373233" className="hover:text-muted-foreground">
-                <MessageCircle size={24} />
-              </Link>
+            <div>
+              <h3 className="font-semibold mb-3">Navegación</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                {navegacion.map((item) => (
+                  <li key={item.href}>
+                    <Link href={item.href} className="hover:text-foreground">
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-semibold mb-3">Contacto</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li className="flex items-center gap-2">
+                  <MapPin className="h-4 w-4" />
+                  <span>Galería Sta. Rosa 946</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Phone className="h-4 w-4" />
+                  <Link href="tel:+51943373233" className="hover:text-foreground">
+                    +51 943 373 233
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-semibold mb-3">Síguenos</h3>
+              <div className="flex items-center gap-4 text-muted-foreground">
+                <Link
+                  href="https://tiktok.com/@pretty.podoestetica"
+                  className="hover:text-foreground"
+                >
+                  <Music size={20} />
+                </Link>
+                <Link
+                  href="https://wa.me/51943373233"
+                  className="hover:text-foreground"
+                >
+                  <MessageCircle size={20} />
+                </Link>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="text-center mt-6 text-muted-foreground text-sm">
-          © Pretty Todos los derechos reservados
+        <div className="mt-8 border-t border-border pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+          <div>© 2026 Pretty. Estética y podología.</div>
+          <div className="flex items-center gap-6">
+            <Link href="/terms" className="hover:text-foreground">
+              Términos y Condiciones
+            </Link>
+            <Link href="/privacy" className="hover:text-foreground">
+              Política de Privacidad
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

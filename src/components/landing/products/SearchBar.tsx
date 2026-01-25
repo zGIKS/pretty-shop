@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
@@ -14,23 +14,24 @@ interface SearchBarProps {
 
 export default function SearchBar({ className = "", onResultClick }: SearchBarProps) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState<typeof products>([]);
   const [showResults, setShowResults] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
 
   // Buscar productos
-  useEffect(() => {
+  const searchResults = useMemo(() => {
     if (searchQuery.trim().length > 0) {
-      const filtered = products.filter(product =>
+      return products.filter(product =>
         product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.description.toLowerCase().includes(searchQuery.toLowerCase())
       );
-      setSearchResults(filtered);
-      setShowResults(true);
     } else {
-      setSearchResults([]);
-      setShowResults(false);
+      return [];
     }
+  }, [searchQuery]);
+
+  // Mostrar resultados
+  useEffect(() => {
+    setShowResults(searchQuery.trim().length > 0);
   }, [searchQuery]);
 
   // Cerrar resultados al hacer clic fuera
@@ -82,7 +83,7 @@ export default function SearchBar({ className = "", onResultClick }: SearchBarPr
               <div className="flex-1">
                 <h3 className="font-semibold text-sm">{product.title}</h3>
                 <p className="text-xs text-gray-600 line-clamp-1">{product.description}</p>
-                <p className="text-sm font-bold text-pink-600 mt-1">${product.price}</p>
+                <p className="text-sm font-bold text-pink-600 mt-1">S/ {product.price}</p>
               </div>
             </Link>
           ))}

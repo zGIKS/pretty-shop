@@ -13,8 +13,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pretty Shop",
+  title: "Pretty | Estética y podología",
   description: "A beautiful e-commerce platform for all your needs.",
+  icons: {
+    icon: '/ico.svg',
+  },
 };
 
 export default function RootLayout({
