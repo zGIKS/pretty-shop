@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 const legalText = (
   <>
@@ -19,8 +19,14 @@ const legalText = (
   </>
 );
 
+const GOOGLE_AUTH_URL =
+  process.env.NEXT_PUBLIC_IAM_GOOGLE_AUTH_URL ?? "http://localhost:8082/api/v1/auth/google";
+
 export default function LoginCard() {
   const [showPassword, setShowPassword] = useState(false);
+  const startGoogleLogin = useCallback(() => {
+    window.location.href = GOOGLE_AUTH_URL;
+  }, []);
   return (
     <div className="relative w-full max-w-sm z-10">
       <div className="relative rounded-[32px] border px-6 py-8">
@@ -28,6 +34,7 @@ export default function LoginCard() {
           <button
             type="button"
             className="flex w-full items-center justify-center gap-3 rounded-full border px-4 py-3 text-base font-semibold"
+            onClick={startGoogleLogin}
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path
