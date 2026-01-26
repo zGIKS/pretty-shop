@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createPortal } from "react-dom";
-import { X, ChevronDown, Briefcase, Package, Mail } from "lucide-react";
+import { X, ChevronDown, Briefcase, Package, Mail, LogIn, Phone } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import PrettyIcon from "@/components/icon/pretty";
 
 type MobileHeaderMenuProps = {
@@ -38,8 +39,8 @@ export default function MobileHeaderMenu({ open, onClose }: MobileHeaderMenuProp
   if (typeof document === "undefined") return null;
 
   return createPortal(
-    <div className="fixed inset-0 z-[60] bg-white overflow-y-auto">
-      <div className="max-w-7xl mx-auto p-6 flex items-center justify-between">
+    <div className="fixed inset-0 z-[60] bg-white flex flex-col">
+      <div className="max-w-7xl w-full mx-auto p-6 flex items-center justify-between">
         <Link href="/" onClick={onClose} aria-label="Ir al inicio">
           <PrettyIcon className="w-18 h-16" />
         </Link>
@@ -53,8 +54,8 @@ export default function MobileHeaderMenu({ open, onClose }: MobileHeaderMenuProp
         </button>
       </div>
 
-      <nav className="border-t border-border">
-        <div className="max-w-7xl mx-auto">
+      <nav className="flex-1 overflow-y-auto border-t border-border">
+        <div className="max-w-7xl w-full mx-auto">
           <div className="divide-y divide-border">
             <button
               type="button"
@@ -193,6 +194,19 @@ export default function MobileHeaderMenu({ open, onClose }: MobileHeaderMenuProp
           </div>
         </div>
       </nav>
+
+      <div className="border-t border-border px-6 pb-8 pt-8 space-y-4 max-w-7xl w-full mx-auto">
+        <Button
+          variant="default"
+          className="w-full flex items-center gap-2"
+          asChild
+        >
+          <Link href="/login" onClick={onClose}>
+            <LogIn className="h-5 w-5" />
+            Iniciar Sesión
+          </Link>
+        </Button>
+      </div>
     </div>
     ,
     document.body

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Package, Mail, Menu, Briefcase, ChevronDown } from "lucide-react";
+import { Package, Mail, Menu, Briefcase, ChevronDown, LogIn } from "lucide-react";
 import PrettyIcon from "@/components/icon/pretty";
 import MobileHeaderMenu from "@/components/mobile-header-menu";
 
@@ -86,6 +86,19 @@ export default function Header({ fixed = true }: { fixed?: boolean }) {
                 <Link href="/contacto" className="hover:underline underline-offset-4">
                   <Mail size={20} />
                   Contacto
+                </Link>
+              </Button>
+            </div>
+
+            <div className="pb-2">
+              <Button
+                variant="default"
+                className="flex items-center gap-2"
+                asChild
+              >
+                <Link href="/login">
+                  <LogIn size={20} />
+                  Iniciar Sesión
                 </Link>
               </Button>
             </div>
