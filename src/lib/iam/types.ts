@@ -12,3 +12,9 @@ export interface AuthTokenPayload {
   expiresAt?: string;
   refreshToken?: string;
 }
+
+export interface TokenVerificationResponse {
+  is_valid: boolean;
+  sub?: string;
+  error?: string;
+}

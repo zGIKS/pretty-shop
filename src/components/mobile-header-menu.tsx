@@ -3,16 +3,23 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createPortal } from "react-dom";
-import { X, ChevronDown, Briefcase, Package, Mail, LogIn, Phone } from "lucide-react";
+import { X, ChevronDown, Briefcase, Package, Mail, LogIn, Phone, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PrettyIcon from "@/components/icon/pretty";
 
 type MobileHeaderMenuProps = {
   open: boolean;
   onClose: () => void;
+  isLoggedIn?: boolean;
+  onLogout?: () => void;
 };
 
-export default function MobileHeaderMenu({ open, onClose }: MobileHeaderMenuProps) {
+export default function MobileHeaderMenu({
+  open,
+  onClose,
+  isLoggedIn = false,
+  onLogout,
+}: MobileHeaderMenuProps) {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
 
@@ -102,7 +109,7 @@ export default function MobileHeaderMenu({ open, onClose }: MobileHeaderMenuProp
                 </div>
                 <div className="mt-4 border-t border-border pt-4">
                   <Link
-                    className="block rounded-md px-3 py-3 text-sm text-muted-foreground hover:bg-muted/60 hover:text-foreground transition-colors"
+                    className="block rounded-md px-3 py-3 text-sm text-foreground hover:bg-muted/60 transition-colors"
                     href="/servicios"
                     onClick={onClose}
                   >
@@ -129,7 +136,7 @@ export default function MobileHeaderMenu({ open, onClose }: MobileHeaderMenuProp
             </button>
             {productsOpen ? (
               <div className="px-6 pb-6">
-                <div className="pt-6 pb-3 text-xs font-medium tracking-wide text-muted-foreground">
+                <div className="pt-6 pb-3 text-xs font-medium tracking-wide text-foreground">
                   CATEGORÍAS
                 </div>
                 <div className="space-y-1">
@@ -171,7 +178,7 @@ export default function MobileHeaderMenu({ open, onClose }: MobileHeaderMenuProp
                 </div>
                 <div className="mt-4 border-t border-border pt-4">
                   <Link
-                    className="block rounded-md px-3 py-3 text-sm text-muted-foreground hover:bg-muted/60 hover:text-foreground transition-colors"
+                    className="block rounded-md px-3 py-3 text-sm text-foreground hover:bg-muted/60 transition-colors"
                     href="/productos"
                     onClick={onClose}
                   >
@@ -196,16 +203,30 @@ export default function MobileHeaderMenu({ open, onClose }: MobileHeaderMenuProp
       </nav>
 
       <div className="border-t border-border px-6 pb-8 pt-8 space-y-4 max-w-7xl w-full mx-auto">
-        <Button
-          variant="default"
-          className="w-full flex items-center gap-2"
-          asChild
-        >
-          <Link href="/login" onClick={onClose}>
-            <LogIn className="h-5 w-5" />
-            Iniciar Sesión
-          </Link>
-        </Button>
+        {isLoggedIn ? (
+          <Button
+            variant="default"
+            className="w-full flex items-center gap-2 justify-center text-red-600 hover:text-red-500"
+            onClick={() => {
+              onClose();
+              onLogout?.();
+            }}
+          >
+            <LogOut className="h-5 w-5" />
+            Cerrar sesión
+          </Button>
+        ) : (
+          <Button
+            variant="default"
+            className="w-full flex items-center gap-2"
+            asChild
+          >
+            <Link href="/login" onClick={onClose}>
+              <LogIn className="h-5 w-5" />
+              Iniciar Sesión
+            </Link>
+          </Button>
+        )}
       </div>
     </div>
     ,
