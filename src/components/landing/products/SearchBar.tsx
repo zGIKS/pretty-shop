@@ -83,7 +83,7 @@ export default function SearchBar({ className = "", onResultClick }: SearchBarPr
               <div className="flex-1">
                 <h3 className="font-semibold text-sm">{product.title}</h3>
                 <p className="text-xs text-gray-600 line-clamp-1">{product.description}</p>
-                <p className="text-sm font-bold text-pink-600 mt-1">S/ {product.price}</p>
+                <p className="text-sm font-bold text-black mt-1">S/ {product.price}</p>
               </div>
             </Link>
           ))}
