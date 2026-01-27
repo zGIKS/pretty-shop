@@ -4,27 +4,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { logout } from "@/lib/iam/services/auth-service";
 
 export async function POST(request: NextRequest) {
-  const refreshToken = request.cookies.get("authRefreshToken")?.value;
+  const body = await request.json().catch(() => ({}));
+  const refreshToken = body.refresh_token;
 
   try {
     await logout(refreshToken ?? undefined);
   } catch {
-    // ignore backend errors to still clear cookies locally
+    // ignore backend errors to still clear local storage
   }
 
-  const response = NextResponse.json({ message: "Sesión cerrada" }, { status: 200 });
-  response.cookies.set("authToken", "", {
-    path: "/",
-    maxAge: 0,
-  });
-  response.cookies.set("authRefreshToken", "", {
-    path: "/",
-    maxAge: 0,
-  });
-  response.cookies.set("authUserName", "", {
-    path: "/",
-    maxAge: 0,
-  });
-
-  return response;
+  return NextResponse.json({ message: "Sesión cerrada" }, { status: 200 });
 }

@@ -33,10 +33,15 @@ export default function HeaderClient({
     let isMounted = true;
 
     const checkSession = async () => {
+      const token = localStorage.getItem("access_token");
+      if (!token) {
+        setIsLoggedIn(false);
+        return;
+      }
+
       try {
-        const response = await fetch("/api/v1/auth/verify", {
+        const response = await fetch("/api/v1/auth/verify?token=" + encodeURIComponent(token), {
           cache: "no-store",
-          credentials: "include",
         });
         if (!isMounted) return;
 
@@ -69,10 +74,16 @@ export default function HeaderClient({
   }, []);
 
   const handleLogout = useCallback(async () => {
-    await fetch("/api/v1/auth/logout", {
-      method: "POST",
-      credentials: "include",
-    });
+    const refreshToken = localStorage.getItem("refresh_token");
+    if (refreshToken) {
+      await fetch("/api/v1/auth/logout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ refresh_token: refreshToken }),
+      });
+    }
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
     setIsLoggedIn(false);
     router.replace("/");
   }, [router]);

@@ -29,7 +29,7 @@ export default function LoginPage() {
       ) : null}
 
       <div className="flex w-full max-w-5xl flex-col items-center gap-10 md:flex-row md:items-center md:justify-center md:gap-24">
-        <LoginCard onNotify={setNotification} isLogin={true} />
+        <LoginCard onNotify={setNotification} />
         <LoginIconPanel />
       </div>
     </div>

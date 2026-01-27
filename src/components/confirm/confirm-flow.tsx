@@ -15,7 +15,7 @@ type ConfirmFlowProps = {
   successRedirect?: string;
 };
 
-export default function ConfirmFlow({ successRedirect = "/login" }: ConfirmFlowProps) {
+export default function ConfirmFlow({ successRedirect = "/register" }: ConfirmFlowProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [state, setState] = useState<ConfirmationState>({

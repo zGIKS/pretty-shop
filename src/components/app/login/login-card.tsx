@@ -6,18 +6,32 @@ import { Eye, EyeOff } from "lucide-react";
 import { FormEvent, useCallback, useState } from "react";
 import { IAM_BACKEND_URL } from "@/lib/env";
 
-const legalText = (
-  <>
-    Al continuar, aceptas nuestra{" "}
-    <a href="/privacy" className="underline">
-      Política de Privacidad
-    </a>{" "}
-    y{" "}
-    <a href="/terms" className="underline">
-      Términos de Servicio
-    </a>
-    .
-  </>
+const legalText = (isLogin: boolean) => (
+  isLogin ? (
+    <>
+      ¿No tienes cuenta?{" "}
+      <a href="/register" className="underline">
+        Regístrate
+      </a>
+    </>
+  ) : (
+    <>
+      ¿Ya tienes una cuenta?{" "}
+      <a href="/login" className="underline">
+        Inicia sesión
+      </a>
+      <br />
+      Al continuar, aceptas nuestra{" "}
+      <a href="/privacy" className="underline">
+        Política de Privacidad
+      </a>{" "}
+      y{" "}
+      <a href="/terms" className="underline">
+        Términos de Servicio
+      </a>
+      .
+    </>
+  )
 );
 
 const GOOGLE_AUTH_URL = `${IAM_BACKEND_URL}/api/v1/auth/google`;
@@ -30,26 +44,39 @@ export interface SignUpNotification {
 
 interface LoginCardProps {
   onNotify: (notification: SignUpNotification | null) => void;
+  isLogin?: boolean;
 }
 
-export default function LoginCard({ onNotify }: LoginCardProps) {
+export default function LoginCard({ onNotify, isLogin = false }: LoginCardProps) {
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const startGoogleLogin = useCallback(() => {
     window.location.href = GOOGLE_AUTH_URL;
   }, []);
 
-  const handleSignUp = useCallback(
+  const handleSubmit = useCallback(
     async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       onNotify(null);
       setIsSubmitting(true);
 
+      if (!isLogin && password !== confirmPassword) {
+        onNotify({
+          type: "destructive",
+          description: "Las contraseñas no coinciden.",
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
       try {
-        const response = await fetch("/api/v1/auth/sign-up", {
+        const endpoint = isLogin ? "/api/v1/auth/sign-in" : "/api/v1/auth/sign-up";
+        const response = await fetch(endpoint, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, password }),
@@ -58,29 +85,37 @@ export default function LoginCard({ onNotify }: LoginCardProps) {
 
         if (!response.ok) {
           throw new Error(
-            data?.message ?? "Error al registrarse con correo electrónico.",
+            data?.message ?? `Error al ${isLogin ? "iniciar sesión" : "registrarse"} con correo electrónico.`,
           );
         }
 
-        onNotify({
-          type: "success",
-          description:
-            data?.message ??
-            "Revisa tu correo y confirma el enlace antes de iniciar sesión.",
-        });
+        if (isLogin) {
+          // Store tokens
+          localStorage.setItem("access_token", data.token);
+          localStorage.setItem("refresh_token", data.refresh_token);
+          // Redirect to home or dashboard
+          window.location.href = "/";
+        } else {
+          onNotify({
+            type: "success",
+            description:
+              data?.message ??
+              "Revisa tu correo y confirma el enlace antes de iniciar sesión.",
+          });
+        }
       } catch (error) {
         onNotify({
           type: "destructive",
           description:
             error instanceof Error
               ? error.message
-              : "Error desconocido al registrarse.",
+              : `Error desconocido al ${isLogin ? "iniciar sesión" : "registrarse"}.`,
         });
       } finally {
         setIsSubmitting(false);
       }
     },
-    [email, password],
+    [email, password, confirmPassword, isLogin],
   );
   return (
     <div className="relative w-full max-w-sm z-10">
@@ -116,7 +151,7 @@ export default function LoginCard({ onNotify }: LoginCardProps) {
             O
           </div>
 
-          <form className="space-y-6" onSubmit={handleSignUp}>
+          <form className="space-y-6" onSubmit={handleSubmit}>
 
             <Input
               placeholder="Ingresa tu correo electrónico"
@@ -149,6 +184,30 @@ export default function LoginCard({ onNotify }: LoginCardProps) {
               </button>
             </div>
 
+            {!isLogin && (
+              <div className="relative">
+                <Input
+                  placeholder="Confirma tu contraseña"
+                  type={showConfirmPassword ? "text" : "password"}
+                  value={confirmPassword}
+                  onChange={(event) => setConfirmPassword(event.target.value)}
+                  maxLength={128}
+                  autoComplete="new-password"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2"
+                >
+                  {showConfirmPassword ? (
+                    <EyeOff className="h-4 w-4" />
+                  ) : (
+                    <Eye className="h-4 w-4" />
+                  )}
+                </button>
+              </div>
+            )}
+
             <Button
               variant="default"
               className="w-full"
@@ -157,10 +216,12 @@ export default function LoginCard({ onNotify }: LoginCardProps) {
             >
               {isSubmitting
                 ? "Procesando..."
+                : isLogin
+                ? "Iniciar sesión con correo electrónico"
                 : "Continuar con correo electrónico"}
             </Button>
 
-            <p className="text-center text-[12px]">{legalText}</p>
+            <p className="text-center text-[12px]">{legalText(isLogin)}</p>
           </form>
         </div>
       </div>
