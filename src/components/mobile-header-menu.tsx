@@ -206,7 +206,7 @@ export default function MobileHeaderMenu({
         {isLoggedIn ? (
           <Button
             variant="default"
-            className="w-full flex items-center gap-2 justify-center text-red-600 hover:text-red-500"
+            className="w-full flex items-center gap-2 justify-center text-white"
             onClick={() => {
               onClose();
               onLogout?.();
