@@ -6,33 +6,37 @@ import { Eye, EyeOff } from "lucide-react";
 import { FormEvent, useCallback, useState } from "react";
 import { IAM_BACKEND_URL } from "@/lib/env";
 
-const legalText = (isLogin: boolean) => (
+console.log("🔗 API Swagger disponible en:", `${IAM_BACKEND_URL}/swagger-ui.html`);
+
+const legalText = (isLogin: boolean) =>
   isLogin ? (
-    <>
-      ¿No tienes cuenta?{" "}
+    <div className="space-y-1">
+      <span>¿No tienes cuenta?</span>{" "}
       <a href="/register" className="underline">
         Regístrate
       </a>
-    </>
+    </div>
   ) : (
-    <>
-      ¿Ya tienes una cuenta?{" "}
-      <a href="/login" className="underline">
-        Inicia sesión
-      </a>
-      <br />
-      Al continuar, aceptas nuestra{" "}
-      <a href="/privacy" className="underline">
-        Política de Privacidad
-      </a>{" "}
-      y{" "}
-      <a href="/terms" className="underline">
-        Términos de Servicio
-      </a>
-      .
-    </>
-  )
-);
+    <div className="space-y-1">
+      <div>
+        ¿Ya tienes una cuenta?{" "}
+        <a href="/login" className="underline">
+          Inicia sesión
+        </a>
+      </div>
+      <div>
+        Al continuar, aceptas nuestra{" "}
+        <a href="/privacy" className="underline">
+          Política de Privacidad
+        </a>{" "}
+        y{" "}
+        <a href="/terms" className="underline">
+          Términos de Servicio
+        </a>
+        .
+      </div>
+    </div>
+  );
 
 const GOOGLE_AUTH_URL = `${IAM_BACKEND_URL}/api/v1/auth/google`;
 
@@ -221,7 +225,7 @@ export default function LoginCard({ onNotify, isLogin = false }: LoginCardProps)
                 : "Continuar con correo electrónico"}
             </Button>
 
-            <p className="text-center text-[12px]">{legalText(isLogin)}</p>
+            <div className="text-center text-[12px]">{legalText(isLogin)}</div>
           </form>
         </div>
       </div>

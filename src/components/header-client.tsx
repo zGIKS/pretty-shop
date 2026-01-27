@@ -190,10 +190,17 @@ export default function HeaderClient({
                     <span className="sr-only">Perfil</span>
                   </Button>
                   <div
-                    className={`absolute right-0 top-full mt-1 flex w-40 flex-col divide-y divide-border rounded-lg border bg-white p-2 text-sm shadow-lg transition-opacity ${
+                    className={`absolute right-0 top-full mt-1 flex w-40 flex-col rounded-lg border bg-white p-2 text-sm shadow-lg transition-opacity ${
                       menuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
                     }`}
                   >
+                    <Link
+                      href="/settings"
+                      className="flex items-center gap-2 rounded-md px-3 py-2 text-left transition hover:bg-muted"
+                    >
+                      <User size={16} />
+                      Configuración
+                    </Link>
                     <button
                       type="button"
                       className="flex items-center gap-2 rounded-md px-3 py-2 text-left text-red-600 transition hover:bg-muted hover:text-red-500"
