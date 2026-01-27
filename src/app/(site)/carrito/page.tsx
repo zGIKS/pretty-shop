@@ -85,18 +85,20 @@ export default function CartPage() {
             </div>
 
             <div className="space-y-4 rounded-3xl border border-border bg-card p-6">
-              <div className="flex items-center justify-between text-sm text-muted-foreground">
-                <span>Total artículos</span>
-                <span>{totalItems}</span>
+              <div className="flex flex-row flex-nowrap items-center justify-between text-sm text-muted-foreground">
+                <span className="whitespace-nowrap">Total artículos</span>
+                <span className="whitespace-nowrap">{totalItems}</span>
               </div>
-              <div className="flex items-center justify-between text-2xl font-semibold">
-                <span>Total</span>
-                <span>S/ {totalPrice.toFixed(2)}</span>
+              <div className="flex flex-row flex-nowrap items-center justify-between text-2xl font-semibold">
+                <span className="whitespace-nowrap">Total</span>
+                <span className="whitespace-nowrap">S/ {totalPrice.toFixed(2)}</span>
               </div>
-              <Button className="w-full">Proceder al pago</Button>
-              <Button variant="ghost" className="w-full" onClick={clearCart}>
-                Vaciar carrito
-              </Button>
+              <div className="flex gap-3">
+                <Button className="flex-1">Proceder al pago</Button>
+                <Button variant="ghost" className="flex-1" onClick={clearCart}>
+                  Vaciar carrito
+                </Button>
+              </div>
             </div>
           </>
         )}

@@ -39,21 +39,29 @@ const cartReducer = (state: CartRecord[], action: CartAction): CartRecord[] => {
       return action.payload;
     case "add": {
       const existing = state.find((item) => item.productId === action.payload.productId);
+      const product = products.find((p) => p.id === action.payload.productId);
+      const max = product ? product.quantity : Infinity;
+
       if (!existing) {
-        return [...state, action.payload];
+        const qty = Math.max(0, Math.min(action.payload.quantity, max));
+        if (qty <= 0) return state;
+        return [...state, { productId: action.payload.productId, quantity: qty }];
       }
+
+      const newQty = Math.max(0, Math.min(existing.quantity + action.payload.quantity, max));
       return state.map((item) =>
-        item.productId === action.payload.productId
-          ? { ...item, quantity: item.quantity + action.payload.quantity }
-          : item
+        item.productId === action.payload.productId ? { ...item, quantity: newQty } : item
       );
     }
     case "update": {
-      if (action.payload.quantity <= 0) {
+      const product = products.find((p) => p.id === action.payload.productId);
+      const max = product ? product.quantity : Infinity;
+      const qty = Math.max(0, Math.min(action.payload.quantity, max));
+      if (qty <= 0) {
         return state.filter((item) => item.productId !== action.payload.productId);
       }
       return state.map((item) =>
-        item.productId === action.payload.productId ? { ...item, quantity: action.payload.quantity } : item
+        item.productId === action.payload.productId ? { ...item, quantity: qty } : item
       );
     }
     case "remove":

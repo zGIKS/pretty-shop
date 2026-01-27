@@ -1,21 +1,14 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { Product } from "@/data/products";
-import { Button } from "@/components/ui/button";
-import { Plus, Minus, Trash2 } from "lucide-react";
-import { useCart } from "@/lib/cart/cart-context";
+import AddToCart from "@/components/cart/AddToCart";
 
 interface ProductCardProps {
   product: Product;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const { items, addItem, updateItemQuantity, removeItem } = useCart();
-  const cartEntry = items.find((entry) => entry.product.id === product.id);
-  const cartQuantity = cartEntry?.quantity ?? 0;
-
   return (
     <div className="flex flex-col h-full">
       <Link href={`/productos/${product.id}`}>
@@ -36,38 +29,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         </Link>
         <p className="text-sm text-muted-foreground">S/ {product.price}</p>
         <div className="mt-auto pt-2">
-          {cartQuantity === 0 ? (
-            <Button size="sm" className="w-full" onClick={() => addItem(product)}>
-              Agregar al Carrito
-            </Button>
-          ) : (
-            <div className="flex items-center justify-between">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => removeItem(product.id)}
-              >
-                <Trash2 className="h-4 w-4" />
-              </Button>
-              <div className="flex items-center space-x-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => updateItemQuantity(product.id, cartQuantity - 1)}
-                >
-                  <Minus className="h-4 w-4" />
-                </Button>
-                <span className="text-sm">{cartQuantity}</span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => updateItemQuantity(product.id, cartQuantity + 1)}
-                >
-                  <Plus className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
-          )}
+          <AddToCart product={product} />
         </div>
       </div>
     </div>

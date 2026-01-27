@@ -8,8 +8,8 @@ import { products } from "@/data/products";
 import RelatedProducts from "@/components/landing/products/RelatedProducts";
 import SearchBar from "@/components/landing/products/SearchBar";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, ChevronUp, SlidersHorizontal, Plus, Minus, Trash2 } from "lucide-react";
-import { useCart } from "@/lib/cart/cart-context";
+import { ChevronDown, ChevronUp, SlidersHorizontal } from "lucide-react";
+import AddToCart from "@/components/cart/AddToCart";
 
 interface ProductPageProps {
   params: Promise<{
@@ -29,9 +29,6 @@ export default function ProductPage({ params }: ProductPageProps) {
   const [sortOpen, setSortOpen] = useState(false);
   const filterRef = useRef<HTMLDivElement>(null);
   const sortRef = useRef<HTMLDivElement>(null);
-  const { items, addItem, updateItemQuantity, removeItem } = useCart();
-  const cartEntry = items.find((entry) => entry.product.id === productId);
-  const cartQuantity = cartEntry?.quantity ?? 0;
 
   const categories = useMemo(() => {
     return Array.from(new Set(products.map((item) => item.category)));
@@ -164,43 +161,11 @@ export default function ProductPage({ params }: ProductPageProps) {
               <p className="text-lg text-muted-foreground mb-6">
                 {product.description}
               </p>
-              <p className="text-3xl mb-6">S/ {product.price}</p>
-              {cartQuantity === 0 ? (
-                <Button
-                  size="lg"
-                  className="w-full md:w-auto"
-                  onClick={() => addItem(product)}
-                >
-                  Agregar al Carrito
-                </Button>
-              ) : (
-                <div className="flex items-center space-x-4">
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    onClick={() => removeItem(product.id)}
-                  >
-                    <Trash2 className="h-5 w-5" />
-                  </Button>
-                  <div className="flex items-center space-x-2">
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      onClick={() => updateItemQuantity(product.id, cartQuantity - 1)}
-                    >
-                      <Minus className="h-5 w-5" />
-                    </Button>
-                    <span className="text-lg font-semibold">{cartQuantity}</span>
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      onClick={() => updateItemQuantity(product.id, cartQuantity + 1)}
-                    >
-                      <Plus className="h-5 w-5" />
-                    </Button>
-                  </div>
-                </div>
-              )}
+              <p className="text-3xl mb-2">S/ {product.price}</p>
+              <p className="text-sm text-muted-foreground mb-6">
+                Disponible: {product.quantity} unidades
+              </p>
+              <AddToCart product={product} size="lg" />
             </div>
           </div>
 
