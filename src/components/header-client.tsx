@@ -2,13 +2,14 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Package, Mail, Menu, Briefcase, ChevronDown, LogIn, User, LogOut } from "lucide-react";
 import PrettyIcon from "@/components/icon/pretty";
 import MobileHeaderMenu from "@/components/mobile-header-menu";
 
 const SESSION_POLL_INTERVAL = 5 * 60 * 1000;
+const ACCESS_TOKEN_COOKIE = "authToken";
 
 interface HeaderProps {
   fixed?: boolean;
@@ -19,7 +20,12 @@ export default function HeaderClient({
   fixed = true,
   initialIsLoggedIn = false,
 }: HeaderProps) {
+  const pathname = usePathname();
   const router = useRouter();
+
+  if (pathname === "/login" || pathname === "/register") {
+    return null;
+  }
   const [open, setOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(initialIsLoggedIn);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -32,8 +38,33 @@ export default function HeaderClient({
   useEffect(() => {
     let isMounted = true;
 
+    const getCookieValue = (name: string) => {
+      if (typeof document === "undefined") return null;
+      const value = document.cookie
+        .split(";")
+        .map((cookie) => cookie.trim())
+        .find((cookie) => cookie.startsWith(`${name}=`));
+      if (!value) return null;
+      return decodeURIComponent(value.split("=")[1] ?? "");
+    };
+
+    const syncTokenFromCookie = () => {
+      if (typeof window === "undefined") return null;
+
+      const cookieToken = getCookieValue(ACCESS_TOKEN_COOKIE);
+      if (cookieToken) {
+        const currentStorageToken = localStorage.getItem("access_token");
+        if (currentStorageToken !== cookieToken) {
+          localStorage.setItem("access_token", cookieToken);
+        }
+        return cookieToken;
+      }
+
+      return localStorage.getItem("access_token");
+    };
+
     const checkSession = async () => {
-      const token = localStorage.getItem("access_token");
+      const token = syncTokenFromCookie();
       if (!token) {
         setIsLoggedIn(false);
         return;
