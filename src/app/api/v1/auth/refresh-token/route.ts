@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
       { message: "Refresh token inválido o expirado" },
       { status: 401 }
     );
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { message: "Error interno del servidor" },
       { status: 500 }

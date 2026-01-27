@@ -119,7 +119,7 @@ export default function LoginCard({ onNotify, isLogin = false }: LoginCardProps)
         setIsSubmitting(false);
       }
     },
-    [email, password, confirmPassword, isLogin],
+    [email, password, confirmPassword, isLogin, onNotify],
   );
   return (
     <div className="relative w-full max-w-sm z-10">

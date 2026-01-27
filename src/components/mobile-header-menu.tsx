@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createPortal } from "react-dom";
-import { X, ChevronDown, Briefcase, Package, Mail, LogIn, Phone, LogOut } from "lucide-react";
+import { X, ChevronDown, Briefcase, Package, Mail, LogIn, LogOut, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PrettyIcon from "@/components/icon/pretty";
 
@@ -203,6 +203,12 @@ export default function MobileHeaderMenu({
       </nav>
 
       <div className="border-t border-border px-6 pb-8 pt-8 space-y-4 max-w-7xl w-full mx-auto">
+        <Button variant="outline" className="w-full flex items-center gap-2 justify-center" asChild>
+          <Link href="/carrito" onClick={onClose} aria-label="Ir al carrito">
+            <ShoppingCart className="h-5 w-5" />
+            Ver carrito
+          </Link>
+        </Button>
         {isLoggedIn ? (
           <Button
             variant="default"
@@ -216,11 +222,7 @@ export default function MobileHeaderMenu({
             Cerrar sesión
           </Button>
         ) : (
-          <Button
-            variant="default"
-            className="w-full flex items-center gap-2"
-            asChild
-          >
+          <Button variant="default" className="w-full flex items-center gap-2" asChild>
             <Link href="/login" onClick={onClose}>
               <LogIn className="h-5 w-5" />
               Iniciar Sesión

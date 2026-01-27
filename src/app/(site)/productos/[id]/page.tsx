@@ -3,13 +3,13 @@
 import { notFound } from "next/navigation";
 import { use, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import Footer from "@/components/footer";
 import { products } from "@/data/products";
 import RelatedProducts from "@/components/landing/products/RelatedProducts";
 import SearchBar from "@/components/landing/products/SearchBar";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, ChevronUp, SlidersHorizontal } from "lucide-react";
+import { ChevronDown, ChevronUp, SlidersHorizontal, Plus, Minus, Trash2 } from "lucide-react";
+import { useCart } from "@/lib/cart/cart-context";
 
 interface ProductPageProps {
   params: Promise<{
@@ -29,6 +29,9 @@ export default function ProductPage({ params }: ProductPageProps) {
   const [sortOpen, setSortOpen] = useState(false);
   const filterRef = useRef<HTMLDivElement>(null);
   const sortRef = useRef<HTMLDivElement>(null);
+  const { items, addItem, updateItemQuantity, removeItem } = useCart();
+  const cartEntry = items.find((entry) => entry.product.id === productId);
+  const cartQuantity = cartEntry?.quantity ?? 0;
 
   const categories = useMemo(() => {
     return Array.from(new Set(products.map((item) => item.category)));
@@ -162,11 +165,42 @@ export default function ProductPage({ params }: ProductPageProps) {
                 {product.description}
               </p>
               <p className="text-3xl mb-6">S/ {product.price}</p>
-              <Button asChild size="lg" className="w-full md:w-auto">
-                <Link href="https://wa.me/51943373233" target="_blank">
-                  Comprar
-                </Link>
-              </Button>
+              {cartQuantity === 0 ? (
+                <Button
+                  size="lg"
+                  className="w-full md:w-auto"
+                  onClick={() => addItem(product)}
+                >
+                  Agregar al Carrito
+                </Button>
+              ) : (
+                <div className="flex items-center space-x-4">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    onClick={() => removeItem(product.id)}
+                  >
+                    <Trash2 className="h-5 w-5" />
+                  </Button>
+                  <div className="flex items-center space-x-2">
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      onClick={() => updateItemQuantity(product.id, cartQuantity - 1)}
+                    >
+                      <Minus className="h-5 w-5" />
+                    </Button>
+                    <span className="text-lg font-semibold">{cartQuantity}</span>
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      onClick={() => updateItemQuantity(product.id, cartQuantity + 1)}
+                    >
+                      <Plus className="h-5 w-5" />
+                    </Button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 

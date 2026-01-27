@@ -18,28 +18,30 @@ type ConfirmFlowProps = {
 export default function ConfirmFlow({ successRedirect = "/register" }: ConfirmFlowProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [state, setState] = useState<ConfirmationState>({
-    status: "idle",
-    message: "",
+  const token = searchParams.get("token");
+  const [state, setState] = useState<ConfirmationState>(() => {
+    if (!token) {
+      return {
+        status: "error",
+        message: "Token faltante. Revisa el enlace que te enviamos.",
+      };
+    }
+    return { status: "loading", message: "Verificando..." };
   });
 
   useEffect(() => {
-    const token = searchParams.get("token");
     if (!token) {
-      setState({
-        status: "error",
-        message: "Token faltante. Revisa el enlace que te enviamos.",
-      });
       return;
     }
-
-    setState({ status: "loading", message: "Verificando..." });
+    let isActive = true;
 
     const verify = async () => {
       const response = await fetch(`/api/v1/identity/confirm-registration?token=${token}`, {
         cache: "no-store",
       });
       const result = await response.json();
+      if (!isActive) return;
+
       if (response.ok && result.success) {
         setState({
           status: "success",
@@ -60,7 +62,10 @@ export default function ConfirmFlow({ successRedirect = "/register" }: ConfirmFl
     };
 
     verify();
-  }, [router, searchParams, successRedirect]);
+    return () => {
+      isActive = false;
+    };
+  }, [token, router, successRedirect]);
 
   const textColor = state.status === "success" ? "text-green-600" : "text-red-600";
 
