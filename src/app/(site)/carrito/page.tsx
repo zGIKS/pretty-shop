@@ -3,8 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Plus, Minus, Trash2 } from "lucide-react";
 import { useCart } from "@/lib/cart/cart-context";
+import QuantityControls from "@/components/cart/QuantityControls";
 
 export default function CartPage() {
   const { items, totalItems, totalPrice, updateItemQuantity, removeItem, clearCart } = useCart();
@@ -17,7 +17,7 @@ export default function CartPage() {
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm uppercase tracking-[0.5em] text-muted-foreground">Carrito</p>
-            <h1 className="text-3xl font-semibold text-foreground">Tu pedido</h1>
+            <h1 className="text-3xl font-semibold text-foreground">Tus pedidos</h1>
           </div>
           <div className="text-sm text-muted-foreground">
             {totalItems} artículo{totalItems === 1 ? "" : "s"}
@@ -54,31 +54,15 @@ export default function CartPage() {
                       </p>
                     </div>
                     <p className="text-sm text-muted-foreground">{item.product.description}</p>
-                    <div className="flex items-center gap-3">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => updateItemQuantity(item.product.id, item.quantity - 1)}
-                      >
-                        <Minus className="h-3 w-3" />
-                      </Button>
-                      <span className="font-semibold">{item.quantity}</span>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => updateItemQuantity(item.product.id, item.quantity + 1)}
-                      >
-                        <Plus className="h-3 w-3" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => removeItem(item.product.id)}
-                        aria-label={`Eliminar ${item.product.title}`}
-                      >
-                        <Trash2 className="h-4 w-4 text-destructive" />
-                      </Button>
-                    </div>
+                    <QuantityControls
+                      quantity={item.quantity}
+                      onDecrease={() => updateItemQuantity(item.product.id, Math.max(1, item.quantity - 1))}
+                      onIncrease={() => updateItemQuantity(item.product.id, item.quantity + 1)}
+                      onRemove={() => removeItem(item.product.id)}
+                      disableDecrease={item.quantity <= 1}
+                      disableIncrease={item.quantity >= item.product.quantity}
+                      className="flex-wrap gap-3"
+                    />
                   </div>
                 </div>
               ))}
