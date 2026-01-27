@@ -18,3 +18,13 @@ export interface TokenVerificationResponse {
   sub?: string;
   error?: string;
 }
+
+export interface SignUpRequest {
+  email: string;
+  password: string;
+}
+
+export interface SignUpResponse {
+  message: string;
+  userId?: string;
+}

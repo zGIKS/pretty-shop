@@ -3,7 +3,8 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Eye, EyeOff } from "lucide-react";
-import { useCallback, useState } from "react";
+import { FormEvent, useCallback, useState } from "react";
+import { IAM_BACKEND_URL } from "@/lib/env";
 
 const legalText = (
   <>
@@ -19,14 +20,68 @@ const legalText = (
   </>
 );
 
-const GOOGLE_AUTH_URL =
-  process.env.NEXT_PUBLIC_IAM_GOOGLE_AUTH_URL ?? "http://localhost:8082/api/v1/auth/google";
+const GOOGLE_AUTH_URL = `${IAM_BACKEND_URL}/api/v1/auth/google`;
 
-export default function LoginCard() {
+export interface SignUpNotification {
+  type: "success" | "destructive";
+  title?: string;
+  description: string;
+}
+
+interface LoginCardProps {
+  onNotify: (notification: SignUpNotification | null) => void;
+}
+
+export default function LoginCard({ onNotify }: LoginCardProps) {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const startGoogleLogin = useCallback(() => {
     window.location.href = GOOGLE_AUTH_URL;
   }, []);
+
+  const handleSignUp = useCallback(
+    async (event: FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      onNotify(null);
+      setIsSubmitting(true);
+
+      try {
+        const response = await fetch("/api/v1/auth/sign-up", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        });
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(
+            data?.message ?? "Error al registrarse con correo electrónico.",
+          );
+        }
+
+        onNotify({
+          type: "success",
+          description:
+            data?.message ??
+            "Revisa tu correo y confirma el enlace antes de iniciar sesión.",
+        });
+      } catch (error) {
+        onNotify({
+          type: "destructive",
+          description:
+            error instanceof Error
+              ? error.message
+              : "Error desconocido al registrarse.",
+        });
+      } finally {
+        setIsSubmitting(false);
+      }
+    },
+    [email, password],
+  );
   return (
     <div className="relative w-full max-w-sm z-10">
       <div className="relative rounded-[32px] border px-6 py-8">
@@ -61,36 +116,52 @@ export default function LoginCard() {
             O
           </div>
 
-          <Input
-            placeholder="Ingresa tu correo electrónico"
-            type="email"
-            maxLength={254}
-          />
+          <form className="space-y-6" onSubmit={handleSignUp}>
 
-          <div className="relative">
             <Input
-              placeholder="Ingresa tu contraseña"
-              type={showPassword ? "text" : "password"}
-              maxLength={128}
+              placeholder="Ingresa tu correo electrónico"
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              maxLength={254}
+              autoComplete="email"
             />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 transform -translate-y-1/2"
+
+            <div className="relative">
+              <Input
+                placeholder="Ingresa tu contraseña"
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                maxLength={128}
+                autoComplete="new-password"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2"
+              >
+                {showPassword ? (
+                  <EyeOff className="h-4 w-4" />
+                ) : (
+                  <Eye className="h-4 w-4" />
+                )}
+              </button>
+            </div>
+
+            <Button
+              variant="default"
+              className="w-full"
+              type="submit"
+              disabled={isSubmitting}
             >
-              {showPassword ? (
-                <EyeOff className="h-4 w-4" />
-              ) : (
-                <Eye className="h-4 w-4" />
-              )}
-            </button>
-          </div>
+              {isSubmitting
+                ? "Procesando..."
+                : "Continuar con correo electrónico"}
+            </Button>
 
-          <Button variant="default" className="w-full">
-            Continuar con correo electrónico
-          </Button>
-
-          <p className="text-center text-[12px]">{legalText}</p>
+            <p className="text-center text-[12px]">{legalText}</p>
+          </form>
         </div>
       </div>
     </div>

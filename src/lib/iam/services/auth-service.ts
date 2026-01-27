@@ -3,6 +3,8 @@
 import { parseBackendResponse } from "@/lib/iam/assemblers/google-auth-assembler";
 import {
   AuthTokenPayload,
+  SignUpRequest,
+  SignUpResponse,
   TokenVerificationResponse,
 } from "@/lib/iam/types";
 import { IAM_BACKEND_URL } from "@/lib/env";
@@ -56,4 +58,40 @@ export async function logout(refreshToken?: string): Promise<void> {
     const errorText = await response.text();
     throw new Error(`Error al cerrar sesión: ${response.status} ${errorText}`);
   }
+}
+
+export async function signUp(payload: SignUpRequest): Promise<SignUpResponse> {
+  const response = await fetch(`${IAM_BACKEND_URL}/api/v1/auth/sign-up`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    const status = response.status;
+    const errorText = await response.text();
+    let parsedMessage: string | undefined;
+    try {
+      const parsed = JSON.parse(errorText);
+      if (typeof parsed?.message === "string") {
+        parsedMessage = parsed.message;
+      }
+    } catch {
+      parsedMessage = undefined;
+    }
+
+    const message =
+      status === 409
+        ? parsedMessage ?? "El usuario ya existe."
+        : parsedMessage ??
+          `Error al registrarse: ${status} ${
+            errorText ? errorText : response.statusText
+          }`;
+    throw new Error(message);
+  }
+
+  const data = await response.json();
+  return data as SignUpResponse;
 }

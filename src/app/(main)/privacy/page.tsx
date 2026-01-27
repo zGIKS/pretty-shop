@@ -1,10 +1,8 @@
-import Header from "@/components/header";
 import Footer from "@/components/footer";
 
 export default function Privacy() {
   return (
     <>
-      <Header />
       <main className="min-h-screen pt-32 md:pt-36 pb-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-6">

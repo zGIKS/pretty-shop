@@ -46,7 +46,7 @@ export default function MobileHeaderMenu({
   if (typeof document === "undefined") return null;
 
   return createPortal(
-    <div className="fixed inset-0 z-[60] bg-white flex flex-col">
+    <div className="fixed inset-0 z-60 bg-white flex flex-col">
       <div className="max-w-7xl w-full mx-auto p-6 flex items-center justify-between">
         <Link href="/" onClick={onClose} aria-label="Ir al inicio">
           <PrettyIcon className="w-18 h-16" />

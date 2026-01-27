@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { use, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { products } from "@/data/products";
 import RelatedProducts from "@/components/landing/products/RelatedProducts";
@@ -55,7 +54,6 @@ export default function ProductPage({ params }: ProductPageProps) {
 
   return (
     <>
-      <Header />
       <main className="min-h-screen pt-32 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
