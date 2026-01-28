@@ -5,36 +5,35 @@ import Image from "next/image";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-import { products } from "@/data/products";
+import type { Product } from "@/api/products";
 
 interface SearchBarProps {
   className?: string;
+  products?: Product[];
   onResultClick?: () => void;
 }
 
-export default function SearchBar({ className = "", onResultClick }: SearchBarProps) {
+export default function SearchBar({ className = "", products = [], onResultClick }: SearchBarProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [showResults, setShowResults] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
 
-  // Buscar productos
-  const searchResults = useMemo(() => {
-    if (searchQuery.trim().length > 0) {
-      return products.filter(product =>
-        product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.description.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    } else {
-      return [];
-    }
-  }, [searchQuery]);
+  const normalizedQuery = searchQuery.trim().toLowerCase();
+  const searchableProducts = useMemo(() => products ?? [], [products]);
 
-  // Mostrar resultados
+  const searchResults = useMemo(() => {
+    if (!normalizedQuery) return [];
+    return searchableProducts.filter(
+      (product) =>
+        product.title.toLowerCase().includes(normalizedQuery) ||
+        product.description.toLowerCase().includes(normalizedQuery)
+    );
+  }, [normalizedQuery, searchableProducts]);
+
   useEffect(() => {
     setShowResults(searchQuery.trim().length > 0);
   }, [searchQuery]);
 
-  // Cerrar resultados al hacer clic fuera
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
@@ -63,7 +62,7 @@ export default function SearchBar({ className = "", onResultClick }: SearchBarPr
         onChange={(e) => setSearchQuery(e.target.value)}
         onFocus={() => searchQuery.length > 0 && setShowResults(true)}
       />
-      
+
       {showResults && searchResults.length > 0 && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-white border rounded-lg shadow-lg max-h-96 overflow-y-auto z-50">
           {searchResults.map((product) => (
@@ -89,7 +88,7 @@ export default function SearchBar({ className = "", onResultClick }: SearchBarPr
           ))}
         </div>
       )}
-      
+
       {showResults && searchResults.length === 0 && searchQuery.length > 0 && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-white border rounded-lg shadow-lg p-4 z-50">
           <p className="text-gray-500 text-sm text-center">No se encontraron productos</p>

@@ -1,5 +1,5 @@
 import ProductCard from "@/components/landing/products/ProductCard";
-import { Product } from "@/data/products";
+import { Product } from "@/api/products";
 
 interface ProductsGridProps {
   products: Product[];

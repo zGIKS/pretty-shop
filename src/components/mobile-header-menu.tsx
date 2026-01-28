@@ -3,15 +3,23 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createPortal } from "react-dom";
-import { X, ChevronDown, Briefcase, Package, Mail } from "lucide-react";
+import { X, ChevronDown, Briefcase, Package, Mail, LogIn, LogOut, ShoppingCart } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import PrettyIcon from "@/components/icon/pretty";
 
 type MobileHeaderMenuProps = {
   open: boolean;
   onClose: () => void;
+  isLoggedIn?: boolean;
+  onLogout?: () => void;
 };
 
-export default function MobileHeaderMenu({ open, onClose }: MobileHeaderMenuProps) {
+export default function MobileHeaderMenu({
+  open,
+  onClose,
+  isLoggedIn = false,
+  onLogout,
+}: MobileHeaderMenuProps) {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
 
@@ -38,8 +46,8 @@ export default function MobileHeaderMenu({ open, onClose }: MobileHeaderMenuProp
   if (typeof document === "undefined") return null;
 
   return createPortal(
-    <div className="fixed inset-0 z-[60] bg-white overflow-y-auto">
-      <div className="max-w-7xl mx-auto p-6 flex items-center justify-between">
+    <div className="fixed inset-0 z-60 bg-white flex flex-col">
+      <div className="max-w-7xl w-full mx-auto p-6 flex items-center justify-between">
         <Link href="/" onClick={onClose} aria-label="Ir al inicio">
           <PrettyIcon className="w-18 h-16" />
         </Link>
@@ -53,8 +61,8 @@ export default function MobileHeaderMenu({ open, onClose }: MobileHeaderMenuProp
         </button>
       </div>
 
-      <nav className="border-t border-border">
-        <div className="max-w-7xl mx-auto">
+      <nav className="flex-1 overflow-y-auto border-t border-border">
+        <div className="max-w-7xl w-full mx-auto">
           <div className="divide-y divide-border">
             <button
               type="button"
@@ -101,7 +109,7 @@ export default function MobileHeaderMenu({ open, onClose }: MobileHeaderMenuProp
                 </div>
                 <div className="mt-4 border-t border-border pt-4">
                   <Link
-                    className="block rounded-md px-3 py-3 text-sm text-muted-foreground hover:bg-muted/60 hover:text-foreground transition-colors"
+                    className="block rounded-md px-3 py-3 text-sm text-foreground hover:bg-muted/60 transition-colors"
                     href="/servicios"
                     onClick={onClose}
                   >
@@ -128,7 +136,7 @@ export default function MobileHeaderMenu({ open, onClose }: MobileHeaderMenuProp
             </button>
             {productsOpen ? (
               <div className="px-6 pb-6">
-                <div className="pt-6 pb-3 text-xs font-medium tracking-wide text-muted-foreground">
+                <div className="pt-6 pb-3 text-xs font-medium tracking-wide text-foreground">
                   CATEGORÍAS
                 </div>
                 <div className="space-y-1">
@@ -170,7 +178,7 @@ export default function MobileHeaderMenu({ open, onClose }: MobileHeaderMenuProp
                 </div>
                 <div className="mt-4 border-t border-border pt-4">
                   <Link
-                    className="block rounded-md px-3 py-3 text-sm text-muted-foreground hover:bg-muted/60 hover:text-foreground transition-colors"
+                    className="block rounded-md px-3 py-3 text-sm text-foreground hover:bg-muted/60 transition-colors"
                     href="/productos"
                     onClick={onClose}
                   >
@@ -193,6 +201,35 @@ export default function MobileHeaderMenu({ open, onClose }: MobileHeaderMenuProp
           </div>
         </div>
       </nav>
+
+      <div className="border-t border-border px-6 pb-8 pt-8 space-y-4 max-w-7xl w-full mx-auto">
+        <Button variant="outline" className="w-full flex items-center gap-2 justify-center" asChild>
+          <Link href="/carrito" onClick={onClose} aria-label="Ir al carrito">
+            <ShoppingCart className="h-5 w-5" />
+            Ver carrito
+          </Link>
+        </Button>
+        {isLoggedIn ? (
+          <Button
+            variant="default"
+            className="w-full flex items-center gap-2 justify-center text-white"
+            onClick={() => {
+              onClose();
+              onLogout?.();
+            }}
+          >
+            <LogOut className="h-5 w-5" />
+            Cerrar sesión
+          </Button>
+        ) : (
+          <Button variant="default" className="w-full flex items-center gap-2" asChild>
+            <Link href="/login" onClick={onClose}>
+              <LogIn className="h-5 w-5" />
+              Iniciar Sesión
+            </Link>
+          </Button>
+        )}
+      </div>
     </div>
     ,
     document.body
