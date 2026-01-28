@@ -2,8 +2,8 @@
 
 import { useEffect, useMemo, useState, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
-import type { Product } from "@/api/products";
-import { getProducts } from "@/api/products";
+import type { Product } from "@/lib/products";
+import { getProducts } from "@/lib/products";
 import ProductsGrid from "@/components/landing/products/ProductsGrid";
 import ProductsToolbar from "@/components/landing/products/ProductsToolbar";
 import { Button } from "@/components/ui/button";

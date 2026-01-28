@@ -8,8 +8,8 @@ import SearchBar from "@/components/landing/products/SearchBar";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronUp, SlidersHorizontal } from "lucide-react";
 import AddToCart from "@/components/cart/AddToCart";
-import type { Product } from "@/api/products";
-import { getProductById, getProducts } from "@/api/products";
+import type { Product } from "@/lib/products";
+import { getProductById, getProducts } from "@/lib/products";
 
 type SortOption = "relevance" | "price-asc" | "price-desc" | "name-asc" | "name-desc";
 

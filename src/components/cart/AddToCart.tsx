@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Product } from "@/api/products";
+import { Product } from "@/lib/products";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/lib/cart/cart-context";
 import QuantityControls from "@/components/cart/QuantityControls";

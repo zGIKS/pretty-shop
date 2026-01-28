@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import ProductCard from "@/components/landing/products/ProductCard";
-import type { Product } from "@/api/products";
+import type { Product } from "@/lib/products";
 
 interface RelatedProductsProps {
   currentProductId: string;

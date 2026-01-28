@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronDown, ChevronUp, SlidersHorizontal } from "lucide-react";
 import SearchBar from "@/components/landing/products/SearchBar";
 import { Button } from "@/components/ui/button";
-import type { Product } from "@/api/products";
+import type { Product } from "@/lib/products";
 
 type SortOption = "relevance" | "price-asc" | "price-desc" | "name-asc" | "name-desc";
 
