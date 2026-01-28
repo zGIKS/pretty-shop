@@ -1,23 +1,23 @@
 import { useMemo } from "react";
 import ProductCard from "@/components/landing/products/ProductCard";
-import { Product } from "@/data/products";
+import type { Product } from "@/api/products";
 
 interface RelatedProductsProps {
-  currentProductIndex: number;
+  currentProductId: string;
   products: Product[];
   selectedCategory: string;
   sortBy: "relevance" | "price-asc" | "price-desc" | "name-asc" | "name-desc";
 }
 
 export default function RelatedProducts({
-  currentProductIndex,
+  currentProductId,
   products,
   selectedCategory,
   sortBy,
 }: RelatedProductsProps) {
   // Obtener 4 productos relacionados excluyendo el actual, ordenados por id descendente
   const relatedProducts = useMemo(() => {
-    let filtered = products.filter((product) => product.id !== currentProductIndex);
+    let filtered = products.filter((product) => product.id !== currentProductId);
 
     if (selectedCategory !== "all") {
       filtered = filtered.filter((product) => product.category === selectedCategory);
@@ -37,13 +37,13 @@ export default function RelatedProducts({
       case "name-desc":
         sorted.sort((a, b) => b.title.localeCompare(a.title));
         break;
-      default:
-        sorted.sort((a, b) => b.id - a.id);
-        break;
-    }
+    default:
+      sorted.sort((a, b) => a.title.localeCompare(b.title));
+      break;
+  }
 
-    return sorted.slice(0, 4);
-  }, [products, currentProductIndex, selectedCategory, sortBy]);
+  return sorted.slice(0, 4);
+}, [products, currentProductId, selectedCategory, sortBy]);
 
   return (
     <div className="mt-16">

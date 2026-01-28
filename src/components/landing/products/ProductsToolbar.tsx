@@ -4,10 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronDown, ChevronUp, SlidersHorizontal } from "lucide-react";
 import SearchBar from "@/components/landing/products/SearchBar";
 import { Button } from "@/components/ui/button";
+import type { Product } from "@/api/products";
 
 type SortOption = "relevance" | "price-asc" | "price-desc" | "name-asc" | "name-desc";
 
 interface ProductsToolbarProps {
+  products: Product[];
   categories: string[];
   selectedCategory: string;
   sortBy: SortOption;
@@ -16,6 +18,7 @@ interface ProductsToolbarProps {
 }
 
 export default function ProductsToolbar({
+  products,
   categories,
   selectedCategory,
   sortBy,
@@ -43,7 +46,7 @@ export default function ProductsToolbar({
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-      <SearchBar className="w-full md:max-w-md" />
+      <SearchBar className="w-full md:max-w-md" products={products} />
       <div className="flex w-full items-center justify-between gap-2 md:w-auto md:gap-4">
         <div className="relative" ref={filterRef}>
           <Button

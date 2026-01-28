@@ -1,12 +1,12 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { products, type Product } from "@/data/products";
+import type { Product } from "@/api/products";
 
 const STORAGE_KEY = "pretty_cart_items";
 
 interface CartRecord {
-  productId: number;
+  product: Product;
   quantity: number;
 }
 
@@ -25,8 +25,8 @@ interface CartSnapshot {
 type CartAction =
   | { type: "hydrate"; payload: CartRecord[] }
   | { type: "add"; payload: CartRecord }
-  | { type: "update"; payload: CartRecord }
-  | { type: "remove"; payload: { productId: number } }
+  | { type: "update"; payload: { productId: string; quantity: number } }
+  | { type: "remove"; payload: { productId: string } }
   | { type: "clear" };
 
 let storedRecords: CartRecord[] = [];
@@ -38,34 +38,38 @@ const cartReducer = (state: CartRecord[], action: CartAction): CartRecord[] => {
     case "hydrate":
       return action.payload;
     case "add": {
-      const existing = state.find((item) => item.productId === action.payload.productId);
-      const product = products.find((p) => p.id === action.payload.productId);
-      const max = product ? product.quantity : Infinity;
+      const existing = state.find((item) => item.product.id === action.payload.product.id);
+      const max = action.payload.product.quantity ?? Infinity;
 
       if (!existing) {
         const qty = Math.max(0, Math.min(action.payload.quantity, max));
         if (qty <= 0) return state;
-        return [...state, { productId: action.payload.productId, quantity: qty }];
+        return [...state, { product: action.payload.product, quantity: qty }];
       }
 
       const newQty = Math.max(0, Math.min(existing.quantity + action.payload.quantity, max));
       return state.map((item) =>
-        item.productId === action.payload.productId ? { ...item, quantity: newQty } : item
+        item.product.id === action.payload.product.id
+          ? { ...item, quantity: newQty, product: action.payload.product }
+          : item
       );
     }
     case "update": {
-      const product = products.find((p) => p.id === action.payload.productId);
-      const max = product ? product.quantity : Infinity;
+      const existing = state.find((item) => item.product.id === action.payload.productId);
+      if (!existing) return state;
+
+      const max = existing.product.quantity ?? Infinity;
       const qty = Math.max(0, Math.min(action.payload.quantity, max));
       if (qty <= 0) {
-        return state.filter((item) => item.productId !== action.payload.productId);
+        return state.filter((item) => item.product.id !== action.payload.productId);
       }
+
       return state.map((item) =>
-        item.productId === action.payload.productId ? { ...item, quantity: qty } : item
+        item.product.id === action.payload.productId ? { ...item, quantity: qty } : item
       );
     }
     case "remove":
-      return state.filter((item) => item.productId !== action.payload.productId);
+      return state.filter((item) => item.product.id !== action.payload.productId);
     case "clear":
       return [];
     default:
@@ -74,13 +78,10 @@ const cartReducer = (state: CartRecord[], action: CartAction): CartRecord[] => {
 };
 
 const computeSnapshot = (records: CartRecord[]): CartSnapshot => {
-  const items = records
-    .map((record) => {
-      const product = products.find((item) => item.id === record.productId);
-      if (!product) return null;
-      return { product, quantity: record.quantity };
-    })
-    .filter((item): item is CartItem => Boolean(item));
+  const items = records.map((record) => ({
+    product: record.product,
+    quantity: record.quantity,
+  }));
 
   const totalItems = records.reduce((sum, record) => sum + record.quantity, 0);
   const totalPrice = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
@@ -158,13 +159,13 @@ const addCartItem = (product: Product, quantity = 1) => {
   dispatch({
     type: "add",
     payload: {
-      productId: product.id,
+      product,
       quantity: Math.max(1, Math.floor(quantity)),
     },
   });
 };
 
-const updateCartItemQuantity = (productId: number, quantity: number) => {
+const updateCartItemQuantity = (productId: string, quantity: number) => {
   dispatch({
     type: "update",
     payload: {
@@ -174,7 +175,7 @@ const updateCartItemQuantity = (productId: number, quantity: number) => {
   });
 };
 
-const removeCartItem = (productId: number) => {
+const removeCartItem = (productId: string) => {
   dispatch({
     type: "remove",
     payload: { productId },
