@@ -1,7 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import type { Product } from "@/api/products";
+import type { Product } from "@/lib/products";
 
 const STORAGE_KEY = "pretty_cart_items";
 

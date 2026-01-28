@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { Product } from "@/api/products";
+import { Product } from "@/lib/products";
 import AddToCart from "@/components/cart/AddToCart";
 
 interface ProductCardProps {

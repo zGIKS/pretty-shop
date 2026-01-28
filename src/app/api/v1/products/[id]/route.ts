@@ -3,9 +3,9 @@ import { PRODUCTS_API_BASE } from "@/lib/env";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const id = params.id;
+  const { id } = await params;
 
   try {
     const response = await fetch(`${PRODUCTS_API_BASE}/products/${encodeURIComponent(id)}`, {

@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-import type { Product } from "@/api/products";
+import type { Product } from "@/lib/products";
 
 interface SearchBarProps {
   className?: string;
