@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PRODUCTS_API_BASE } from "@/lib/env";
 
 export async function GET(
   request: NextRequest,
@@ -8,7 +7,7 @@ export async function GET(
   const { id } = await params;
 
   try {
-    const response = await fetch(`${PRODUCTS_API_BASE}/products/${encodeURIComponent(id)}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_GATEWAY}/api/v1/products/${encodeURIComponent(id)}`, {
       cache: "no-store",
     });
 
@@ -21,7 +20,7 @@ export async function GET(
 
     const data = await response.json();
     return NextResponse.json(data);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
