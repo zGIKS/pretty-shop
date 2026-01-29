@@ -8,6 +8,11 @@ import {
 
 const API_BASE = "/api/v1";
 
+type PaymentRequestOptions = {
+  signal?: AbortSignal;
+  authToken?: string;
+};
+
 function getGatewayHost() {
   const host = process.env.NEXT_PUBLIC_API_GATEWAY;
   if (!host) {
@@ -32,17 +37,32 @@ async function parseErrorMessage(response: Response) {
   return "Ocurrió un error al comunicarse con el servidor.";
 }
 
+function buildAuthHeaders(token?: string, includeContentType = false) {
+  const trimmedToken = token?.trim();
+  if (!trimmedToken) {
+    throw new Error("Token de autenticación no disponible. Inicia sesión de nuevo.");
+  }
+
+  const headers: Record<string, string> = {
+    Authorization: `Bearer ${trimmedToken}`,
+  };
+
+  if (includeContentType) {
+    headers["Content-Type"] = "application/json";
+  }
+
+  return headers;
+}
+
 export async function createPaymentPreference(
   payload: CreatePaymentPreferencePayload,
-  signal?: AbortSignal,
+  { signal, authToken }: PaymentRequestOptions = {},
 ): Promise<CreatePaymentPreferenceResponse> {
   const response = await fetch(buildUrl("/payments"), {
     method: "POST",
     cache: "no-store",
     signal,
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: buildAuthHeaders(authToken, true),
     body: JSON.stringify({
       payer_email: payload.payerEmail,
       product_id: payload.productId,
@@ -58,10 +78,14 @@ export async function createPaymentPreference(
   return response.json();
 }
 
-export async function getPaymentById(id: string, signal?: AbortSignal): Promise<Payment> {
+export async function getPaymentById(
+  id: string,
+  { signal, authToken }: PaymentRequestOptions = {},
+): Promise<Payment> {
   const response = await fetch(buildUrl(`/payments/${encodeURIComponent(id)}`), {
     cache: "no-store",
     signal,
+    headers: buildAuthHeaders(authToken),
   });
 
   if (response.status === 404) {
