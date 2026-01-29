@@ -111,7 +111,7 @@ export async function PaymentResultPage({
   const config = VARIANT_CONFIG[variant];
   const IconComponent = config.icon;
   const externalReference = getSearchParamValue(searchParams.external_reference);
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const authToken = cookieStore.get("authToken")?.value ?? null;
   let payment: Payment | null = null;
   let error: string | null = null;
