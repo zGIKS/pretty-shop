@@ -7,10 +7,8 @@ import { Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { createPaymentPreference } from "@/lib/payments";
-import { getStoredAccessToken } from "@/lib/iam/token-storage";
 import { useCart } from "@/lib/cart/cart-context";
 import QuantityControls from "@/components/cart/QuantityControls";
-import { useAuth } from "@/lib/hooks/useAuth";
 import { useRouter } from "next/navigation";
 
 export default function CartPage() {
@@ -18,7 +16,6 @@ export default function CartPage() {
   const [payerEmail, setPayerEmail] = useState("");
   const [isCreatingPayment, setIsCreatingPayment] = useState(false);
   const [checkoutError, setCheckoutError] = useState<string | null>(null);
-  const { isLoggedIn } = useAuth();
   const router = useRouter();
 
   const hasItems = items.length > 0;
@@ -30,20 +27,8 @@ export default function CartPage() {
       return;
     }
 
-    if (!isLoggedIn) {
-      router.push(`/login?redirect=${encodeURIComponent("/carrito")}`);
-      return;
-    }
-
     if (!payerEmail.trim()) {
       setCheckoutError("Necesitamos tu correo electrónico para crear la orden.");
-      return;
-    }
-
-    const authToken = getStoredAccessToken();
-    if (!authToken) {
-      setCheckoutError("Tu sesión expiró. Inicia sesión de nuevo para continuar.");
-      router.push(`/login?redirect=${encodeURIComponent("/carrito")}`);
       return;
     }
 
@@ -55,7 +40,7 @@ export default function CartPage() {
         payerEmail: payerEmail.trim(),
         productId: firstItem.product.id,
         quantity: firstItem.quantity,
-      }, { authToken });
+      });
 
       window.location.href = preference.preference_url;
     } catch (error) {
@@ -65,7 +50,7 @@ export default function CartPage() {
     } finally {
       setIsCreatingPayment(false);
     }
-  }, [firstItem, payerEmail, isLoggedIn, router]);
+  }, [firstItem, payerEmail]);
 
   return (
     <main className="min-h-screen pt-32 pb-16 bg-background px-4 sm:px-6 lg:px-8">

@@ -7,21 +7,15 @@ import { Button } from "@/components/ui/button";
 import { Menu, ShoppingCart } from "lucide-react";
 import PrettyIcon from "@/components/icon/pretty";
 import MobileHeaderMenu from "@/components/mobile-header-menu";
-import { useAuth } from "@/lib/hooks/useAuth";
 import { NavigationMenu } from "@/components/header/NavigationMenu";
 import { useCart } from "@/lib/cart/cart-context";
 
 interface HeaderProps {
   fixed?: boolean;
-  initialIsLoggedIn?: boolean;
 }
 
-export default function HeaderClient({
-  fixed = true,
-  initialIsLoggedIn = false,
-}: HeaderProps) {
+export default function HeaderClient({ fixed = true }: HeaderProps) {
   const pathname = usePathname();
-  const { isLoggedIn, handleLogout } = useAuth(initialIsLoggedIn);
   const [open, setOpen] = useState(false);
   const { totalItems } = useCart();
 
@@ -35,7 +29,7 @@ export default function HeaderClient({
         <Link href="/">
           <PrettyIcon className="w-18 h-16" />
         </Link>
-        <NavigationMenu isLoggedIn={isLoggedIn} onLogout={handleLogout} cartItemCount={totalItems} />
+        <NavigationMenu cartItemCount={totalItems} />
         <div className="md:hidden flex items-center gap-2">
           <Button variant="ghost" size="icon" className="relative" asChild>
             <Link href="/carrito" aria-label="Ver carrito">
@@ -62,8 +56,6 @@ export default function HeaderClient({
       <MobileHeaderMenu
         open={open}
         onClose={() => setOpen(false)}
-        isLoggedIn={isLoggedIn}
-        onLogout={handleLogout}
       />
     </div>
   );

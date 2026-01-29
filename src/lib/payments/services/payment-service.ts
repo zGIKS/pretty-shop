@@ -39,13 +39,11 @@ async function parseErrorMessage(response: Response) {
 
 function buildAuthHeaders(token?: string, includeContentType = false) {
   const trimmedToken = token?.trim();
-  if (!trimmedToken) {
-    throw new Error("Token de autenticación no disponible. Inicia sesión de nuevo.");
-  }
+  const headers: Record<string, string> = {};
 
-  const headers: Record<string, string> = {
-    Authorization: `Bearer ${trimmedToken}`,
-  };
+  if (trimmedToken) {
+    headers.Authorization = `Bearer ${trimmedToken}`;
+  }
 
   if (includeContentType) {
     headers["Content-Type"] = "application/json";

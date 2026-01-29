@@ -10,15 +10,11 @@ import PrettyIcon from "@/components/icon/pretty";
 type MobileHeaderMenuProps = {
   open: boolean;
   onClose: () => void;
-  isLoggedIn?: boolean;
-  onLogout?: () => void;
 };
 
 export default function MobileHeaderMenu({
   open,
   onClose,
-  isLoggedIn = false,
-  onLogout,
 }: MobileHeaderMenuProps) {
   const [servicesOpen, setServicesOpen] = useState(false);
 
@@ -150,26 +146,6 @@ export default function MobileHeaderMenu({
             Ver carrito
           </Link>
         </Button>
-        {isLoggedIn ? (
-          <Button
-            variant="default"
-            className="w-full flex items-center gap-2 justify-center text-white"
-            onClick={() => {
-              onClose();
-              onLogout?.();
-            }}
-          >
-            <LogOut className="h-5 w-5" />
-            Cerrar sesión
-          </Button>
-        ) : (
-          <Button variant="default" className="w-full flex items-center gap-2" asChild>
-            <Link href="/login" onClick={onClose}>
-              <LogIn className="h-5 w-5" />
-              Iniciar Sesión
-            </Link>
-          </Button>
-        )}
       </div>
     </div>
     ,

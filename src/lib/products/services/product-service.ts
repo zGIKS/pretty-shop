@@ -38,7 +38,7 @@ export async function getProducts(options?: ProductQueryOptions): Promise<Produc
 }
 
 export async function getProductById(id: string, signal?: AbortSignal): Promise<Product> {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_GATEWAY}/api/v1/products/${encodeURIComponent(id)}`, {
+  const response = await fetch(buildUrl(`/products/${encodeURIComponent(id)}`), {
     signal,
     cache: "no-store",
   });

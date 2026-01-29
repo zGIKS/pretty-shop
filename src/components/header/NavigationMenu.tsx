@@ -5,19 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Mail, ShoppingCart } from "lucide-react";
 import { ServicesDropdown } from "./ServicesDropdown";
 import { ProductsDropdown } from "./ProductsDropdown";
-import { UserMenu } from "./UserMenu";
 
 interface NavigationMenuProps {
-  isLoggedIn: boolean;
-  onLogout: () => void;
   cartItemCount?: number;
 }
 
-export function NavigationMenu({
-  isLoggedIn,
-  onLogout,
-  cartItemCount = 0,
-}: NavigationMenuProps) {
+export function NavigationMenu({ cartItemCount = 0 }: NavigationMenuProps) {
   return (
     <div className="hidden md:flex items-center gap-4">
       <ServicesDropdown />
@@ -46,7 +39,6 @@ export function NavigationMenu({
           </Link>
         </Button>
       </div>
-      <UserMenu isLoggedIn={isLoggedIn} onLogout={onLogout} />
     </div>
   );
 }
