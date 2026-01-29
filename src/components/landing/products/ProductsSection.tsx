@@ -1,6 +1,6 @@
  "use client";
 
-import { useEffect, useMemo, useState, useCallback } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { Product } from "@/lib/products";
 import { getProducts } from "@/lib/products";
@@ -24,7 +24,7 @@ export default function ProductsSection() {
     setSelectedCategory(categoryParam || "all");
   }, [searchParams]);
 
-  const loadProducts = useCallback(async () => {
+  const loadProducts = async () => {
     setStatus("loading");
     try {
       const data = await getProducts();
@@ -33,11 +33,12 @@ export default function ProductsSection() {
     } catch {
       setStatus("error");
     }
-  }, []);
+  };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadProducts();
-  }, [loadProducts]);
+  }, []);
 
   const categories = useMemo(() => {
     return Array.from(new Set(products.map((product) => product.category)));
