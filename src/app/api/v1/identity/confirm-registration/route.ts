@@ -1,7 +1,6 @@
 "use server";
 
 import { NextRequest, NextResponse } from "next/server";
-import { IAM_BACKEND_URL } from "@/lib/env";
 
 export async function GET(request: NextRequest) {
   const token = request.nextUrl.searchParams.get("token");
@@ -19,7 +18,7 @@ export async function GET(request: NextRequest) {
 
   const params = new URLSearchParams({ token });
   const response = await fetch(
-    `${IAM_BACKEND_URL}/api/v1/identity/confirm-registration?${params}`,
+    `${process.env.API_GATEWAY}/api/v1/identity/confirm-registration?${params}`,
     {
       method: "GET",
       redirect: "manual",

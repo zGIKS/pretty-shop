@@ -1,4 +1,3 @@
-import { PRODUCTS_API_BASE } from "@/lib/env";
 import { Product, ProductQueryOptions, ApiProduct } from '../types';
 import { normalizeProduct } from '../assemblers/product-assembler';
 
@@ -7,7 +6,7 @@ const API_BASE = "/api/v1";
 type QueryParams = Record<string, string | number | undefined | null>;
 
 const buildUrl = (path: string, params?: QueryParams) => {
-  const url = new URL(`${API_BASE}${path}`, window.location.origin);
+  const url = new URL(`${API_BASE}${path}`, process.env.NEXT_PUBLIC_API_GATEWAY);
   if (params) {
     Object.entries(params).forEach(([key, value]) => {
       if (value != null && value !== "") {
@@ -39,7 +38,7 @@ export async function getProducts(options?: ProductQueryOptions): Promise<Produc
 }
 
 export async function getProductById(id: string, signal?: AbortSignal): Promise<Product> {
-  const response = await fetch(`${PRODUCTS_API_BASE}/products/${encodeURIComponent(id)}`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_GATEWAY}/api/v1/products/${encodeURIComponent(id)}`, {
     signal,
     cache: "no-store",
   });

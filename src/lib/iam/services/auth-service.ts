@@ -7,12 +7,11 @@ import {
   SignUpResponse,
   TokenVerificationResponse,
 } from "@/lib/iam/types";
-import { IAM_BACKEND_URL } from "@/lib/env";
 
 export async function exchangeCodeForToken(code: string): Promise<AuthTokenPayload> {
   const params = new URLSearchParams({ code });
 
-  const response = await fetch(`${IAM_BACKEND_URL}/api/v1/auth/google/callback?${params.toString()}`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_GATEWAY}/api/v1/auth/google/callback?${params.toString()}`, {
     method: "GET",
   });
 
@@ -29,7 +28,7 @@ export async function exchangeCodeForToken(code: string): Promise<AuthTokenPaylo
 
 export async function verifyToken(token: string): Promise<TokenVerificationResponse> {
   const params = new URLSearchParams({ token });
-  const response = await fetch(`${IAM_BACKEND_URL}/api/v1/auth/verify?${params.toString()}`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_GATEWAY}/api/v1/auth/verify?${params.toString()}`, {
     method: "GET",
   });
 
@@ -46,7 +45,7 @@ export async function verifyToken(token: string): Promise<TokenVerificationRespo
 
 export async function logout(refreshToken?: string): Promise<void> {
   const body = JSON.stringify({ refresh_token: refreshToken ?? "" });
-  const response = await fetch(`${IAM_BACKEND_URL}/api/v1/auth/logout`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_GATEWAY}/api/v1/auth/logout`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -61,7 +60,7 @@ export async function logout(refreshToken?: string): Promise<void> {
 }
 
 export async function signUp(payload: SignUpRequest): Promise<SignUpResponse> {
-  const response = await fetch(`${IAM_BACKEND_URL}/api/v1/auth/sign-up`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_GATEWAY}/api/v1/auth/sign-up`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -97,7 +96,7 @@ export async function signUp(payload: SignUpRequest): Promise<SignUpResponse> {
 }
 
 export async function signIn(payload: { email: string; password: string }): Promise<{ token: string; refresh_token: string }> {
-  const response = await fetch(`${IAM_BACKEND_URL}/api/v1/auth/sign-in`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_GATEWAY}/api/v1/auth/sign-in`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

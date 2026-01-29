@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PRODUCTS_API_BASE } from "@/lib/env";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -7,7 +6,7 @@ export async function GET(request: NextRequest) {
   const offset = searchParams.get("offset");
   const category = searchParams.get("category");
 
-  const url = new URL(`${PRODUCTS_API_BASE}/products`);
+  const url = new URL(`${process.env.NEXT_PUBLIC_API_GATEWAY}/api/v1/products`);
   if (limit) url.searchParams.set("limit", limit);
   if (offset) url.searchParams.set("offset", offset);
   if (category) url.searchParams.set("category", category);
