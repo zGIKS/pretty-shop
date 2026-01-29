@@ -1,35 +1,30 @@
+"use client";
+
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import SignShampooIcon from "@/components/icon/shampoo";
+import { Button } from "@/components/ui/button";
 
 export default function Section5() {
-  const items = [
-    "Cuidado de la piel",
-    "Rostro",
-    "Ojos",
-    "Labios",
-    "Accesorios de belleza",
-  ];
-
   return (
     <section className="py-10 md:py-16">
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_1.6fr] gap-6 md:gap-10 items-start">
-          <div>
-            <h2 className="text-2xl md:text-3xl font-semibold">Productos</h2>
-          </div>
-          <div className="divide-y">
-            {items.map((item) => (
-              <Link
-                key={item}
-                href={{ pathname: "/productos", query: { category: item } }}
-                className="w-full flex items-center justify-between py-4 text-base md:text-lg font-medium text-left hover:opacity-80 transition-opacity"
-              >
-                <span>{item}</span>
-                <ArrowRight className="h-4 w-4" aria-hidden />
-              </Link>
-            ))}
-          </div>
+      <div className="max-w-7xl mx-auto px-4 md:px-6 flex flex-col gap-8 items-center text-center">
+        <div className="flex justify-center">
+          <SignShampooIcon className="h-64 w-64 md:h-96 md:w-96" />
         </div>
+        <div className="max-w-3xl space-y-4">
+          <p className="text-sm uppercase tracking-[0.4em] text-slate-900">
+            Belleza con intención
+          </p>
+          <h2 className="text-3xl md:text-4xl font-semibold text-slate-900">
+            Productos de calidad profesional para cuidar tu piel y cabello
+          </h2>
+          <p className="text-base md:text-lg text-slate-600">
+            Cada fórmula combina ingredientes seleccionados, textura sensorial y empaques sostenibles para que disfrutes rutinas que realmente se sienten como un lujo diario.
+          </p>
+        </div>
+        <Button asChild className="text-sm md:text-base">
+          <Link href="/productos">Ver productos</Link>
+        </Button>
       </div>
     </section>
   );
