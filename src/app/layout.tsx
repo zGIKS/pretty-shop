@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: "Pretty | Estética y podología",
   description: "A beautiful e-commerce platform for all your needs.",
   icons: {
-    icon: '/ico.svg',
+    icon: "/ico.svg",
   },
 };
 
@@ -27,9 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
       </body>
     </html>

@@ -1,7 +1,8 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-import { Product } from "@/data/products";
-import { Button } from "@/components/ui/button";
+import { Product } from "@/lib/products";
+import AddToCart from "@/components/cart/AddToCart";
 
 interface ProductCardProps {
   product: Product;
@@ -28,11 +29,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         </Link>
         <p className="text-sm text-muted-foreground">S/ {product.price}</p>
         <div className="mt-auto pt-2">
-          <Button asChild size="sm" className="w-full">
-            <Link href="https://wa.me/51943373233" target="_blank">
-              Comprar
-            </Link>
-          </Button>
+          <AddToCart product={product} />
         </div>
       </div>
     </div>
