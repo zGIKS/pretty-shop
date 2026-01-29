@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/card";
 import { getPaymentById, type Payment } from "@/lib/payments";
 import { CheckCircle2, Clock, XCircle } from "lucide-react";
+import { cookies } from "next/headers";
 import Link from "next/link";
 
 type PaymentResultVariant = "success" | "failure" | "pending";
@@ -110,14 +111,18 @@ export async function PaymentResultPage({
   const config = VARIANT_CONFIG[variant];
   const IconComponent = config.icon;
   const externalReference = getSearchParamValue(searchParams.external_reference);
+  const cookieStore = cookies();
+  const authToken = cookieStore.get("authToken")?.value ?? null;
   let payment: Payment | null = null;
   let error: string | null = null;
 
   if (!externalReference) {
     error = "No se recibió el identificador del pago (external_reference).";
+  } else if (!authToken) {
+    error = "Necesitas iniciar sesión para revisar el resultado del pago.";
   } else {
     try {
-      payment = await getPaymentById(externalReference);
+      payment = await getPaymentById(externalReference, { authToken });
     } catch (err) {
       if (err instanceof Error) {
         error = err.message;

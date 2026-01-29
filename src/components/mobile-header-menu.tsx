@@ -21,7 +21,6 @@ export default function MobileHeaderMenu({
   onLogout,
 }: MobileHeaderMenuProps) {
   const [servicesOpen, setServicesOpen] = useState(false);
-  const [productsOpen, setProductsOpen] = useState(false);
 
   useEffect(() => {
     if (!open) return;
@@ -119,74 +118,16 @@ export default function MobileHeaderMenu({
               </div>
             ) : null}
 
-            <button
-              type="button"
-              className="w-full px-6 py-6 flex items-center justify-between text-left"
-              onClick={() => setProductsOpen((v) => !v)}
-              aria-expanded={productsOpen}
+            <Link
+              href="/productos"
+              onClick={onClose}
+              className="w-full px-6 py-6 flex items-center justify-between"
             >
               <span className="flex items-center gap-3 text-lg font-semibold">
                 <Package className="h-5 w-5" />
                 Productos
               </span>
-              <ChevronDown
-                className={`h-5 w-5 transition-transform ${productsOpen ? "rotate-180" : ""}`}
-                aria-hidden="true"
-              />
-            </button>
-            {productsOpen ? (
-              <div className="px-6 pb-6">
-                <div className="pt-6 pb-3 text-xs font-medium tracking-wide text-foreground">
-                  CATEGORÍAS
-                </div>
-                <div className="space-y-1">
-                  <Link
-                    className="block rounded-md px-3 py-3 text-base hover:bg-muted/60 transition-colors"
-                    href={{ pathname: "/productos", query: { category: "Cuidado de la piel" } }}
-                    onClick={onClose}
-                  >
-                    Cuidado de la piel
-                  </Link>
-                  <Link
-                    className="block rounded-md px-3 py-3 text-base hover:bg-muted/60 transition-colors"
-                    href={{ pathname: "/productos", query: { category: "Rostro" } }}
-                    onClick={onClose}
-                  >
-                    Rostro
-                  </Link>
-                  <Link
-                    className="block rounded-md px-3 py-3 text-base hover:bg-muted/60 transition-colors"
-                    href={{ pathname: "/productos", query: { category: "Ojos" } }}
-                    onClick={onClose}
-                  >
-                    Ojos
-                  </Link>
-                  <Link
-                    className="block rounded-md px-3 py-3 text-base hover:bg-muted/60 transition-colors"
-                    href={{ pathname: "/productos", query: { category: "Labios" } }}
-                    onClick={onClose}
-                  >
-                    Labios
-                  </Link>
-                  <Link
-                    className="block rounded-md px-3 py-3 text-base hover:bg-muted/60 transition-colors"
-                    href={{ pathname: "/productos", query: { category: "Accesorios de belleza" } }}
-                    onClick={onClose}
-                  >
-                    Accesorios de belleza
-                  </Link>
-                </div>
-                <div className="mt-4 border-t border-border pt-4">
-                  <Link
-                    className="block rounded-md px-3 py-3 text-sm text-foreground hover:bg-muted/60 transition-colors"
-                    href="/productos"
-                    onClick={onClose}
-                  >
-                    Ver todos los productos
-                  </Link>
-                </div>
-              </div>
-            ) : null}
+            </Link>
 
             <Link
               href="/contacto"
