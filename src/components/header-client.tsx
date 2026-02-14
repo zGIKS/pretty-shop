@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Menu, ShoppingCart } from "lucide-react";
 import PrettyIcon from "@/components/icon/pretty";
@@ -15,13 +14,8 @@ interface HeaderProps {
 }
 
 export default function HeaderClient({ fixed = true }: HeaderProps) {
-  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const { totalItems } = useCart();
-
-  if (pathname === "/login" || pathname === "/register") {
-    return null;
-  }
 
   return (
     <div className={`${fixed ? "fixed top-0 left-0 right-0 z-50" : ""} shadow-md backdrop-blur-sm bg-white/95`}>

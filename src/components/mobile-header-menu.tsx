@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createPortal } from "react-dom";
-import { X, ChevronDown, Briefcase, Package, Mail, LogIn, LogOut, ShoppingCart } from "lucide-react";
+import { X, ChevronDown, Briefcase, Package, Mail, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PrettyIcon from "@/components/icon/pretty";
 
