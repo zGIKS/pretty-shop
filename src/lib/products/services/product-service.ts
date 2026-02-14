@@ -6,15 +6,17 @@ const API_BASE = "/api/v1";
 type QueryParams = Record<string, string | number | undefined | null>;
 
 const buildUrl = (path: string, params?: QueryParams) => {
-  const url = new URL(`${API_BASE}${path}`, process.env.NEXT_PUBLIC_API_GATEWAY);
+  const searchParams = new URLSearchParams();
   if (params) {
     Object.entries(params).forEach(([key, value]) => {
       if (value != null && value !== "") {
-        url.searchParams.set(key, String(value));
+        searchParams.set(key, String(value));
       }
     });
   }
-  return url.toString();
+
+  const query = searchParams.toString();
+  return query ? `${API_BASE}${path}?${query}` : `${API_BASE}${path}`;
 };
 
 export async function getProducts(options?: ProductQueryOptions): Promise<Product[]> {

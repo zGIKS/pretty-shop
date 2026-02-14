@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
+  const gateway = (process.env.NEXT_PUBLIC_API_GATEWAY ?? "http://localhost:8082").replace(/\/+$/, "");
   const { searchParams } = new URL(request.url);
   const limit = searchParams.get("limit");
   const offset = searchParams.get("offset");
   const category = searchParams.get("category");
 
-  const url = new URL(`${process.env.NEXT_PUBLIC_API_GATEWAY}/api/v1/products`);
+  const url = new URL(`${gateway}/products`);
   if (limit) url.searchParams.set("limit", limit);
   if (offset) url.searchParams.set("offset", offset);
   if (category) url.searchParams.set("category", category);

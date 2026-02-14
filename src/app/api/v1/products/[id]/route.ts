@@ -4,10 +4,11 @@ export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const gateway = (process.env.NEXT_PUBLIC_API_GATEWAY ?? "http://localhost:8082").replace(/\/+$/, "");
   const { id } = await params;
 
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_GATEWAY}/api/v1/products/${encodeURIComponent(id)}`, {
+    const response = await fetch(`${gateway}/products/${encodeURIComponent(id)}`, {
       cache: "no-store",
     });
 

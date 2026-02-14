@@ -2,15 +2,11 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { LogIn, Mail, ShoppingCart } from "lucide-react";
+import { LogIn, Mail } from "lucide-react";
 import { ServicesDropdown } from "./ServicesDropdown";
 import { ProductsDropdown } from "./ProductsDropdown";
 
-interface NavigationMenuProps {
-  cartItemCount?: number;
-}
-
-export function NavigationMenu({ cartItemCount = 0 }: NavigationMenuProps) {
+export function NavigationMenu() {
   return (
     <div className="hidden md:flex items-center gap-4">
       <ServicesDropdown />
@@ -39,18 +35,6 @@ export function NavigationMenu({ cartItemCount = 0 }: NavigationMenuProps) {
             aria-label="Iniciar sesión"
           >
             <LogIn size={20} />
-          </Link>
-        </Button>
-      </div>
-      <div className="pb-2">
-        <Button variant="ghost" className="relative p-2" aria-label="Carrito" asChild>
-          <Link href="/carrito" className="inline-flex">
-            {cartItemCount > 0 && (
-              <span className="pointer-events-none absolute -top-1 -right-1 inline-flex h-4 w-4 items-center justify-center rounded-full bg-destructive text-[10px] font-semibold text-white">
-                {cartItemCount}
-              </span>
-            )}
-            <ShoppingCart size={20} />
           </Link>
         </Button>
       </div>

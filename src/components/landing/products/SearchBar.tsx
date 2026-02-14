@@ -4,8 +4,10 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import type { Product } from "@/lib/products";
+import { getWhatsAppLink } from "@/lib/whatsapp";
 
 interface SearchBarProps {
   className?: string;
@@ -66,12 +68,7 @@ export default function SearchBar({ className = "", products = [], onResultClick
       {showResults && searchResults.length > 0 && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-white border rounded-lg shadow-lg max-h-96 overflow-y-auto z-50">
           {searchResults.map((product) => (
-            <Link
-              key={product.id}
-              href={`/productos/${product.id}`}
-              className="flex items-center gap-3 p-3 hover:bg-gray-50 border-b last:border-b-0 transition-colors"
-              onClick={handleResultClick}
-            >
+            <div key={product.id} className="flex items-center gap-3 p-3 border-b last:border-b-0">
               <Image
                 src={product.image}
                 alt={product.title}
@@ -84,7 +81,17 @@ export default function SearchBar({ className = "", products = [], onResultClick
                 <p className="text-xs text-gray-600 line-clamp-1">{product.description}</p>
                 <p className="text-sm font-bold text-black mt-1">S/ {product.price}</p>
               </div>
-            </Link>
+              <Button asChild size="sm">
+                <Link
+                  href={getWhatsAppLink(`Hola, quiero comprar este producto: ${product.title}`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleResultClick}
+                >
+                  Comprar
+                </Link>
+              </Button>
+            </div>
           ))}
         </div>
       )}

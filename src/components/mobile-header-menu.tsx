@@ -9,11 +9,11 @@ import {
   Briefcase,
   Package,
   Mail,
-  ShoppingCart,
   LogIn,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PrettyIcon from "@/components/icon/pretty";
+import { getWhatsAppLink } from "@/lib/whatsapp";
 
 type MobileHeaderMenuProps = {
   open: boolean;
@@ -159,10 +159,14 @@ export default function MobileHeaderMenu({
       </nav>
 
       <div className="border-t border-border px-6 pb-8 pt-8 space-y-4 max-w-7xl w-full mx-auto">
-        <Button variant="outline" className="w-full flex items-center gap-2 justify-center" asChild>
-          <Link href="/carrito" onClick={onClose} aria-label="Ir al carrito">
-            <ShoppingCart className="h-5 w-5" />
-            Ver carrito
+        <Button className="w-full" asChild>
+          <Link
+            href={getWhatsAppLink("Hola, quiero comprar un producto.")}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={onClose}
+          >
+            Comprar
           </Link>
         </Button>
       </div>
