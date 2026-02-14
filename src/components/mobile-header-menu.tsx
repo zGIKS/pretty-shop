@@ -3,7 +3,15 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createPortal } from "react-dom";
-import { X, ChevronDown, Briefcase, Package, Mail, ShoppingCart } from "lucide-react";
+import {
+  X,
+  ChevronDown,
+  Briefcase,
+  Package,
+  Mail,
+  ShoppingCart,
+  LogIn,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PrettyIcon from "@/components/icon/pretty";
 
@@ -133,6 +141,17 @@ export default function MobileHeaderMenu({
               <span className="flex items-center gap-3 text-lg font-semibold">
                 <Mail className="h-5 w-5" />
                 Contacto
+              </span>
+            </Link>
+
+            <Link
+              href="/login"
+              onClick={onClose}
+              className="w-full px-6 py-6 flex items-center justify-between"
+            >
+              <span className="flex items-center gap-3 text-lg font-semibold">
+                <LogIn className="h-5 w-5" />
+                Iniciar sesión
               </span>
             </Link>
           </div>
