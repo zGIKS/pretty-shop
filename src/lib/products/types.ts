@@ -29,3 +29,12 @@ export interface ProductQueryOptions {
   category?: string;
   signal?: AbortSignal;
 }
+
+export interface ProductMutationInput {
+  title: string;
+  description: string;
+  price: number;
+  image_url: string;
+  quantity?: number;
+  category?: string;
+}

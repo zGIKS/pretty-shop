@@ -3,22 +3,26 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createPortal } from "react-dom";
-import { X, ChevronDown, Briefcase, Package, Mail, LogIn, LogOut, ShoppingCart } from "lucide-react";
+import {
+  X,
+  ChevronDown,
+  Briefcase,
+  Package,
+  Mail,
+  LogIn,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PrettyIcon from "@/components/icon/pretty";
+import { getWhatsAppLink } from "@/lib/whatsapp";
 
 type MobileHeaderMenuProps = {
   open: boolean;
   onClose: () => void;
-  isLoggedIn?: boolean;
-  onLogout?: () => void;
 };
 
 export default function MobileHeaderMenu({
   open,
   onClose,
-  isLoggedIn = false,
-  onLogout,
 }: MobileHeaderMenuProps) {
   const [servicesOpen, setServicesOpen] = useState(false);
 
@@ -139,37 +143,32 @@ export default function MobileHeaderMenu({
                 Contacto
               </span>
             </Link>
+
+            <Link
+              href="/login"
+              onClick={onClose}
+              className="w-full px-6 py-6 flex items-center justify-between"
+            >
+              <span className="flex items-center gap-3 text-lg font-semibold">
+                <LogIn className="h-5 w-5" />
+                Iniciar sesión
+              </span>
+            </Link>
           </div>
         </div>
       </nav>
 
       <div className="border-t border-border px-6 pb-8 pt-8 space-y-4 max-w-7xl w-full mx-auto">
-        <Button variant="outline" className="w-full flex items-center gap-2 justify-center" asChild>
-          <Link href="/carrito" onClick={onClose} aria-label="Ir al carrito">
-            <ShoppingCart className="h-5 w-5" />
-            Ver carrito
+        <Button className="w-full" asChild>
+          <Link
+            href={getWhatsAppLink("Hola, quiero comprar un producto.")}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={onClose}
+          >
+            Comprar
           </Link>
         </Button>
-        {isLoggedIn ? (
-          <Button
-            variant="default"
-            className="w-full flex items-center gap-2 justify-center text-white"
-            onClick={() => {
-              onClose();
-              onLogout?.();
-            }}
-          >
-            <LogOut className="h-5 w-5" />
-            Cerrar sesión
-          </Button>
-        ) : (
-          <Button variant="default" className="w-full flex items-center gap-2" asChild>
-            <Link href="/login" onClick={onClose}>
-              <LogIn className="h-5 w-5" />
-              Iniciar Sesión
-            </Link>
-          </Button>
-        )}
       </div>
     </div>
     ,

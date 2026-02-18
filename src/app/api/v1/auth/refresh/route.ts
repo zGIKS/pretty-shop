@@ -20,7 +20,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const response = await fetch(`${gateway}/auth/logout`, {
+    const response = await fetch(`${gateway}/auth/refresh`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,10 +28,6 @@ export async function POST(request: Request) {
       body: JSON.stringify(body),
       cache: "no-store",
     });
-
-    if (response.status === 204) {
-      return new NextResponse(null, { status: 204 });
-    }
 
     const text = await response.text();
     return new NextResponse(text, {
@@ -41,6 +37,6 @@ export async function POST(request: Request) {
       },
     });
   } catch {
-    return NextResponse.json({ error: "failed to logout" }, { status: 500 });
+    return NextResponse.json({ error: "failed to refresh token" }, { status: 500 });
   }
 }
