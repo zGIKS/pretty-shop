@@ -10,19 +10,13 @@ type SortOption = "relevance" | "price-asc" | "price-desc" | "name-asc" | "name-
 
 interface ProductsToolbarProps {
   products: Product[];
-  categories: string[];
-  selectedCategory: string;
   sortBy: SortOption;
-  onCategoryChange: (category: string) => void;
   onSortChange: (sort: SortOption) => void;
 }
 
 export default function ProductsToolbar({
   products,
-  categories,
-  selectedCategory,
   sortBy,
-  onCategoryChange,
   onSortChange,
 }: ProductsToolbarProps) {
   const [sortOpen, setSortOpen] = useState(false);

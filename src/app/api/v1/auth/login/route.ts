@@ -1,14 +1,14 @@
 import { NextResponse } from "next/server";
 
 const getGateway = () => {
-  const value = process.env.NEXT_PUBLIC_AUTH_GATEWAY?.trim();
+  const value = process.env.NEXT_PUBLIC_API_GATEWAY?.trim();
   return value ? value.replace(/\/+$/, "") : null;
 };
 
 export async function POST(request: Request) {
   const gateway = getGateway();
   if (!gateway) {
-    return NextResponse.json({ error: "NEXT_PUBLIC_AUTH_GATEWAY is not configured" }, { status: 500 });
+    return NextResponse.json({ error: "NEXT_PUBLIC_API_GATEWAY is not configured" }, { status: 500 });
   }
 
   let body: unknown;

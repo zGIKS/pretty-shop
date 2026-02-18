@@ -40,10 +40,6 @@ export default function ProductsSection() {
     loadProducts();
   }, []);
 
-  const categories = useMemo(() => {
-    return Array.from(new Set(products.map((product) => product.category)));
-  }, [products]);
-
   const visibleProducts = useMemo(() => {
     const baseList =
       selectedCategory === "all"
@@ -74,10 +70,7 @@ export default function ProductsSection() {
   return (
     <>
       <ProductsToolbar
-        categories={categories}
-        selectedCategory={selectedCategory}
         sortBy={sortBy}
-        onCategoryChange={setSelectedCategory}
         onSortChange={setSortBy}
         products={products}
       />
