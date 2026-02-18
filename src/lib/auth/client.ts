@@ -96,4 +96,20 @@ export const getAccessToken = () => readTokens()?.access_token;
 
 export const getRefreshToken = () => readTokens()?.refresh_token;
 
-export const logout = () => clearTokens();
+export const logout = async (): Promise<void> => {
+  const refreshToken = readTokens()?.refresh_token;
+
+  try {
+    if (refreshToken) {
+      await fetch("/api/v1/auth/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ refresh_token: refreshToken }),
+      });
+    }
+  } finally {
+    clearTokens();
+  }
+};

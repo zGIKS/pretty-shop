@@ -51,7 +51,7 @@ export default function LoginPage() {
 
     try {
       await login({ username, password });
-      router.replace("/welcome");
+      router.replace("/admin");
     } catch (submitError) {
       setError(formatAuthError(submitError));
     } finally {

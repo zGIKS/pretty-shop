@@ -109,3 +109,25 @@ export async function deleteProduct(id: string): Promise<void> {
     throw new Error("No se pudo eliminar el producto.");
   }
 }
+
+export async function uploadProductImage(file: File): Promise<string> {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const response = await authFetch(buildUrl("/media/upload"), {
+    method: "POST",
+    body: formData,
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error("No se pudo subir la imagen.");
+  }
+
+  const data = (await response.json()) as { secure_url?: string };
+  if (!data?.secure_url) {
+    throw new Error("La respuesta de subida no incluyó secure_url.");
+  }
+
+  return data.secure_url;
+}
