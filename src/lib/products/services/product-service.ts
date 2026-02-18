@@ -1,20 +1,28 @@
-import { Product, ProductQueryOptions, ApiProduct } from '../types';
+import {
+  Product,
+  ProductQueryOptions,
+  ApiProduct,
+  ProductMutationInput,
+} from '../types';
 import { normalizeProduct } from '../assemblers/product-assembler';
+import { authFetch } from "@/lib/auth";
 
 const API_BASE = "/api/v1";
 
 type QueryParams = Record<string, string | number | undefined | null>;
 
 const buildUrl = (path: string, params?: QueryParams) => {
-  const url = new URL(`${API_BASE}${path}`, process.env.NEXT_PUBLIC_API_GATEWAY);
+  const searchParams = new URLSearchParams();
   if (params) {
     Object.entries(params).forEach(([key, value]) => {
       if (value != null && value !== "") {
-        url.searchParams.set(key, String(value));
+        searchParams.set(key, String(value));
       }
     });
   }
-  return url.toString();
+
+  const query = searchParams.toString();
+  return query ? `${API_BASE}${path}?${query}` : `${API_BASE}${path}`;
 };
 
 export async function getProducts(options?: ProductQueryOptions): Promise<Product[]> {
@@ -38,7 +46,7 @@ export async function getProducts(options?: ProductQueryOptions): Promise<Produc
 }
 
 export async function getProductById(id: string, signal?: AbortSignal): Promise<Product> {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_GATEWAY}/api/v1/products/${encodeURIComponent(id)}`, {
+  const response = await fetch(buildUrl(`/products/${encodeURIComponent(id)}`), {
     signal,
     cache: "no-store",
   });
@@ -53,4 +61,73 @@ export async function getProductById(id: string, signal?: AbortSignal): Promise<
 
   const data: ApiProduct = await response.json();
   return normalizeProduct(data);
+}
+
+export async function createProduct(payload: ProductMutationInput): Promise<Product> {
+  const response = await authFetch(buildUrl("/products"), {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error("No se pudo crear el producto.");
+  }
+
+  const data: ApiProduct = await response.json();
+  return normalizeProduct(data);
+}
+
+export async function updateProduct(id: string, payload: Partial<ProductMutationInput>): Promise<Product> {
+  const response = await authFetch(buildUrl(`/products/${encodeURIComponent(id)}`), {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error("No se pudo actualizar el producto.");
+  }
+
+  const data: ApiProduct = await response.json();
+  return normalizeProduct(data);
+}
+
+export async function deleteProduct(id: string): Promise<void> {
+  const response = await authFetch(buildUrl(`/products/${encodeURIComponent(id)}`), {
+    method: "DELETE",
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error("No se pudo eliminar el producto.");
+  }
+}
+
+export async function uploadProductImage(file: File): Promise<string> {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const response = await authFetch(buildUrl("/media/upload"), {
+    method: "POST",
+    body: formData,
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error("No se pudo subir la imagen.");
+  }
+
+  const data = (await response.json()) as { secure_url?: string };
+  if (!data?.secure_url) {
+    throw new Error("La respuesta de subida no incluyó secure_url.");
+  }
+
+  return data.secure_url;
 }

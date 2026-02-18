@@ -11,27 +11,24 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "NEXT_PUBLIC_API_GATEWAY is not configured" }, { status: 500 });
   }
 
-  let body: unknown;
+  const contentType = request.headers.get("content-type") ?? "";
+  const authorization = request.headers.get("authorization");
 
-  try {
-    body = await request.json();
-  } catch {
-    return NextResponse.json({ error: "invalid json body" }, { status: 400 });
+  if (!contentType.toLowerCase().startsWith("multipart/form-data")) {
+    return NextResponse.json({ error: "invalid multipart form" }, { status: 400 });
   }
 
   try {
-    const response = await fetch(`${gateway}/auth/logout`, {
+    const body = await request.arrayBuffer();
+    const response = await fetch(`${gateway}/media/upload`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        ...(authorization ? { Authorization: authorization } : {}),
+        "Content-Type": contentType,
       },
-      body: JSON.stringify(body),
+      body,
       cache: "no-store",
     });
-
-    if (response.status === 204) {
-      return new NextResponse(null, { status: 204 });
-    }
 
     const text = await response.text();
     return new NextResponse(text, {
@@ -41,6 +38,6 @@ export async function POST(request: Request) {
       },
     });
   } catch {
-    return NextResponse.json({ error: "failed to logout" }, { status: 500 });
+    return NextResponse.json({ error: "failed to upload image" }, { status: 500 });
   }
 }

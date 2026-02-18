@@ -20,7 +20,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const response = await fetch(`${gateway}/auth/logout`, {
+    const response = await fetch(`${gateway}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -29,18 +29,17 @@ export async function POST(request: Request) {
       cache: "no-store",
     });
 
-    if (response.status === 204) {
-      return new NextResponse(null, { status: 204 });
-    }
-
     const text = await response.text();
+    const retryAfter = response.headers.get("Retry-After");
+
     return new NextResponse(text, {
       status: response.status,
       headers: {
         "Content-Type": response.headers.get("Content-Type") ?? "application/json",
+        ...(retryAfter ? { "Retry-After": retryAfter } : {}),
       },
     });
   } catch {
-    return NextResponse.json({ error: "failed to logout" }, { status: 500 });
+    return NextResponse.json({ error: "failed to login" }, { status: 500 });
   }
 }
