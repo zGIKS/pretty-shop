@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, FormEvent, useCallback, useEffect, useMemo, useState } from "react";
+import { ChangeEvent, FormEvent, Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Alert } from "@/components/ui/alert";
 import AdminProductForm from "@/components/admin/AdminProductForm";
@@ -37,7 +37,7 @@ const currency = new Intl.NumberFormat("es-DO", {
   minimumFractionDigits: 2,
 });
 
-export default function AdminPage() {
+function AdminPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [products, setProducts] = useState<Product[]>([]);
@@ -290,5 +290,13 @@ export default function AdminPage() {
         </section>
       </section>
     </main>
+  );
+}
+
+export default function AdminPage() {
+  return (
+    <Suspense fallback={<main className="min-h-screen bg-zinc-50 p-4 md:p-6" />}>
+      <AdminPageContent />
+    </Suspense>
   );
 }
