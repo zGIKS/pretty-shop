@@ -99,6 +99,10 @@ export async function DELETE(
       cache: "no-store",
     });
 
+    if (response.status === 204) {
+      return new NextResponse(null, { status: 204 });
+    }
+
     const text = await response.text();
     return new NextResponse(text, {
       status: response.status,
