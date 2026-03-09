@@ -1,15 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import { createPortal } from "react-dom";
 import {
   X,
-  ChevronDown,
   Briefcase,
   Package,
   Mail,
-  LogIn,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PrettyIcon from "@/components/icon/pretty";
@@ -24,8 +22,6 @@ export default function MobileHeaderMenu({
   open,
   onClose,
 }: MobileHeaderMenuProps) {
-  const [servicesOpen, setServicesOpen] = useState(false);
-
   useEffect(() => {
     if (!open) return;
 
@@ -67,60 +63,16 @@ export default function MobileHeaderMenu({
       <nav className="flex-1 overflow-y-auto border-t border-border">
         <div className="max-w-7xl w-full mx-auto">
           <div className="divide-y divide-border">
-            <button
-              type="button"
-              className="w-full px-6 py-6 flex items-center justify-between text-left"
-              onClick={() => setServicesOpen((v) => !v)}
-              aria-expanded={servicesOpen}
+            <Link
+              href="/servicios"
+              onClick={onClose}
+              className="w-full px-6 py-6 flex items-center justify-between"
             >
               <span className="flex items-center gap-3 text-lg font-semibold">
                 <Briefcase className="h-5 w-5" />
                 Servicios
               </span>
-              <ChevronDown
-                className={`h-5 w-5 transition-transform ${servicesOpen ? "rotate-180" : ""}`}
-                aria-hidden="true"
-              />
-            </button>
-            {servicesOpen ? (
-              <div className="px-6 pb-6">
-                <div className="pt-6 pb-3 text-xs font-medium tracking-wide text-muted-foreground">
-                  CATEGORÍAS
-                </div>
-                <div className="space-y-1">
-                  <Link
-                    className="block rounded-md px-3 py-3 text-base hover:bg-muted/60 transition-colors"
-                    href="/servicios/faciales"
-                    onClick={onClose}
-                  >
-                    Tratamientos Faciales
-                  </Link>
-                  <Link
-                    className="block rounded-md px-3 py-3 text-base hover:bg-muted/60 transition-colors"
-                    href="/servicios/corporales"
-                    onClick={onClose}
-                  >
-                    Tratamientos Corporales
-                  </Link>
-                  <Link
-                    className="block rounded-md px-3 py-3 text-base hover:bg-muted/60 transition-colors"
-                    href="/servicios/podologia"
-                    onClick={onClose}
-                  >
-                    Podología
-                  </Link>
-                </div>
-                <div className="mt-4 border-t border-border pt-4">
-                  <Link
-                    className="block rounded-md px-3 py-3 text-sm text-foreground hover:bg-muted/60 transition-colors"
-                    href="/servicios"
-                    onClick={onClose}
-                  >
-                    Ver todos los servicios
-                  </Link>
-                </div>
-              </div>
-            ) : null}
+            </Link>
 
             <Link
               href="/productos"
@@ -143,17 +95,6 @@ export default function MobileHeaderMenu({
                 Contacto
               </span>
             </Link>
-
-            <Link
-              href="/login"
-              onClick={onClose}
-              className="w-full px-6 py-6 flex items-center justify-between"
-            >
-              <span className="flex items-center gap-3 text-lg font-semibold">
-                <LogIn className="h-5 w-5" />
-                Iniciar sesión
-              </span>
-            </Link>
           </div>
         </div>
       </nav>
@@ -170,8 +111,7 @@ export default function MobileHeaderMenu({
           </Link>
         </Button>
       </div>
-    </div>
-    ,
+    </div>,
     document.body
   );
 }
