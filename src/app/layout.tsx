@@ -24,6 +24,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Pretty Studio",
   description: "Pretty Studio",
+  icons: {
+    icon: "/ico.svg",
+    shortcut: "/ico.svg",
+    apple: "/ico.svg",
+  },
 };
 
 export default function RootLayout({
