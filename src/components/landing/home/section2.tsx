@@ -33,26 +33,28 @@ export default function Section2() {
               <Link
                 key={category.slug}
                 href={`/servicios/${category.slug}`}
-                className="flex items-center justify-between rounded-lg bg-muted p-3 transition-colors hover:bg-muted/80 md:p-4"
+                className="flex items-center justify-between rounded-lg border border-primary/25 bg-primary/10 p-3 transition-colors hover:bg-primary/20 md:p-4"
               >
                 <div>
-                  <span className="block text-sm font-medium md:text-lg">
+                  <span className="block text-sm font-medium text-foreground md:text-lg">
                     {category.title}
                   </span>
                   <span className="block text-xs text-muted-foreground md:text-sm">
                     {category.summary}
                   </span>
                 </div>
-                <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
+                <ArrowRight className="h-4 w-4 text-primary md:h-5 md:w-5" />
               </Link>
             ))}
 
             <Link
               href="/productos"
-              className="flex items-center justify-between rounded-lg bg-muted p-3 transition-colors hover:bg-muted/80 md:p-4"
+              className="flex items-center justify-between rounded-lg border border-primary/25 bg-primary/10 p-3 transition-colors hover:bg-primary/20 md:p-4"
             >
-              <span className="text-sm font-medium md:text-lg">Productos</span>
-              <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
+              <span className="text-sm font-medium text-foreground md:text-lg">
+                Productos
+              </span>
+              <ArrowRight className="h-4 w-4 text-primary md:h-5 md:w-5" />
             </Link>
           </div>
         </div>

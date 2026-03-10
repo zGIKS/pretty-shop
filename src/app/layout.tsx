@@ -9,16 +9,21 @@ import "./globals.css";
 const manrope = Manrope({
   variable: "--font-body",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 const playfairDisplay = Playfair_Display({
   variable: "--font-display",
   subsets: ["latin"],
+  weight: ["600", "700"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {

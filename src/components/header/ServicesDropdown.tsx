@@ -2,6 +2,7 @@
 
 import type { ComponentType } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Briefcase, ChevronDown } from "lucide-react";
 
 import { BodyTreatment } from "@/components/icon/body-treatment";
@@ -17,6 +18,8 @@ const categoryIcons: Record<string, ComponentType<{ className?: string }>> = {
 };
 
 export function ServicesDropdown() {
+  const pathname = usePathname();
+
   return (
     <div className="group relative pb-2">
       <Button
@@ -36,14 +39,27 @@ export function ServicesDropdown() {
           <div className="space-y-1">
             {serviceCategories.map((category) => {
               const Icon = categoryIcons[category.slug];
+              const href = `/servicios/${category.slug}`;
+              const isActive = pathname === href;
 
               return (
                 <Link
                   key={category.slug}
-                  href={`/servicios/${category.slug}`}
-                  className="flex items-center gap-3 rounded-2xl px-4 py-3 transition hover:bg-muted/50"
+                  href={href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`flex items-center gap-3 rounded-2xl border px-4 py-3 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 ${
+                    isActive
+                      ? "border-primary/40 bg-primary/18"
+                      : "border-transparent hover:border-primary/25 hover:bg-primary/10"
+                  }`}
                 >
-                  <span className="rounded-full bg-muted p-2 text-foreground">
+                  <span
+                    className={`rounded-full p-2 ${
+                      isActive
+                        ? "bg-primary/25 text-primary"
+                        : "bg-primary/10 text-primary"
+                    }`}
+                  >
                     <Icon className="h-4 w-4" />
                   </span>
                   <span className="text-sm font-semibold text-foreground">
