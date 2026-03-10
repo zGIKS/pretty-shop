@@ -8,7 +8,7 @@ export default function Contacto() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
             <ContactInfo />
-            <div className="bg-white rounded-xl border border-border overflow-hidden h-full min-h-130">
+            <div className="bg-card rounded-xl border border-border overflow-hidden h-full min-h-130">
               <iframe
                 title="Mapa de ubicación"
                 src="https://www.google.com/maps?&q=Galeria%20Santa%20Rosa%2C%20Surquillo%2C%20Lima%2C%20Peru&output=embed"

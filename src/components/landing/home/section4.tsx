@@ -13,20 +13,20 @@ export default function Section4() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Link href="/servicios" className="block">
             <Card className="group flex flex-col items-center justify-center p-6 hover:bg-muted/40 transition-colors cursor-pointer">
-              <FacialTreatment className="h-36 w-36 mb-4 text-[#D78589] group-hover:scale-110 transition-transform duration-300" />
-              <h3 className="text-lg font-semibold">Tratamientos Faciales</h3>
+              <FacialTreatment className="h-36 w-36 mb-4 text-brand-rose group-hover:scale-110 transition-transform duration-300" />
+              <h3>Tratamientos Faciales</h3>
             </Card>
           </Link>
           <Link href="/servicios" className="block">
             <Card className="group flex flex-col items-center justify-center p-6 hover:bg-muted/40 transition-colors cursor-pointer">
-              <BodyTreatment className="h-36 w-36 mb-4 text-[#D78589] group-hover:scale-110 transition-transform duration-300" />
-              <h3 className="text-lg font-semibold">Tratamientos Corporales</h3>
+              <BodyTreatment className="h-36 w-36 mb-4 text-brand-rose group-hover:scale-110 transition-transform duration-300" />
+              <h3>Tratamientos Corporales</h3>
             </Card>
           </Link>
           <Link href="/servicios" className="block">
             <Card className="group flex flex-col items-center justify-center p-6 hover:bg-muted/40 transition-colors cursor-pointer">
-              <FootTreatment className="h-36 w-36 mb-4 text-[#D78589] group-hover:scale-110 transition-transform duration-300" />
-              <h3 className="text-lg font-semibold">Podología</h3>
+              <FootTreatment className="h-36 w-36 mb-4 text-brand-rose group-hover:scale-110 transition-transform duration-300" />
+              <h3>Podología</h3>
             </Card>
           </Link>
         </div>

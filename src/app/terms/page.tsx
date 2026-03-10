@@ -6,7 +6,7 @@ export default function Terms() {
       <main className="min-h-screen pt-32 md:pt-36 pb-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-6">
-            <h1 className="text-4xl font-bold text-foreground">
+            <h1>
               Términos y Condiciones
             </h1>
             <p className="text-sm text-muted-foreground mt-2">
@@ -14,9 +14,9 @@ export default function Terms() {
             </p>
           </div>
 
-          <div className="bg-white border border-border rounded-xl p-6 md:p-8 space-y-8">
+          <div className="bg-card border border-border rounded-xl p-6 md:p-8 space-y-8">
             <section className="space-y-3">
-              <h2 className="text-xl font-semibold">1. Introducción</h2>
+              <h2>1. Introducción</h2>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Estos Términos y Condiciones regulan el acceso y uso de los
                 servicios ofrecidos por Pretty. Al reservar o utilizar nuestros
@@ -27,7 +27,7 @@ export default function Terms() {
             <div className="border-t border-border" />
 
             <section className="space-y-4">
-              <h2 className="text-xl font-semibold">2. Servicios</h2>
+              <h2>2. Servicios</h2>
               <p className="text-sm text-muted-foreground">
                 Pretty ofrece servicios de estética y podología. La información
                 publicada sobre servicios, precios y promociones es referencial
@@ -38,7 +38,7 @@ export default function Terms() {
             <div className="border-t border-border" />
 
             <section className="space-y-4">
-              <h2 className="text-xl font-semibold">3. Reservas y Citas</h2>
+              <h2>3. Reservas y Citas</h2>
               <ul className="list-disc pl-5 space-y-2 text-sm text-muted-foreground">
                 <li>Las citas se programan por nuestros canales oficiales.</li>
                 <li>Recomendamos llegar con al menos 10 minutos de anticipación.</li>
@@ -49,7 +49,7 @@ export default function Terms() {
             <div className="border-t border-border" />
 
             <section className="space-y-4">
-              <h2 className="text-xl font-semibold">4. Pagos y Facturación</h2>
+              <h2>4. Pagos y Facturación</h2>
               <p className="text-sm text-muted-foreground">
                 Los pagos se realizan con los métodos disponibles al momento de
                 la atención. La emisión de comprobantes se efectúa de acuerdo
@@ -60,7 +60,7 @@ export default function Terms() {
             <div className="border-t border-border" />
 
             <section className="space-y-4">
-              <h2 className="text-xl font-semibold">5. Cambios y Cancelaciones</h2>
+              <h2>5. Cambios y Cancelaciones</h2>
               <p className="text-sm text-muted-foreground">
                 Para cambios o cancelaciones, solicitamos comunicarse con
                 anticipación. Pretty se reserva el derecho de reprogramar citas
@@ -71,7 +71,7 @@ export default function Terms() {
             <div className="border-t border-border" />
 
             <section className="space-y-4">
-              <h2 className="text-xl font-semibold">
+              <h2>
                 6. Resultados y Responsabilidad
               </h2>
               <p className="text-sm text-muted-foreground">
@@ -84,7 +84,7 @@ export default function Terms() {
             <div className="border-t border-border" />
 
             <section className="space-y-4">
-              <h2 className="text-xl font-semibold">
+              <h2>
                 7. Salud y Contraindicaciones
               </h2>
               <p className="text-sm text-muted-foreground">
@@ -98,7 +98,7 @@ export default function Terms() {
             <div className="border-t border-border" />
 
             <section className="space-y-4">
-              <h2 className="text-xl font-semibold">
+              <h2>
                 8. Propiedad Intelectual
               </h2>
               <p className="text-sm text-muted-foreground">
@@ -111,7 +111,7 @@ export default function Terms() {
             <div className="border-t border-border" />
 
             <section className="space-y-4">
-              <h2 className="text-xl font-semibold">9. Enlaces de Terceros</h2>
+              <h2>9. Enlaces de Terceros</h2>
               <p className="text-sm text-muted-foreground">
                 Nuestro sitio puede incluir enlaces a terceros. Pretty no es
                 responsable por el contenido o políticas de dichos sitios.
@@ -121,7 +121,7 @@ export default function Terms() {
             <div className="border-t border-border" />
 
             <section className="space-y-4">
-              <h2 className="text-xl font-semibold">10. Modificaciones</h2>
+              <h2>10. Modificaciones</h2>
               <p className="text-sm text-muted-foreground">
                 Pretty puede actualizar estos Términos y Condiciones en
                 cualquier momento. Los cambios se publicarán en esta página con
@@ -132,7 +132,7 @@ export default function Terms() {
             <div className="border-t border-border" />
 
             <section className="space-y-4">
-              <h2 className="text-xl font-semibold">11. Ley Aplicable</h2>
+              <h2>11. Ley Aplicable</h2>
               <p className="text-sm text-muted-foreground">
                 Estos términos se rigen por las leyes de la República del Perú.
               </p>

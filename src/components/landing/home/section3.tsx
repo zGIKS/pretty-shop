@@ -11,7 +11,7 @@ export default function Section3() {
             <LotoAnimation />
           </div>
           <div className="w-full md:w-1/2">
-            <h3 className="text-lg md:text-2xl font-semibold text-primary mb-2 md:mb-4">
+            <h3 className="md:text-2xl text-primary mb-2 md:mb-4">
               En Pretty Studio, celebramos la belleza natural
             </h3>
             <p className="text-sm md:text-lg text-muted-foreground mb-4 md:mb-6">

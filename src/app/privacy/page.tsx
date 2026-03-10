@@ -6,7 +6,7 @@ export default function Privacy() {
       <main className="min-h-screen pt-32 md:pt-36 pb-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-6">
-            <h1 className="text-4xl font-bold text-foreground">
+            <h1>
               Política de Privacidad
             </h1>
             <p className="text-sm text-muted-foreground mt-2">
@@ -14,9 +14,9 @@ export default function Privacy() {
             </p>
           </div>
 
-          <div className="bg-white border border-border rounded-xl p-6 md:p-8 space-y-8">
+          <div className="bg-card border border-border rounded-xl p-6 md:p-8 space-y-8">
             <section className="space-y-3">
-              <h2 className="text-xl font-semibold">1. Introducción</h2>
+              <h2>1. Introducción</h2>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 En Pretty, valoramos y respetamos su privacidad. Esta Política
                 de Privacidad describe cómo recopilamos, usamos, almacenamos y
@@ -28,7 +28,7 @@ export default function Privacy() {
             <div className="border-t border-border" />
 
             <section className="space-y-4">
-              <h2 className="text-xl font-semibold">
+              <h2>
                 2. Información que Recopilamos
               </h2>
               <p className="text-sm text-muted-foreground">
@@ -70,7 +70,7 @@ export default function Privacy() {
             <div className="border-t border-border" />
 
             <section className="space-y-4">
-              <h2 className="text-xl font-semibold">3. Uso de la Información</h2>
+              <h2>3. Uso de la Información</h2>
               <p className="text-sm text-muted-foreground">
                 Utilizamos su información personal para los siguientes
                 propósitos:
@@ -95,7 +95,7 @@ export default function Privacy() {
             <div className="border-t border-border" />
 
             <section className="space-y-4">
-              <h2 className="text-xl font-semibold">4. Compartir Información</h2>
+              <h2>4. Compartir Información</h2>
               <p className="text-sm text-muted-foreground">
                 No vendemos, alquilamos ni compartimos su información personal
                 con terceros, excepto en las siguientes circunstancias:
@@ -118,7 +118,7 @@ export default function Privacy() {
             <div className="border-t border-border" />
 
             <section className="space-y-4">
-              <h2 className="text-xl font-semibold">
+              <h2>
                 5. Seguridad de la Información
               </h2>
               <p className="text-sm text-muted-foreground">
@@ -133,7 +133,7 @@ export default function Privacy() {
             <div className="border-t border-border" />
 
             <section className="space-y-4">
-              <h2 className="text-xl font-semibold">6. Sus Derechos</h2>
+              <h2>6. Sus Derechos</h2>
               <p className="text-sm text-muted-foreground">
                 De acuerdo con la legislación peruana de protección de datos
                 personales, usted tiene los siguientes derechos:
@@ -162,7 +162,7 @@ export default function Privacy() {
             <div className="border-t border-border" />
 
             <section className="space-y-4">
-              <h2 className="text-xl font-semibold">7. Retención de Datos</h2>
+              <h2>7. Retención de Datos</h2>
               <p className="text-sm text-muted-foreground">
                 Conservamos su información personal durante el tiempo necesario
                 para cumplir con los propósitos descritos en esta política, a
@@ -175,7 +175,7 @@ export default function Privacy() {
             <div className="border-t border-border" />
 
             <section className="space-y-4">
-              <h2 className="text-xl font-semibold">8. Menores de Edad</h2>
+              <h2>8. Menores de Edad</h2>
               <p className="text-sm text-muted-foreground">
                 Nuestros servicios están dirigidos a personas mayores de 18
                 años. Si un menor requiere servicios, debe estar acompañado por
@@ -187,7 +187,7 @@ export default function Privacy() {
             <div className="border-t border-border" />
 
             <section className="space-y-4">
-              <h2 className="text-xl font-semibold">
+              <h2>
                 9. Cookies y Tecnologías Similares
               </h2>
               <p className="text-sm text-muted-foreground">
@@ -202,7 +202,7 @@ export default function Privacy() {
             <div className="border-t border-border" />
 
             <section className="space-y-4">
-              <h2 className="text-xl font-semibold">
+              <h2>
                 10. Cambios a esta Política
               </h2>
               <p className="text-sm text-muted-foreground">
