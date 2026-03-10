@@ -4,9 +4,12 @@ import PrettyIcon from "@/components/icon/pretty";
 
 export default function Footer() {
   const servicios = [
-    "Tratamientos Faciales",
-    "Tratamientos Corporales",
-    "Podología",
+    { label: "Tratamientos Faciales", href: "/servicios/tratamientos-faciales" },
+    {
+      label: "Tratamientos Corporales",
+      href: "/servicios/tratamientos-corporales",
+    },
+    { label: "Podología", href: "/servicios/podologia" },
   ];
 
   const navegacion = [
@@ -28,7 +31,11 @@ export default function Footer() {
               <h3 className="font-semibold mb-3">Servicios</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 {servicios.map((item) => (
-                  <li key={item}>{item}</li>
+                  <li key={item.href}>
+                    <Link href={item.href} className="hover:text-foreground">
+                      {item.label}
+                    </Link>
+                  </li>
                 ))}
               </ul>
             </div>

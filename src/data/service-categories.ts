@@ -170,7 +170,7 @@ export const serviceCategories: ServiceCategory[] = [
             name: "Exosomas",
             price: "S/ 350",
             description:
-              "Tratamiento avanzado de regeneracion celular y rejuvenecimiento.",
+              "Tratamiento avanzado de regeneración celular y rejuvenecimiento.",
           },
         ],
       },

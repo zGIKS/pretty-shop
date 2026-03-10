@@ -31,7 +31,7 @@ export function ServicesDropdown() {
         </Link>
       </Button>
 
-      <div className="pointer-events-none absolute left-0 top-full z-50 w-80 pt-3 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+      <div className="pointer-events-none absolute left-0 top-full z-50 w-56 pt-3 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
         <div className="rounded-3xl border border-border bg-popover p-3 shadow-[0_24px_80px_-36px_rgba(28,25,23,0.45)]">
           <div className="space-y-1">
             {serviceCategories.map((category) => {
@@ -41,18 +41,13 @@ export function ServicesDropdown() {
                 <Link
                   key={category.slug}
                   href={`/servicios/${category.slug}`}
-                  className="flex items-start gap-3 rounded-2xl px-4 py-3 transition hover:bg-muted/50"
+                  className="flex items-center gap-3 rounded-2xl px-4 py-3 transition hover:bg-muted/50"
                 >
                   <span className="rounded-full bg-muted p-2 text-foreground">
                     <Icon className="h-4 w-4" />
                   </span>
-                  <span className="space-y-1">
-                    <span className="block text-sm font-semibold text-foreground">
-                      {category.title}
-                    </span>
-                    <span className="block text-xs leading-5 text-muted-foreground">
-                      {category.summary}
-                    </span>
+                  <span className="text-sm font-semibold text-foreground">
+                    {category.title}
                   </span>
                 </Link>
               );
