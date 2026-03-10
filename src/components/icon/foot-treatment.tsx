@@ -7,7 +7,7 @@ interface FootTreatmentProps {
 export function FootTreatment({ className }: FootTreatmentProps) {
   return (
     <svg
-      className={cn("h-4 w-4", className)}
+      className={cn("h-4 w-4 text-primary", className)}
       viewBox="0 0 513 476"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

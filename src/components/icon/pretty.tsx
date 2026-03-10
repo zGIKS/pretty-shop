@@ -5,7 +5,10 @@ interface PrettyIconProps {
   color?: string;
 }
 
-const PrettyIcon: React.FC<PrettyIconProps> = ({ className, color = '#D78589' }) => {
+const PrettyIcon: React.FC<PrettyIconProps> = ({
+  className,
+  color = "var(--primary)",
+}) => {
   return (
     <svg
       width="1292"

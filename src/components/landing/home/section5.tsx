@@ -12,13 +12,13 @@ export default function Section5() {
           <SignShampooIcon className="h-64 w-64 md:h-96 md:w-96" />
         </div>
         <div className="max-w-3xl space-y-4">
-          <p className="text-sm uppercase tracking-[0.4em] text-slate-900">
+          <p className="text-sm uppercase tracking-label-wide text-foreground">
             Belleza con intención
           </p>
-          <h2 className="text-3xl md:text-4xl font-semibold text-slate-900">
+          <h2 className="text-3xl md:text-4xl">
             Productos de calidad profesional para cuidar tu piel y cabello
           </h2>
-          <p className="text-base md:text-lg text-slate-600">
+          <p className="text-base md:text-lg text-muted-foreground">
             Cada fórmula combina ingredientes seleccionados, textura sensorial y empaques sostenibles para que disfrutes rutinas que realmente se sienten como un lujo diario.
           </p>
         </div>

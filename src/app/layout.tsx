@@ -1,9 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { ReactNode } from "react";
+import { Manrope, Playfair_Display, Geist_Mono } from "next/font/google";
+
+import Header from "@/components/header";
+
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const manrope = Manrope({
+  variable: "--font-body",
+  subsets: ["latin"],
+});
+
+const playfairDisplay = Playfair_Display({
+  variable: "--font-display",
   subsets: ["latin"],
 });
 
@@ -13,21 +22,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pretty | Estética y podología",
-  description: "A beautiful e-commerce platform for all your needs.",
-  icons: {
-    icon: "/ico.svg",
-  },
+  title: "Pretty Studio",
+  description: "Pretty Studio",
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <html lang="es">
+      <body
+        className={`${manrope.variable} ${playfairDisplay.variable} ${geistMono.variable}`}
+      >
+        <Header />
         {children}
       </body>
     </html>

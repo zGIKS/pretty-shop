@@ -13,7 +13,7 @@ export default function ContactDetails() {
             target="_blank"
             className="text-muted-foreground hover:text-foreground"
           >
-            Galería Santa Rosa, Surquillo
+            Galería Santa Rosa 946, Surquillo
           </Link>
         </div>
       </div>

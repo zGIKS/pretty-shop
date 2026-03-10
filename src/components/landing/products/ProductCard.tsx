@@ -25,7 +25,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         />
       </div>
       <div className="flex flex-col grow pt-3 space-y-2">
-        <h3 className="text-lg font-semibold">{product.title}</h3>
+        <h3>{product.title}</h3>
         <p className="text-sm text-muted-foreground">S/ {product.price}</p>
         <div className="mt-auto pt-2">
           <Button asChild className="w-full">

@@ -16,7 +16,7 @@ export default function HeaderClient({ fixed = true }: HeaderProps) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className={`${fixed ? "fixed top-0 left-0 right-0 z-50" : ""} shadow-md backdrop-blur-sm bg-white/95`}>
+    <div className={`${fixed ? "fixed top-0 left-0 right-0 z-50" : ""} shadow-md backdrop-blur-sm bg-background/95`}>
       <header className="max-w-7xl mx-auto flex items-center justify-between p-6">
         <Link href="/">
           <PrettyIcon className="w-18 h-16" />

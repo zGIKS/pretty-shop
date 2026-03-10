@@ -55,7 +55,7 @@ export default function SearchBar({ className = "", products = [], onResultClick
 
   return (
     <div className={`relative ${className}`} ref={searchRef}>
-      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" size={20} />
       <Input
         type="text"
         placeholder="Buscar productos..."
@@ -66,7 +66,7 @@ export default function SearchBar({ className = "", products = [], onResultClick
       />
 
       {showResults && searchResults.length > 0 && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-white border rounded-lg shadow-lg max-h-96 overflow-y-auto z-50">
+        <div className="absolute top-full left-0 right-0 mt-2 bg-popover border rounded-lg shadow-lg max-h-96 overflow-y-auto z-50">
           {searchResults.map((product) => (
             <div key={product.id} className="flex items-center gap-3 p-3 border-b last:border-b-0">
               <Image
@@ -77,9 +77,9 @@ export default function SearchBar({ className = "", products = [], onResultClick
                 className="rounded object-cover"
               />
               <div className="flex-1">
-                <h3 className="font-semibold text-sm">{product.title}</h3>
-                <p className="text-xs text-gray-600 line-clamp-1">{product.description}</p>
-                <p className="text-sm font-bold text-black mt-1">S/ {product.price}</p>
+                <h3 className="text-sm">{product.title}</h3>
+                <p className="text-xs text-muted-foreground line-clamp-1">{product.description}</p>
+                <p className="text-sm font-semibold text-foreground mt-1">S/ {product.price}</p>
               </div>
               <Button asChild size="sm">
                 <Link
@@ -97,8 +97,8 @@ export default function SearchBar({ className = "", products = [], onResultClick
       )}
 
       {showResults && searchResults.length === 0 && searchQuery.length > 0 && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-white border rounded-lg shadow-lg p-4 z-50">
-          <p className="text-gray-500 text-sm text-center">No se encontraron productos</p>
+        <div className="absolute top-full left-0 right-0 mt-2 bg-popover border rounded-lg shadow-lg p-4 z-50">
+          <p className="text-muted-foreground text-sm text-center">No se encontraron productos</p>
         </div>
       )}
     </div>
