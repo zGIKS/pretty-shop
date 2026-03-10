@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Manrope, Playfair_Display, Geist_Mono } from "next/font/google";
 
 import Header from "@/components/header";
 
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const manrope = Manrope({
+  variable: "--font-body",
+  subsets: ["latin"],
+});
+
+const playfairDisplay = Playfair_Display({
+  variable: "--font-display",
   subsets: ["latin"],
 });
 
@@ -28,7 +33,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body
+        className={`${manrope.variable} ${playfairDisplay.variable} ${geistMono.variable}`}
+      >
         <Header />
         {children}
       </body>
