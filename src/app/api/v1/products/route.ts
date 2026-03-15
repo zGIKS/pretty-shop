@@ -1,9 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-
-const getGateway = () => {
-  const value = process.env.NEXT_PUBLIC_API_GATEWAY?.trim();
-  return value ? value.replace(/\/+$/, "") : null;
-};
+import { getGateway } from "@/lib/gateway";
 
 export async function GET(request: NextRequest) {
   const gateway = getGateway();

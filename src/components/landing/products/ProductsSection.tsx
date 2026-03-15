@@ -11,6 +11,7 @@ import { Spinner } from "@/components/ui/spinner";
 
 export default function ProductsSection() {
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
   const [products, setProducts] = useState<Product[]>([]);
   const [status, setStatus] = useState<"idle" | "loading" | "error">("loading");
   const searchParams = useSearchParams();
@@ -38,14 +39,30 @@ export default function ProductsSection() {
   }, []);
 
   const visibleProducts = useMemo(() => {
-    return selectedCategory === "all"
-      ? products
-      : products.filter((product) => product.category === selectedCategory);
-  }, [products, selectedCategory]);
+    let filtered =
+      selectedCategory === "all"
+        ? products
+        : products.filter((p) => p.category === selectedCategory);
+
+    if (searchQuery.trim()) {
+      const q = searchQuery.trim().toLowerCase();
+      filtered = filtered.filter(
+        (p) =>
+          p.title.toLowerCase().includes(q) ||
+          p.description.toLowerCase().includes(q)
+      );
+    }
+
+    return filtered;
+  }, [products, selectedCategory, searchQuery]);
 
   return (
     <>
-      <ProductsToolbar products={products} />
+      <ProductsToolbar
+        products={products}
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+      />
 
       {status === "loading" && (
         <div className="flex flex-col items-center gap-3 py-16 text-sm uppercase tracking-wide text-muted-foreground">
@@ -54,12 +71,22 @@ export default function ProductsSection() {
         </div>
       )}
 
-      {status !== "loading" && visibleProducts.length === 0 && (
-        <div className="flex flex-col items-center gap-6 py-16 text-sm uppercase tracking-wide text-muted-foreground">
-          <Spinner size="lg" />
+      {status === "error" && (
+        <div className="flex flex-col items-center gap-4 py-16 text-sm text-muted-foreground">
+          <p className="uppercase tracking-wide">No se pudieron cargar los productos.</p>
           <Button onClick={loadProducts} variant="default">
             Intentar de nuevo
           </Button>
+        </div>
+      )}
+
+      {status === "idle" && visibleProducts.length === 0 && (
+        <div className="flex flex-col items-center gap-4 py-16 text-sm text-muted-foreground">
+          <p className="uppercase tracking-wide">
+            {searchQuery.trim()
+              ? `Sin resultados para "${searchQuery}"`
+              : "No hay productos disponibles."}
+          </p>
         </div>
       )}
 

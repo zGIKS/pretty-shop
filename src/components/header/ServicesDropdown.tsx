@@ -1,21 +1,12 @@
 "use client";
 
-import type { ComponentType } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Briefcase, ChevronDown } from "lucide-react";
 
-import { BodyTreatment } from "@/components/icon/body-treatment";
-import { FacialTreatment } from "@/components/icon/facial-treatment";
-import { FootTreatment } from "@/components/icon/foot-treatment";
 import { Button } from "@/components/ui/button";
 import { serviceCategories } from "@/data/service-categories";
-
-const categoryIcons: Record<string, ComponentType<{ className?: string }>> = {
-  podologia: FootTreatment,
-  "tratamientos-faciales": FacialTreatment,
-  "tratamientos-corporales": BodyTreatment,
-};
+import { categoryIcons } from "@/lib/category-icons";
 
 export function ServicesDropdown() {
   const pathname = usePathname();

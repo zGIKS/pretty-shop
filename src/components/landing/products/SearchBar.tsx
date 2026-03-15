@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
@@ -12,57 +12,57 @@ import { getWhatsAppLink } from "@/lib/whatsapp";
 interface SearchBarProps {
   className?: string;
   products?: Product[];
+  searchQuery: string;
+  onSearchChange: (value: string) => void;
   onResultClick?: () => void;
 }
 
-export default function SearchBar({ className = "", products = [], onResultClick }: SearchBarProps) {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [showResults, setShowResults] = useState(false);
+export default function SearchBar({
+  className = "",
+  products = [],
+  searchQuery,
+  onSearchChange,
+  onResultClick,
+}: SearchBarProps) {
   const searchRef = useRef<HTMLDivElement>(null);
 
   const normalizedQuery = searchQuery.trim().toLowerCase();
-  const searchableProducts = useMemo(() => products ?? [], [products]);
+  const showResults = searchQuery.trim().length > 0;
 
   const searchResults = useMemo(() => {
     if (!normalizedQuery) return [];
-    return searchableProducts.filter(
+    return products.filter(
       (product) =>
         product.title.toLowerCase().includes(normalizedQuery) ||
         product.description.toLowerCase().includes(normalizedQuery)
     );
-  }, [normalizedQuery, searchableProducts]);
-
-  useEffect(() => {
-    setShowResults(searchQuery.trim().length > 0);
-  }, [searchQuery]);
+  }, [normalizedQuery, products]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-        setShowResults(false);
+        onSearchChange("");
       }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  }, [onSearchChange]);
 
   const handleResultClick = () => {
-    setShowResults(false);
-    setSearchQuery("");
+    onSearchChange("");
     onResultClick?.();
   };
 
   return (
     <div className={`relative ${className}`} ref={searchRef}>
-      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" size={20} />
+      <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={20} />
       <Input
         type="text"
         placeholder="Buscar productos..."
         className="pl-10"
         value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        onFocus={() => searchQuery.length > 0 && setShowResults(true)}
+        onChange={(e) => onSearchChange(e.target.value)}
       />
 
       {showResults && searchResults.length > 0 && (
@@ -96,7 +96,7 @@ export default function SearchBar({ className = "", products = [], onResultClick
         </div>
       )}
 
-      {showResults && searchResults.length === 0 && searchQuery.length > 0 && (
+      {showResults && searchResults.length === 0 && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-popover border rounded-lg shadow-lg p-4 z-50">
           <p className="text-muted-foreground text-sm text-center">No se encontraron productos</p>
         </div>

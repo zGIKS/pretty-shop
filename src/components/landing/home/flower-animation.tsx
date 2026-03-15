@@ -1,32 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Lottie from "lottie-react";
+import dynamic from "next/dynamic";
+
+import animationData from "../../../../public/animations/flower-animation.json";
+
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
 export default function LotusFlower() {
-  const [animationData, setAnimationData] = useState(null);
-
-  useEffect(() => {
-    fetch("/animations/flower-animation.json")
-      .then((response) => response.json())
-      .then((data) => {
-        setAnimationData(data);
-      })
-      .catch((error) => {
-        console.error("Error loading animation:", error);
-      });
-  }, []);
-
   return (
-    <div className="flex items-center justify-center w-62.5 h-62.5">
-      {animationData && (
-        <Lottie
-          animationData={animationData}
-          loop={true}
-          autoplay={true}
-          style={{ width: '250px', height: '250px' }}
-        />
-      )}
+    <div className="flex items-center justify-center w-[250px] h-[250px]">
+      <Lottie
+        animationData={animationData}
+        loop={true}
+        autoplay={true}
+        style={{ width: "250px", height: "250px" }}
+      />
     </div>
   );
 }

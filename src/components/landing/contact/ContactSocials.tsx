@@ -1,5 +1,6 @@
 import { MessageCircle, Music } from "lucide-react";
 import Link from "next/link";
+import { WHATSAPP_HREF, TIKTOK_HREF } from "@/lib/contact";
 
 export default function ContactSocials() {
   return (
@@ -7,7 +8,7 @@ export default function ContactSocials() {
       <div className="font-semibold mb-3">Redes sociales</div>
       <div className="flex items-center gap-4 text-muted-foreground">
         <Link
-          href="https://wa.me/51943373233"
+          href={WHATSAPP_HREF}
           target="_blank"
           aria-label="WhatsApp"
           className="hover:text-foreground"
@@ -15,7 +16,7 @@ export default function ContactSocials() {
           <MessageCircle size={18} />
         </Link>
         <Link
-          href="https://tiktok.com/@pretty.podoestetica"
+          href={TIKTOK_HREF}
           target="_blank"
           aria-label="TikTok"
           className="hover:text-foreground"

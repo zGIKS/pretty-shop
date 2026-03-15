@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { MapPin, Phone, Music, MessageCircle } from "lucide-react";
 import Pretty from "@/components/icon/pretty/pretty";
+import { PHONE_DISPLAY, PHONE_TEL_HREF, WHATSAPP_HREF, TIKTOK_HREF } from "@/lib/contact";
 
 export default function Footer() {
   const servicios = [
@@ -64,8 +65,8 @@ export default function Footer() {
                 </li>
                 <li className="flex items-center gap-2">
                   <Phone className="h-4 w-4" />
-                  <Link href="tel:+51943373233" className="hover:text-foreground">
-                    +51 943 373 233
+                  <Link href={PHONE_TEL_HREF} className="hover:text-foreground">
+                    {PHONE_DISPLAY}
                   </Link>
                 </li>
               </ul>
@@ -75,13 +76,13 @@ export default function Footer() {
               <h3 className="font-semibold mb-3">Síguenos</h3>
               <div className="flex items-center gap-4 text-muted-foreground">
                 <Link
-                  href="https://tiktok.com/@pretty.podoestetica"
+                  href={TIKTOK_HREF}
                   className="hover:text-foreground"
                 >
                   <Music size={20} />
                 </Link>
                 <Link
-                  href="https://wa.me/51943373233"
+                  href={WHATSAPP_HREF}
                   className="hover:text-foreground"
                 >
                   <MessageCircle size={20} />
@@ -92,7 +93,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 border-t border-border pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-          <div>© 2026 Pretty. Estética y podología.</div>
+          <div>© 2026 Pretty Studio. Estética y podología.</div>
           <div className="flex items-center gap-6">
             <Link href="/terms" className="hover:text-foreground">
               Términos y Condiciones

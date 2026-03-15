@@ -1,26 +1,17 @@
 "use client";
 
-import type { ComponentType } from "react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createPortal } from "react-dom";
 import { Briefcase, ChevronDown, Mail, Package, X } from "lucide-react";
 
-import { BodyTreatment } from "@/components/icon/body-treatment";
-import { FacialTreatment } from "@/components/icon/facial-treatment";
-import { FootTreatment } from "@/components/icon/foot-treatment";
 import Pretty from "@/components/icon/pretty/pretty";
 import { serviceCategories } from "@/data/service-categories";
+import { categoryIcons } from "@/lib/category-icons";
 
 type MobileHeaderMenuProps = {
   open: boolean;
   onClose: () => void;
-};
-
-const categoryIcons: Record<string, ComponentType<{ className?: string }>> = {
-  podologia: FootTreatment,
-  "tratamientos-faciales": FacialTreatment,
-  "tratamientos-corporales": BodyTreatment,
 };
 
 export default function MobileHeaderMenu({
