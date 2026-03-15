@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { MapPin, Phone, Music, MessageCircle } from "lucide-react";
-import PrettyIcon from "@/components/icon/pretty";
+import Pretty from "@/components/icon/pretty/pretty";
 
 export default function Footer() {
   const servicios = [
@@ -23,7 +23,9 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-[1.2fr_2.8fr] gap-8">
           <div className="flex items-start">
-            <PrettyIcon className="h-16 w-auto" />
+            <Pretty
+              size="lg"
+            />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">

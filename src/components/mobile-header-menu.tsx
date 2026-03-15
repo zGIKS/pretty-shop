@@ -9,7 +9,7 @@ import { Briefcase, ChevronDown, Mail, Package, X } from "lucide-react";
 import { BodyTreatment } from "@/components/icon/body-treatment";
 import { FacialTreatment } from "@/components/icon/facial-treatment";
 import { FootTreatment } from "@/components/icon/foot-treatment";
-import PrettyIcon from "@/components/icon/pretty";
+import Pretty from "@/components/icon/pretty/pretty";
 import { serviceCategories } from "@/data/service-categories";
 
 type MobileHeaderMenuProps = {
@@ -60,7 +60,10 @@ export default function MobileHeaderMenu({
     <div className="fixed inset-0 z-60 flex flex-col bg-background">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between p-6">
         <Link href="/" onClick={handleClose} aria-label="Ir al inicio">
-          <PrettyIcon className="h-16 w-18" />
+          <Pretty
+            size="xs"
+            className="shrink-0"
+          />
         </Link>
         <button
           type="button"
