@@ -5,11 +5,12 @@ import { usePathname } from "next/navigation";
 import { Briefcase, ChevronDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { serviceCategories } from "@/data/service-categories";
+import { getOrderedServiceCategories } from "@/data/service-categories";
 import { categoryIcons } from "@/lib/category-icons";
 
 export function ServicesDropdown() {
   const pathname = usePathname();
+  const orderedCategories = getOrderedServiceCategories();
 
   return (
     <div className="group relative pb-2">
@@ -28,7 +29,7 @@ export function ServicesDropdown() {
       <div className="pointer-events-none absolute left-0 top-full z-50 w-56 pt-3 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
         <div className="rounded-3xl border border-border bg-popover p-3 shadow-[0_24px_80px_-36px_rgba(28,25,23,0.45)]">
           <div className="space-y-1">
-            {serviceCategories.map((category) => {
+            {orderedCategories.map((category) => {
               const Icon = categoryIcons[category.slug];
               const href = `/servicios/${category.slug}`;
               const isActive = pathname === href;

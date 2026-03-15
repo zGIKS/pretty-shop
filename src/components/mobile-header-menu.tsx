@@ -6,7 +6,7 @@ import { createPortal } from "react-dom";
 import { Briefcase, ChevronDown, Mail, Package, X } from "lucide-react";
 
 import Pretty from "@/components/icon/pretty/pretty";
-import { serviceCategories } from "@/data/service-categories";
+import { getOrderedServiceCategories } from "@/data/service-categories";
 import { categoryIcons } from "@/lib/category-icons";
 
 type MobileHeaderMenuProps = {
@@ -19,6 +19,7 @@ export default function MobileHeaderMenu({
   onClose,
 }: MobileHeaderMenuProps) {
   const [servicesOpen, setServicesOpen] = useState(false);
+  const orderedCategories = getOrderedServiceCategories();
 
   const handleClose = () => {
     setServicesOpen(false);
@@ -96,7 +97,7 @@ export default function MobileHeaderMenu({
               }`}
             >
               <div className="min-h-0">
-                {serviceCategories.map((category) => {
+                {orderedCategories.map((category) => {
                   const Icon = categoryIcons[category.slug];
 
                   return (

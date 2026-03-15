@@ -195,13 +195,13 @@ export const serviceCategories: ServiceCategory[] = [
         services: [
           {
             name: "Masaje Relajante",
-            image: encodeURI("/services/body/masaje-relajante.png"),
+            image: encodeURI("/services/body/Masaje-Relajante1.png"),
             description:
               "Alivia tensiones, relaja el cuerpo y mejora el bienestar.",
           },
           {
             name: "Masaje Reductor",
-            image: encodeURI("/services/body/masaje-reductor.png"),
+            image: encodeURI("/services/body/Masaje-Reductor1.png"),
             description: "Ayuda a reducir medidas y mejorar la circulación.",
           },
         ],
@@ -211,12 +211,12 @@ export const serviceCategories: ServiceCategory[] = [
         services: [
           {
             name: "Exfoliación de espalda",
-            image: encodeURI("/services/body/Exfoliaciondeespalda.png"),
+            image: encodeURI("/services/body/Exfoliación-espalda1.png"),
             description: "Elimina células muertas y limpia los poros.",
           },
           {
             name: "Exfoliación de glúteos",
-            image: encodeURI("/services/body/gluteos.png"),
+            image: encodeURI("/services/body/Exfoliación-gluteos1.png"),
             description:
               "Mejora la textura de la piel y previene imperfecciones.",
           },
@@ -227,7 +227,7 @@ export const serviceCategories: ServiceCategory[] = [
         services: [
           {
             name: "Cauterización de verrugas",
-            image: encodeURI("/services/body/verrgugas.png"),
+            image: encodeURI("/services/body/verrugas1.png"),
             description:
               "Procedimiento para eliminar verrugas de forma segura.",
           },
@@ -236,6 +236,29 @@ export const serviceCategories: ServiceCategory[] = [
     ],
   },
 ];
+
+const SERVICE_CATEGORY_ORDER: string[] = [
+  "tratamientos-faciales",
+  "tratamientos-corporales",
+  "podologia",
+];
+
+export function getOrderedServiceCategories(): ServiceCategory[] {
+  const rank = new Map(
+    SERVICE_CATEGORY_ORDER.map((slug, index) => [slug, index])
+  );
+
+  return [...serviceCategories].sort((a, b) => {
+    const aRank = rank.get(a.slug) ?? Number.MAX_SAFE_INTEGER;
+    const bRank = rank.get(b.slug) ?? Number.MAX_SAFE_INTEGER;
+
+    if (aRank !== bRank) {
+      return aRank - bRank;
+    }
+
+    return a.title.localeCompare(b.title);
+  });
+}
 
 export function getServiceCategory(slug: string) {
   return serviceCategories.find((category) => category.slug === slug);
