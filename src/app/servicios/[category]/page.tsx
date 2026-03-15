@@ -71,7 +71,7 @@ export default async function ServiceCategoryPage({ params }: PageProps) {
         <ServiceCategoryHeader category={category} />
 
         {category.services ? (
-          <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <section className="grid gap-x-6 gap-y-8 md:grid-cols-2 xl:grid-cols-3">
             {category.services.map((service) => (
               <ServiceTreatmentCard key={service.name} {...service} />
             ))}
@@ -93,7 +93,7 @@ export default async function ServiceCategoryPage({ params }: PageProps) {
                     Servicios disponibles dentro de esta subcategoría.
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="grid gap-4 px-6 pb-6 sm:px-8 sm:pb-8 md:grid-cols-2 xl:grid-cols-3">
+                <CardContent className="grid gap-x-6 gap-y-8 px-6 pb-6 sm:px-8 sm:pb-8 md:grid-cols-2 xl:grid-cols-3">
                   {subcategory.services.map((service) => (
                     <ServiceTreatmentCard key={service.name} {...service} />
                   ))}

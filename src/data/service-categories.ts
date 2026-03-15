@@ -1,6 +1,7 @@
 export type Service = {
   name: string;
   description: string;
+  image?: string;
 };
 
 export type ServiceSubcategory = {
@@ -33,36 +34,43 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       {
         name: "Profilaxis",
+        image: encodeURI("/services/podologia/Profilaxis-podologia.png"),
         description:
           "Limpieza y cuidado preventivo para mantener los pies sanos y libres de durezas.",
       },
       {
         name: "Profilaxis a domicilio",
+        image: encodeURI("/services/podologia/Profilaxis-domicilio.png"),
         description:
           "Cuidado y limpieza profesional de los pies en casa (previa coordinación).",
       },
       {
         name: "Extracción de uñero",
+        image: encodeURI("/services/podologia/Extraccióndeunero.png"),
         description:
           "Procedimiento podológico para aliviar el dolor causado por una uña encarnada y prevenir infecciones.",
       },
       {
         name: "Reflexología podal",
+        image: encodeURI("/services/podologia/Reflexología podal.png"),
         description:
           "Masaje terapéutico que estimula puntos del pie para promover bienestar y relajación.",
       },
       {
         name: "Sesión de alta frecuencia",
+        image: encodeURI("/services/podologia/altafrecuencia.png"),
         description:
           "Tratamiento que ayuda a eliminar hongos, desinfectar y mejorar la salud de la piel y las uñas.",
       },
       {
         name: "Tratamiento químico para hongos",
+        image: encodeURI("/services/podologia/tratamientohongos.png"),
         description:
           "Tratamiento aplicado directamente en la uña para hongos muy avanzados.",
       },
       {
         name: "Desintoxicación iónica",
+        image: encodeURI("/services/podologia/Desintoxicación-ionica.png"),
         description:
           "Terapia que ayuda a eliminar toxinas y mejorar el bienestar general.",
       },
