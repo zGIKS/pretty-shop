@@ -32,7 +32,7 @@ export default function Section4() {
           {featuredServices.map(({ href, title, Icon }) => (
             <Link key={href} href={href} className="block">
               <Card className="group flex flex-col items-center justify-center p-6 transition-colors cursor-pointer hover:bg-muted/40">
-                <Icon className="mb-4 h-36 w-36 text-brand-rose transition-transform duration-300 group-hover:scale-110" />
+                <Icon className="mb-4 h-36 w-36 text-brand-brown transition-transform duration-300 group-hover:scale-110 group-hover:text-brand-gold" />
                 <h3>{title}</h3>
               </Card>
             </Link>

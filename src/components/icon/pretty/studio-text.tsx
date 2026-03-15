@@ -12,8 +12,8 @@ interface StudioTextProps {
 export function StudioText({
   className,
   children = "STUDIO",
-  gradientFrom = "#E7BE76",
-  gradientTo = "#8A6B3E",
+  gradientFrom = "var(--logo-gradient-start)",
+  gradientTo = "var(--logo-gradient-end)",
 }: StudioTextProps) {
   return (
     <span

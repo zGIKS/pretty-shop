@@ -9,8 +9,8 @@ interface FlowerProps extends React.ComponentProps<"svg"> {
 
 export function Flower({
   className,
-  gradientFrom = "#E6BD7B",
-  gradientTo = "#806944",
+  gradientFrom = "var(--logo-gradient-start)",
+  gradientTo = "var(--logo-gradient-end)",
   ...props
 }: FlowerProps) {
   const gradientId = React.useId()

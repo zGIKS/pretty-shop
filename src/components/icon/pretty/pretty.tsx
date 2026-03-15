@@ -47,8 +47,8 @@ export function Pretty({
   size = "sm",
   title = "Pretty",
   subtitle = "STUDIO",
-  gradientFrom = "#E7BE76",
-  gradientTo = "#8A6B3E",
+  gradientFrom = "var(--logo-gradient-start)",
+  gradientTo = "var(--logo-gradient-end)",
 }: PrettyProps) {
   const styles = sizeStyles[size]
 

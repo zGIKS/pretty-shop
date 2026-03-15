@@ -12,8 +12,8 @@ interface PrettyTextProps {
 export function PrettyText({
   className,
   children = "Pretty",
-  gradientFrom = "#E7BE76",
-  gradientTo = "#8A6B3E",
+  gradientFrom = "var(--logo-gradient-start)",
+  gradientTo = "var(--logo-gradient-end)",
 }: PrettyTextProps) {
   return (
     <span
