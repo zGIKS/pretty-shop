@@ -1,6 +1,5 @@
 export type Service = {
   name: string;
-  price: string;
   description: string;
 };
 
@@ -34,43 +33,36 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       {
         name: "Profilaxis",
-        price: "S/ 50",
         description:
           "Limpieza y cuidado preventivo para mantener los pies sanos y libres de durezas.",
       },
       {
         name: "Profilaxis a domicilio",
-        price: "Evaluación previa",
         description:
           "Cuidado y limpieza profesional de los pies en casa (previa coordinación).",
       },
       {
         name: "Extracción de uñero",
-        price: "S/ 40",
         description:
           "Procedimiento podológico para aliviar el dolor causado por una uña encarnada y prevenir infecciones.",
       },
       {
         name: "Reflexología podal",
-        price: "S/ 40",
         description:
           "Masaje terapéutico que estimula puntos del pie para promover bienestar y relajación.",
       },
       {
         name: "Sesión de alta frecuencia",
-        price: "S/ 40",
         description:
           "Tratamiento que ayuda a eliminar hongos, desinfectar y mejorar la salud de la piel y las uñas.",
       },
       {
         name: "Tratamiento químico para hongos",
-        price: "S/ 120",
         description:
           "Tratamiento aplicado directamente en la uña para hongos muy avanzados.",
       },
       {
         name: "Desintoxicación iónica",
-        price: "S/ 50",
         description:
           "Terapia que ayuda a eliminar toxinas y mejorar el bienestar general.",
       },
@@ -91,18 +83,15 @@ export const serviceCategories: ServiceCategory[] = [
         services: [
           {
             name: "Limpieza facial básica",
-            price: "S/ 70",
             description:
               "Elimina impurezas y células muertas, dejando la piel limpia y fresca.",
           },
           {
             name: "Limpieza facial profunda",
-            price: "S/ 100",
             description: "Limpieza intensiva con extracción de puntos negros.",
           },
           {
             name: "Dermaplaning",
-            price: "S/ 30",
             description: "Técnica facial que elimina el vello fino del rostro.",
           },
         ],
@@ -112,13 +101,11 @@ export const serviceCategories: ServiceCategory[] = [
         services: [
           {
             name: "Peeling Facial",
-            price: "S/ 150",
             description:
               "Renueva la piel, aclara manchas y mejora la textura.",
           },
           {
             name: "ClariDerm",
-            price: "S/ 150",
             description:
               "Tratamiento indicado para melasma y manchas por acné.",
           },
@@ -129,12 +116,10 @@ export const serviceCategories: ServiceCategory[] = [
         services: [
           {
             name: "HidraLips",
-            price: "S/ 100",
             description: "Tratamiento de hidratación profunda para labios.",
           },
           {
             name: "HydraGlow (Ácido hialurónico)",
-            price: "S/ 180",
             description:
               "Tratamiento hidratante profundo que mejora elasticidad y luminosidad.",
           },
@@ -145,13 +130,11 @@ export const serviceCategories: ServiceCategory[] = [
         services: [
           {
             name: "Acné Clear (Cóctel)",
-            price: "S/ 150",
             description:
               "Ayuda a controlar el acné, reducir imperfecciones y cerrar poros.",
           },
           {
             name: "Skin Repair (Cóctel)",
-            price: "S/ 150",
             description:
               "Regenera la piel, atenúa cicatrices de acné y mejora la textura.",
           },
@@ -162,13 +145,11 @@ export const serviceCategories: ServiceCategory[] = [
         services: [
           {
             name: "Age Balance (Cóctel)",
-            price: "S/ 150",
             description:
               "Revitaliza la piel y ayuda a mantener un rostro más firme.",
           },
           {
             name: "Exosomas",
-            price: "S/ 350",
             description:
               "Tratamiento avanzado de regeneración celular y rejuvenecimiento.",
           },
@@ -191,13 +172,11 @@ export const serviceCategories: ServiceCategory[] = [
         services: [
           {
             name: "Masaje Relajante",
-            price: "S/ 80",
             description:
               "Alivia tensiones, relaja el cuerpo y mejora el bienestar.",
           },
           {
             name: "Masaje Reductor",
-            price: "S/ 80",
             description: "Ayuda a reducir medidas y mejorar la circulación.",
           },
         ],
@@ -207,12 +186,10 @@ export const serviceCategories: ServiceCategory[] = [
         services: [
           {
             name: "Exfoliación de espalda",
-            price: "S/ 150",
             description: "Elimina células muertas y limpia los poros.",
           },
           {
             name: "Exfoliación de glúteos",
-            price: "S/ 130",
             description:
               "Mejora la textura de la piel y previene imperfecciones.",
           },
@@ -223,7 +200,6 @@ export const serviceCategories: ServiceCategory[] = [
         services: [
           {
             name: "Cauterización de verrugas",
-            price: "Evaluación previa",
             description:
               "Procedimiento para eliminar verrugas de forma segura.",
           },
