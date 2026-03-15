@@ -38,7 +38,7 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       {
         name: "Profilaxis",
-        image: encodeURI("/services/podologia/Profilaxis-podologia.png"),
+        image: encodeURI("/services/podologia/foot-profilaxis.png"),
         description:
           "Limpieza y cuidado preventivo para mantener los pies sanos y libres de durezas.",
       },
@@ -50,31 +50,31 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         name: "Extracción de uñero",
-        image: encodeURI("/services/podologia/Extraccióndeunero.png"),
+        image: encodeURI("/services/podologia/extraccion-uneros.png"),
         description:
           "Procedimiento podológico para aliviar el dolor causado por una uña encarnada y prevenir infecciones.",
       },
       {
         name: "Reflexología podal",
-        image: encodeURI("/services/podologia/Reflexología podal.png"),
+        image: encodeURI("/services/podologia/Reflexologia-podal.png"),
         description:
           "Masaje terapéutico que estimula puntos del pie para promover bienestar y relajación.",
       },
       {
         name: "Sesión de alta frecuencia",
-        image: encodeURI("/services/podologia/altafrecuencia.png"),
+        image: encodeURI("/services/podologia/alta-frecuencia.png"),
         description:
           "Tratamiento que ayuda a eliminar hongos, desinfectar y mejorar la salud de la piel y las uñas.",
       },
       {
         name: "Tratamiento químico para hongos",
-        image: encodeURI("/services/podologia/tratamientohongos.png"),
+        image: encodeURI("/services/podologia/quimica-pies.png"),
         description:
           "Tratamiento aplicado directamente en la uña para hongos muy avanzados.",
       },
       {
         name: "Desintoxicación iónica",
-        image: encodeURI("/services/podologia/Desintoxicación-ionica.png"),
+        image: encodeURI("/services/podologia/Desintoxicacion-ionica.png"),
         description:
           "Terapia que ayuda a eliminar toxinas y mejorar el bienestar general.",
       },
