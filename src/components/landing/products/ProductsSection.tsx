@@ -1,4 +1,4 @@
- "use client";
+"use client";
 
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
@@ -9,11 +9,8 @@ import ProductsToolbar from "@/components/landing/products/ProductsToolbar";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 
-type SortOption = "relevance" | "price-asc" | "price-desc" | "name-asc" | "name-desc";
-
 export default function ProductsSection() {
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [sortBy, setSortBy] = useState<SortOption>("relevance");
   const [products, setProducts] = useState<Product[]>([]);
   const [status, setStatus] = useState<"idle" | "loading" | "error">("loading");
   const searchParams = useSearchParams();
@@ -41,39 +38,14 @@ export default function ProductsSection() {
   }, []);
 
   const visibleProducts = useMemo(() => {
-    const baseList =
-      selectedCategory === "all"
-        ? products
-        : products.filter((product) => product.category === selectedCategory);
-
-    const sorted = [...baseList];
-    switch (sortBy) {
-      case "price-asc":
-        sorted.sort((a, b) => a.price - b.price);
-        break;
-      case "price-desc":
-        sorted.sort((a, b) => b.price - a.price);
-        break;
-      case "name-asc":
-        sorted.sort((a, b) => a.title.localeCompare(b.title));
-        break;
-      case "name-desc":
-        sorted.sort((a, b) => b.title.localeCompare(a.title));
-        break;
-      default:
-        break;
-    }
-
-    return sorted;
-  }, [products, selectedCategory, sortBy]);
+    return selectedCategory === "all"
+      ? products
+      : products.filter((product) => product.category === selectedCategory);
+  }, [products, selectedCategory]);
 
   return (
     <>
-      <ProductsToolbar
-        sortBy={sortBy}
-        onSortChange={setSortBy}
-        products={products}
-      />
+      <ProductsToolbar products={products} />
 
       {status === "loading" && (
         <div className="flex flex-col items-center gap-3 py-16 text-sm uppercase tracking-wide text-muted-foreground">

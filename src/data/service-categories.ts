@@ -21,6 +21,10 @@ export type ServiceCategory = {
   subcategories?: ServiceSubcategory[];
 };
 
+export type ResolvedService = Service & {
+  sectionLabel?: string;
+};
+
 export const serviceCategories: ServiceCategory[] = [
   {
     slug: "podologia",
@@ -91,15 +95,18 @@ export const serviceCategories: ServiceCategory[] = [
         services: [
           {
             name: "Limpieza facial básica",
+            image: encodeURI("/services/facial/Limpieza-Facial-Basica.png"),
             description:
               "Elimina impurezas y células muertas, dejando la piel limpia y fresca.",
           },
           {
             name: "Limpieza facial profunda",
+            image: encodeURI("/services/facial/limpieza-facial-profunda.png"),
             description: "Limpieza intensiva con extracción de puntos negros.",
           },
           {
             name: "Dermaplaning",
+            image: encodeURI("/services/facial/Dermaplaning.png"),
             description: "Técnica facial que elimina el vello fino del rostro.",
           },
         ],
@@ -109,11 +116,13 @@ export const serviceCategories: ServiceCategory[] = [
         services: [
           {
             name: "Peeling Facial",
+            image: encodeURI("/services/facial/peeling.png"),
             description:
               "Renueva la piel, aclara manchas y mejora la textura.",
           },
           {
             name: "ClariDerm",
+            image: encodeURI("/services/facial/ClariDerm.png"),
             description:
               "Tratamiento indicado para melasma y manchas por acné.",
           },
@@ -124,10 +133,12 @@ export const serviceCategories: ServiceCategory[] = [
         services: [
           {
             name: "HidraLips",
+            image: encodeURI("/services/facial/hidralips.png"),
             description: "Tratamiento de hidratación profunda para labios.",
           },
           {
             name: "HydraGlow (Ácido hialurónico)",
+            image: encodeURI("/services/facial/HydraGlow.png"),
             description:
               "Tratamiento hidratante profundo que mejora elasticidad y luminosidad.",
           },
@@ -138,11 +149,13 @@ export const serviceCategories: ServiceCategory[] = [
         services: [
           {
             name: "Acné Clear (Cóctel)",
+            image: encodeURI("/services/facial/AcneClear.png"),
             description:
               "Ayuda a controlar el acné, reducir imperfecciones y cerrar poros.",
           },
           {
             name: "Skin Repair (Cóctel)",
+            image: encodeURI("/services/facial/SkinRepair.png"),
             description:
               "Regenera la piel, atenúa cicatrices de acné y mejora la textura.",
           },
@@ -153,11 +166,13 @@ export const serviceCategories: ServiceCategory[] = [
         services: [
           {
             name: "Age Balance (Cóctel)",
+            image: encodeURI("/services/facial/Age Balance.png"),
             description:
               "Revitaliza la piel y ayuda a mantener un rostro más firme.",
           },
           {
             name: "Exosomas",
+            image: encodeURI("/services/facial/Exosomas.png"),
             description:
               "Tratamiento avanzado de regeneración celular y rejuvenecimiento.",
           },
@@ -180,11 +195,13 @@ export const serviceCategories: ServiceCategory[] = [
         services: [
           {
             name: "Masaje Relajante",
+            image: encodeURI("/services/body/masaje-relajante.png"),
             description:
               "Alivia tensiones, relaja el cuerpo y mejora el bienestar.",
           },
           {
             name: "Masaje Reductor",
+            image: encodeURI("/services/body/masaje-reductor.png"),
             description: "Ayuda a reducir medidas y mejorar la circulación.",
           },
         ],
@@ -194,10 +211,12 @@ export const serviceCategories: ServiceCategory[] = [
         services: [
           {
             name: "Exfoliación de espalda",
+            image: encodeURI("/services/body/Exfoliaciondeespalda.png"),
             description: "Elimina células muertas y limpia los poros.",
           },
           {
             name: "Exfoliación de glúteos",
+            image: encodeURI("/services/body/gluteos.png"),
             description:
               "Mejora la textura de la piel y previene imperfecciones.",
           },
@@ -208,6 +227,7 @@ export const serviceCategories: ServiceCategory[] = [
         services: [
           {
             name: "Cauterización de verrugas",
+            image: encodeURI("/services/body/verrgugas.png"),
             description:
               "Procedimiento para eliminar verrugas de forma segura.",
           },
@@ -219,4 +239,21 @@ export const serviceCategories: ServiceCategory[] = [
 
 export function getServiceCategory(slug: string) {
   return serviceCategories.find((category) => category.slug === slug);
+}
+
+export function getResolvedServices(category: ServiceCategory): ResolvedService[] {
+  if (category.services) {
+    return category.services;
+  }
+
+  if (!category.subcategories) {
+    return [];
+  }
+
+  return category.subcategories.flatMap((subcategory) =>
+    subcategory.services.map((service) => ({
+      ...service,
+      sectionLabel: subcategory.name,
+    }))
+  );
 }

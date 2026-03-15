@@ -4,12 +4,14 @@ type ServiceTreatmentCardProps = {
   name: string;
   description: string;
   image?: string;
+  sectionLabel?: string;
 };
 
 export function ServiceTreatmentCard({
   name,
   description,
   image,
+  sectionLabel,
 }: ServiceTreatmentCardProps) {
   return (
     <article className="group flex h-full flex-col">
@@ -26,6 +28,11 @@ export function ServiceTreatmentCard({
         </div>
       ) : null}
       <div className="flex grow flex-col gap-3 px-1 pt-4">
+        {sectionLabel ? (
+          <p className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+            {sectionLabel}
+          </p>
+        ) : null}
         <h3 className="text-xl leading-tight tracking-tight">{name}</h3>
         <p className="line-clamp-3 text-sm leading-6 text-muted-foreground">
           {description}
