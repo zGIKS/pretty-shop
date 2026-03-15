@@ -95,18 +95,18 @@ export const serviceCategories: ServiceCategory[] = [
         services: [
           {
             name: "Limpieza facial básica",
-            image: encodeURI("/services/facial/Limpieza-Facial-Basica.png"),
+            image: encodeURI("/services/facial/Limpieza-facial-basica.png"),
             description:
               "Elimina impurezas y células muertas, dejando la piel limpia y fresca.",
           },
           {
             name: "Limpieza facial profunda",
-            image: encodeURI("/services/facial/limpieza-facial-profunda.png"),
+            image: encodeURI("/services/facial/Limpieza-facial-profunda.png"),
             description: "Limpieza intensiva con extracción de puntos negros.",
           },
           {
             name: "Dermaplaning",
-            image: encodeURI("/services/facial/Dermaplaning.png"),
+            image: encodeURI("/services/facial/Dermaplaning1.png"),
             description: "Técnica facial que elimina el vello fino del rostro.",
           },
         ],
@@ -116,13 +116,13 @@ export const serviceCategories: ServiceCategory[] = [
         services: [
           {
             name: "Peeling Facial",
-            image: encodeURI("/services/facial/peeling.png"),
+            image: encodeURI("/services/facial/Peeling-Facial.png"),
             description:
               "Renueva la piel, aclara manchas y mejora la textura.",
           },
           {
             name: "ClariDerm",
-            image: encodeURI("/services/facial/ClariDerm.png"),
+            image: encodeURI("/services/facial/ClariDerm1.png"),
             description:
               "Tratamiento indicado para melasma y manchas por acné.",
           },
@@ -133,12 +133,12 @@ export const serviceCategories: ServiceCategory[] = [
         services: [
           {
             name: "HidraLips",
-            image: encodeURI("/services/facial/hidralips.png"),
+            image: encodeURI("/services/facial/HidraLips.png"),
             description: "Tratamiento de hidratación profunda para labios.",
           },
           {
             name: "HydraGlow (Ácido hialurónico)",
-            image: encodeURI("/services/facial/HydraGlow.png"),
+            image: encodeURI("/services/facial/HydraGlow1.png"),
             description:
               "Tratamiento hidratante profundo que mejora elasticidad y luminosidad.",
           },
@@ -149,13 +149,13 @@ export const serviceCategories: ServiceCategory[] = [
         services: [
           {
             name: "Acné Clear (Cóctel)",
-            image: encodeURI("/services/facial/AcneClear.png"),
+            image: encodeURI("/services/facial/Skin-Repair.png"),
             description:
               "Ayuda a controlar el acné, reducir imperfecciones y cerrar poros.",
           },
           {
             name: "Skin Repair (Cóctel)",
-            image: encodeURI("/services/facial/SkinRepair.png"),
+            image: encodeURI("/services/facial/Skin-Repair.png"),
             description:
               "Regenera la piel, atenúa cicatrices de acné y mejora la textura.",
           },
@@ -166,13 +166,13 @@ export const serviceCategories: ServiceCategory[] = [
         services: [
           {
             name: "Age Balance (Cóctel)",
-            image: encodeURI("/services/facial/Age Balance.png"),
+            image: encodeURI("/services/facial/Age-Balance.png"),
             description:
               "Revitaliza la piel y ayuda a mantener un rostro más firme.",
           },
           {
             name: "Exosomas",
-            image: encodeURI("/services/facial/Exosomas.png"),
+            image: encodeURI("/services/facial/Exosomas1.png"),
             description:
               "Tratamiento avanzado de regeneración celular y rejuvenecimiento.",
           },
