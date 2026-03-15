@@ -44,7 +44,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         name: "Profilaxis a domicilio",
-        image: encodeURI("/services/podologia/Profilaxis-domicilio.png"),
+        image: encodeURI("/services/podologia/Profilaxis-domicilio-bueno.png"),
         description:
           "Cuidado y limpieza profesional de los pies en casa (previa coordinación).",
       },
