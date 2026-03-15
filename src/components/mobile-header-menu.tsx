@@ -38,18 +38,11 @@ export default function MobileHeaderMenu({
     if (!open) return;
 
     const originalOverflow = document.body.style.overflow;
-    const originalPaddingRight = document.body.style.paddingRight;
-    const scrollbarWidth =
-      window.innerWidth - document.documentElement.clientWidth;
 
     document.body.style.overflow = "hidden";
-    if (scrollbarWidth > 0) {
-      document.body.style.paddingRight = `${scrollbarWidth}px`;
-    }
 
     return () => {
       document.body.style.overflow = originalOverflow;
-      document.body.style.paddingRight = originalPaddingRight;
     };
   }, [open]);
 
@@ -61,7 +54,7 @@ export default function MobileHeaderMenu({
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between p-6">
         <Link href="/" onClick={handleClose} aria-label="Ir al inicio">
           <Pretty
-            size="xs"
+            size="md"
             className="shrink-0"
           />
         </Link>
