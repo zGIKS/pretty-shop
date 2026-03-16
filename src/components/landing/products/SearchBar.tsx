@@ -1,45 +1,48 @@
 "use client";
 
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 import type { Product } from "@/lib/products";
 import { getWhatsAppLink } from "@/lib/whatsapp";
 
 interface SearchBarProps {
   className?: string;
   products?: Product[];
+  searchQuery: string;
+  onSearchChange: (value: string) => void;
   onResultClick?: () => void;
 }
 
-export default function SearchBar({ className = "", products = [], onResultClick }: SearchBarProps) {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [showResults, setShowResults] = useState(false);
+export default function SearchBar({
+  className = "",
+  products = [],
+  searchQuery,
+  onSearchChange,
+  onResultClick,
+}: SearchBarProps) {
   const searchRef = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   const normalizedQuery = searchQuery.trim().toLowerCase();
-  const searchableProducts = useMemo(() => products ?? [], [products]);
+  const showResults = isOpen && searchQuery.trim().length > 0;
 
   const searchResults = useMemo(() => {
     if (!normalizedQuery) return [];
-    return searchableProducts.filter(
+    return products.filter(
       (product) =>
         product.title.toLowerCase().includes(normalizedQuery) ||
         product.description.toLowerCase().includes(normalizedQuery)
     );
-  }, [normalizedQuery, searchableProducts]);
-
-  useEffect(() => {
-    setShowResults(searchQuery.trim().length > 0);
-  }, [searchQuery]);
+  }, [normalizedQuery, products]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-        setShowResults(false);
+        setIsOpen(false);
       }
     };
 
@@ -48,22 +51,37 @@ export default function SearchBar({ className = "", products = [], onResultClick
   }, []);
 
   const handleResultClick = () => {
-    setShowResults(false);
-    setSearchQuery("");
+    setIsOpen(false);
     onResultClick?.();
   };
 
   return (
     <div className={`relative ${className}`} ref={searchRef}>
-      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" size={20} />
+      <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={20} />
       <Input
         type="text"
         placeholder="Buscar productos..."
-        className="pl-10"
+        className="pl-10 pr-10"
         value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        onFocus={() => searchQuery.length > 0 && setShowResults(true)}
+        onFocus={() => setIsOpen(true)}
+        onChange={(e) => {
+          onSearchChange(e.target.value);
+          setIsOpen(true);
+        }}
       />
+      {searchQuery.length > 0 && (
+        <button
+          type="button"
+          aria-label="Limpiar búsqueda"
+          onClick={() => {
+            onSearchChange("");
+            setIsOpen(false);
+          }}
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <X size={16} />
+        </button>
+      )}
 
       {showResults && searchResults.length > 0 && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-popover border rounded-lg shadow-lg max-h-96 overflow-y-auto z-50">
@@ -79,7 +97,6 @@ export default function SearchBar({ className = "", products = [], onResultClick
               <div className="flex-1">
                 <h3 className="text-sm">{product.title}</h3>
                 <p className="text-xs text-muted-foreground line-clamp-1">{product.description}</p>
-                <p className="text-sm font-semibold text-foreground mt-1">S/ {product.price}</p>
               </div>
               <Button asChild size="sm">
                 <Link
@@ -96,7 +113,7 @@ export default function SearchBar({ className = "", products = [], onResultClick
         </div>
       )}
 
-      {showResults && searchResults.length === 0 && searchQuery.length > 0 && (
+      {showResults && searchResults.length === 0 && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-popover border rounded-lg shadow-lg p-4 z-50">
           <p className="text-muted-foreground text-sm text-center">No se encontraron productos</p>
         </div>

@@ -3,9 +3,9 @@ import ContactInfo from "@/components/landing/contact/ContactInfo";
 
 export default function Contacto() {
   return (
-    <div className="min-h-screen flex flex-col pt-32">
+    <div className="flex min-h-screen flex-col page-top">
       <main className="flex-1 flex items-start lg:items-center justify-center pb-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
             <ContactInfo />
             <div className="bg-card rounded-xl border border-border overflow-hidden h-full min-h-130">

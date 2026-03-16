@@ -1,5 +1,6 @@
 import { MapPin, Phone } from "lucide-react";
 import Link from "next/link";
+import { PHONE_DISPLAY, PHONE_TEL_HREF } from "@/lib/contact";
 
 export default function ContactDetails() {
   return (
@@ -23,10 +24,10 @@ export default function ContactDetails() {
         <div>
           <div className="font-semibold">Teléfono</div>
           <Link
-            href="tel:+51943373233"
+            href={PHONE_TEL_HREF}
             className="text-muted-foreground hover:text-foreground"
           >
-            +51 943 373 233
+            {PHONE_DISPLAY}
           </Link>
         </div>
       </div>

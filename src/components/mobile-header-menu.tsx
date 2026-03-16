@@ -1,55 +1,64 @@
 "use client";
 
-import type { ComponentType } from "react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createPortal } from "react-dom";
-import { Briefcase, ChevronDown, Mail, Package, X } from "lucide-react";
+import { Briefcase, CreditCard, Gift, Mail, Package, Plus, Minus, Sparkles, X } from "lucide-react";
+import { usePathname } from "next/navigation";
+import type { LucideIcon } from "lucide-react";
 
-import { BodyTreatment } from "@/components/icon/body-treatment";
-import { FacialTreatment } from "@/components/icon/facial-treatment";
-import { FootTreatment } from "@/components/icon/foot-treatment";
-import PrettyIcon from "@/components/icon/pretty";
-import { serviceCategories } from "@/data/service-categories";
+import Pretty from "@/components/icon/pretty/pretty";
+import { getOrderedServiceCategories } from "@/data/service-categories";
+import { categoryIcons } from "@/lib/category-icons";
 
 type MobileHeaderMenuProps = {
   open: boolean;
   onClose: () => void;
 };
 
-const categoryIcons: Record<string, ComponentType<{ className?: string }>> = {
-  podologia: FootTreatment,
-  "tratamientos-faciales": FacialTreatment,
-  "tratamientos-corporales": BodyTreatment,
-};
+interface MobileNavLinkProps {
+  href: string;
+  label: string;
+  Icon: LucideIcon;
+  onClick: () => void;
+  pathname: string;
+}
+
+function MobileNavLink({ href, label, Icon, onClick, pathname }: MobileNavLinkProps) {
+  return (
+    <Link
+      href={href}
+      onClick={onClick}
+      aria-current={pathname === href ? "page" : undefined}
+      className="flex w-full items-center gap-3 px-5 py-6 text-lg font-semibold sm:px-6"
+    >
+      <Icon className="h-5 w-5" />
+      {label}
+    </Link>
+  );
+}
 
 export default function MobileHeaderMenu({
   open,
   onClose,
 }: MobileHeaderMenuProps) {
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [experiencesOpen, setExperiencesOpen] = useState(false);
+  const orderedCategories = getOrderedServiceCategories();
+  const pathname = usePathname();
 
   const handleClose = () => {
     setServicesOpen(false);
+    setExperiencesOpen(false);
     onClose();
   };
 
   useEffect(() => {
     if (!open) return;
-
     const originalOverflow = document.body.style.overflow;
-    const originalPaddingRight = document.body.style.paddingRight;
-    const scrollbarWidth =
-      window.innerWidth - document.documentElement.clientWidth;
-
     document.body.style.overflow = "hidden";
-    if (scrollbarWidth > 0) {
-      document.body.style.paddingRight = `${scrollbarWidth}px`;
-    }
-
     return () => {
       document.body.style.overflow = originalOverflow;
-      document.body.style.paddingRight = originalPaddingRight;
     };
   }, [open]);
 
@@ -58,9 +67,9 @@ export default function MobileHeaderMenu({
 
   return createPortal(
     <div className="fixed inset-0 z-60 flex flex-col bg-background">
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between p-6">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-4 sm:px-6 sm:py-5">
         <Link href="/" onClick={handleClose} aria-label="Ir al inicio">
-          <PrettyIcon className="h-16 w-18" />
+          <Pretty size="md" className="shrink-0" />
         </Link>
         <button
           type="button"
@@ -74,11 +83,13 @@ export default function MobileHeaderMenu({
 
       <nav className="flex-1 overflow-y-auto border-t border-border">
         <div className="mx-auto w-full max-w-7xl divide-y divide-border">
-          <div className="px-6 py-2">
+          {/* Servicios con sub-categorías desplegables */}
+          <div className="px-5 py-2 sm:px-6">
             <div className="flex items-center gap-3 py-4">
               <Link
                 href="/servicios"
                 onClick={handleClose}
+                aria-current={pathname === "/servicios" ? "page" : undefined}
                 className="flex min-w-0 flex-1 items-center gap-3 text-lg font-semibold"
               >
                 <Briefcase className="h-5 w-5" />
@@ -94,11 +105,13 @@ export default function MobileHeaderMenu({
                     ? "Ocultar categorías de servicios"
                     : "Mostrar categorías de servicios"
                 }
-                className="rounded-md border border-border p-2 transition-colors hover:bg-muted"
+                className="p-2 text-muted-foreground transition-colors hover:bg-muted rounded-md"
               >
-                <ChevronDown
-                  className={`h-5 w-5 transition ${servicesOpen ? "rotate-180" : ""}`}
-                />
+                {servicesOpen ? (
+                  <Minus className="h-6 w-6" strokeWidth={1.5} />
+                ) : (
+                  <Plus className="h-6 w-6" strokeWidth={1.5} />
+                )}
               </button>
             </div>
 
@@ -109,14 +122,15 @@ export default function MobileHeaderMenu({
               }`}
             >
               <div className="min-h-0">
-                {serviceCategories.map((category) => {
+                {orderedCategories.map((category) => {
                   const Icon = categoryIcons[category.slug];
-
+                  const href = `/servicios/${category.slug}`;
                   return (
                     <Link
                       key={category.slug}
-                      href={`/servicios/${category.slug}`}
+                      href={href}
                       onClick={handleClose}
+                      aria-current={pathname === href ? "page" : undefined}
                       className="flex items-start gap-3 py-3"
                     >
                       <span className="rounded-full border border-border p-2 text-foreground">
@@ -137,27 +151,86 @@ export default function MobileHeaderMenu({
             </div>
           </div>
 
-          <Link
-            href="/productos"
-            onClick={handleClose}
-            className="flex w-full items-center justify-between px-6 py-6"
-          >
-            <span className="flex items-center gap-3 text-lg font-semibold">
-              <Package className="h-5 w-5" />
-              Productos
-            </span>
-          </Link>
+          <div className="px-5 py-2 sm:px-6">
+            <div className="flex items-center gap-3 py-4">
+              <Link
+                href="/membresias"
+                onClick={handleClose}
+                aria-current={pathname === "/membresias" || pathname === "/paquetes" ? "page" : undefined}
+                className="flex min-w-0 flex-1 items-center gap-3 text-lg font-semibold"
+              >
+                <Sparkles className="h-5 w-5" />
+                Experiencias
+              </Link>
+              <button
+                type="button"
+                onClick={() => setExperiencesOpen((current) => !current)}
+                aria-expanded={experiencesOpen}
+                aria-controls="mobile-experience-links"
+                aria-label={
+                  experiencesOpen
+                    ? "Ocultar experiencias"
+                    : "Mostrar experiencias"
+                }
+                className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-muted"
+              >
+                {experiencesOpen ? (
+                  <Minus className="h-6 w-6" strokeWidth={1.5} />
+                ) : (
+                  <Plus className="h-6 w-6" strokeWidth={1.5} />
+                )}
+              </button>
+            </div>
 
-          <Link
-            href="/contacto"
-            onClick={handleClose}
-            className="flex w-full items-center justify-between px-6 py-6"
-          >
-            <span className="flex items-center gap-3 text-lg font-semibold">
-              <Mail className="h-5 w-5" />
-              Contacto
-            </span>
-          </Link>
+            <div
+              id="mobile-experience-links"
+              className={`grid overflow-hidden transition-all duration-200 ${
+                experiencesOpen ? "grid-rows-[1fr] pb-4" : "grid-rows-[0fr]"
+              }`}
+            >
+              <div className="min-h-0">
+                <Link
+                  href="/membresias"
+                  onClick={handleClose}
+                  aria-current={pathname === "/membresias" ? "page" : undefined}
+                  className="flex items-start gap-3 py-3"
+                >
+                  <span className="rounded-full border border-border p-2 text-[var(--brand-gold)]">
+                    <CreditCard className="h-4 w-4" strokeWidth={1.8} />
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold text-foreground">
+                      Membresías
+                    </span>
+                    <span className="block text-xs leading-5 text-muted-foreground">
+                      Planes con beneficios y prioridad en citas.
+                    </span>
+                  </span>
+                </Link>
+                <Link
+                  href="/paquetes"
+                  onClick={handleClose}
+                  aria-current={pathname === "/paquetes" ? "page" : undefined}
+                  className="flex items-start gap-3 py-3"
+                >
+                  <span className="rounded-full border border-border p-2 text-[var(--brand-gold)]">
+                    <Gift className="h-4 w-4" strokeWidth={1.8} />
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold text-foreground">
+                      Paquetes
+                    </span>
+                    <span className="block text-xs leading-5 text-muted-foreground">
+                      Combos de tratamientos con precio especial.
+                    </span>
+                  </span>
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <MobileNavLink href="/productos" label="Productos" Icon={Package} onClick={handleClose} pathname={pathname} />
+          <MobileNavLink href="/contacto" label="Contacto" Icon={Mail} onClick={handleClose} pathname={pathname} />
         </div>
       </nav>
     </div>,

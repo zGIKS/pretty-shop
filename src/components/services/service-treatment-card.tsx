@@ -1,45 +1,56 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Image from "next/image";
+import Link from "next/link";
 
 type ServiceTreatmentCardProps = {
   name: string;
-  price: string;
   description: string;
+  image?: string;
+  sectionLabel?: string;
+  href?: string;
 };
 
 export function ServiceTreatmentCard({
   name,
-  price,
   description,
+  image,
+  sectionLabel,
+  href,
 }: ServiceTreatmentCardProps) {
-  const isEvaluation = price
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .includes("evaluacion");
-
-  return (
-    <Card className="h-full border-border bg-muted/30 py-0">
-      <CardHeader className="p-5 pb-3">
-        <div className="flex items-start justify-between gap-4">
-          <CardTitle className="text-lg leading-6 tracking-tight">
-            {name}
-          </CardTitle>
-          <span
-            className={`shrink-0 rounded-full px-3 py-1 text-xs font-semibold ${
-              isEvaluation
-                ? "bg-secondary text-secondary-foreground"
-                : "bg-primary/10 text-primary"
-            }`}
-          >
-            {price}
-          </span>
+  const content = (
+    <article className="group flex h-full flex-col">
+      {image ? (
+        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-xl bg-muted/40">
+          <Image
+            src={image}
+            alt={name}
+            width={900}
+            height={900}
+            sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          />
         </div>
-      </CardHeader>
-      <CardContent className="p-5 pt-0">
-        <p className="text-sm leading-6 text-muted-foreground">
+      ) : null}
+      <div className="flex grow flex-col gap-3 px-1 pt-4">
+        {sectionLabel ? (
+          <p className="text-xs font-medium uppercase tracking-label text-muted-foreground">
+            {sectionLabel}
+          </p>
+        ) : null}
+        <h3 className="text-xl leading-tight tracking-tight">{name}</h3>
+        <p className="line-clamp-3 text-sm leading-6 text-muted-foreground">
           {description}
         </p>
-      </CardContent>
-    </Card>
+      </div>
+    </article>
   );
+
+  if (href) {
+    return (
+      <Link href={href} className="block">
+        {content}
+      </Link>
+    );
+  }
+
+  return content;
 }

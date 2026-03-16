@@ -9,16 +9,11 @@ import { ServicesPageShell } from "@/components/services/services-page-shell";
 import { ServiceTreatmentCard } from "@/components/services/service-treatment-card";
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
   getServiceCategory,
+  getResolvedServices,
   serviceCategories,
 } from "@/data/service-categories";
+import { slugify } from "@/lib/utils";
 
 type PageProps = {
   params: Promise<{
@@ -58,6 +53,8 @@ export default async function ServiceCategoryPage({ params }: PageProps) {
     notFound();
   }
 
+  const services = getResolvedServices(category);
+
   return (
     <>
       <ServicesPageShell>
@@ -70,35 +67,14 @@ export default async function ServiceCategoryPage({ params }: PageProps) {
 
         <ServiceCategoryHeader category={category} />
 
-        {category.services ? (
-          <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {category.services.map((service) => (
-              <ServiceTreatmentCard key={service.name} {...service} />
-            ))}
-          </section>
-        ) : null}
-
-        {category.subcategories ? (
-          <section className="space-y-8">
-            {category.subcategories.map((subcategory) => (
-              <Card
-                key={subcategory.name}
-                className="border-border bg-card py-0 shadow-sm"
-              >
-                <CardHeader className="p-6 pb-4 sm:p-8">
-                  <CardTitle className="text-xl tracking-tight">
-                    {subcategory.name}
-                  </CardTitle>
-                  <CardDescription>
-                    Servicios disponibles dentro de esta subcategoría.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="grid gap-4 px-6 pb-6 sm:px-8 sm:pb-8 md:grid-cols-2 xl:grid-cols-3">
-                  {subcategory.services.map((service) => (
-                    <ServiceTreatmentCard key={service.name} {...service} />
-                  ))}
-                </CardContent>
-              </Card>
+        {services.length > 0 ? (
+          <section className="grid gap-x-6 gap-y-8 md:grid-cols-2 xl:grid-cols-3">
+            {services.map((service) => (
+              <ServiceTreatmentCard
+                key={service.name}
+                {...service}
+                href={`/servicios/${categorySlug}/${slugify(service.name)}`}
+              />
             ))}
           </section>
         ) : null}

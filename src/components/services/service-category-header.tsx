@@ -1,20 +1,11 @@
-import type { ComponentType } from "react";
 import Link from "next/link";
 import { MessageCircle, Stethoscope } from "lucide-react";
 
-import { BodyTreatment } from "@/components/icon/body-treatment";
-import { FacialTreatment } from "@/components/icon/facial-treatment";
-import { FootTreatment } from "@/components/icon/foot-treatment";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import type { ServiceCategory } from "@/data/service-categories";
+import { categoryIcons } from "@/lib/category-icons";
 import { getWhatsAppLink } from "@/lib/whatsapp";
-
-const categoryIcons: Record<string, ComponentType<{ className?: string }>> = {
-  podologia: FootTreatment,
-  "tratamientos-faciales": FacialTreatment,
-  "tratamientos-corporales": BodyTreatment,
-};
 
 type ServiceCategoryHeaderProps = {
   category: ServiceCategory;

@@ -1,21 +1,16 @@
- "use client";
+"use client";
 
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { Product } from "@/lib/products";
-import { getProducts } from "@/lib/products";
+import { productsCatalog } from "@/data/products";
 import ProductsGrid from "@/components/landing/products/ProductsGrid";
 import ProductsToolbar from "@/components/landing/products/ProductsToolbar";
-import { Button } from "@/components/ui/button";
-import { Spinner } from "@/components/ui/spinner";
-
-type SortOption = "relevance" | "price-asc" | "price-desc" | "name-asc" | "name-desc";
 
 export default function ProductsSection() {
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [sortBy, setSortBy] = useState<SortOption>("relevance");
-  const [products, setProducts] = useState<Product[]>([]);
-  const [status, setStatus] = useState<"idle" | "loading" | "error">("loading");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [products] = useState<Product[]>(productsCatalog);
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -24,70 +19,39 @@ export default function ProductsSection() {
     setSelectedCategory(categoryParam || "all");
   }, [searchParams]);
 
-  const loadProducts = async () => {
-    setStatus("loading");
-    try {
-      const data = await getProducts();
-      setProducts(data);
-      setStatus("idle");
-    } catch {
-      setStatus("error");
-    }
-  };
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    loadProducts();
-  }, []);
-
   const visibleProducts = useMemo(() => {
-    const baseList =
+    let filtered =
       selectedCategory === "all"
         ? products
-        : products.filter((product) => product.category === selectedCategory);
+        : products.filter((p) => p.category === selectedCategory);
 
-    const sorted = [...baseList];
-    switch (sortBy) {
-      case "price-asc":
-        sorted.sort((a, b) => a.price - b.price);
-        break;
-      case "price-desc":
-        sorted.sort((a, b) => b.price - a.price);
-        break;
-      case "name-asc":
-        sorted.sort((a, b) => a.title.localeCompare(b.title));
-        break;
-      case "name-desc":
-        sorted.sort((a, b) => b.title.localeCompare(a.title));
-        break;
-      default:
-        break;
+    if (searchQuery.trim()) {
+      const q = searchQuery.trim().toLowerCase();
+      filtered = filtered.filter(
+        (p) =>
+          p.title.toLowerCase().includes(q) ||
+          p.description.toLowerCase().includes(q)
+      );
     }
 
-    return sorted;
-  }, [products, selectedCategory, sortBy]);
+    return filtered;
+  }, [products, selectedCategory, searchQuery]);
 
   return (
     <>
       <ProductsToolbar
-        sortBy={sortBy}
-        onSortChange={setSortBy}
         products={products}
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
       />
 
-      {status === "loading" && (
-        <div className="flex flex-col items-center gap-3 py-16 text-sm uppercase tracking-wide text-muted-foreground">
-          <Spinner size="lg" />
-          Cargando productos...
-        </div>
-      )}
-
-      {status !== "loading" && visibleProducts.length === 0 && (
-        <div className="flex flex-col items-center gap-6 py-16 text-sm uppercase tracking-wide text-muted-foreground">
-          <Spinner size="lg" />
-          <Button onClick={loadProducts} variant="default">
-            Intentar de nuevo
-          </Button>
+      {visibleProducts.length === 0 && (
+        <div className="flex flex-col items-center gap-4 py-16 text-sm text-muted-foreground">
+          <p className="uppercase tracking-wide">
+            {searchQuery.trim()
+              ? `Sin resultados para "${searchQuery}"`
+              : "No hay productos disponibles."}
+          </p>
         </div>
       )}
 
