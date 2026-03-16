@@ -1,6 +1,6 @@
-import { MessageCircle, Music } from "lucide-react";
+import { Instagram, MessageCircle, Music } from "lucide-react";
 import Link from "next/link";
-import { WHATSAPP_HREF, TIKTOK_HREF } from "@/lib/contact";
+import { INSTAGRAM_HREF, WHATSAPP_HREF, TIKTOK_HREF } from "@/lib/contact";
 
 export default function ContactSocials() {
   return (
@@ -22,6 +22,14 @@ export default function ContactSocials() {
           className="hover:text-foreground"
         >
           <Music size={18} />
+        </Link>
+        <Link
+          href={INSTAGRAM_HREF}
+          target="_blank"
+          aria-label="Instagram"
+          className="hover:text-foreground"
+        >
+          <Instagram size={18} />
         </Link>
       </div>
     </div>

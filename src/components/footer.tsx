@@ -1,7 +1,13 @@
 import Link from "next/link";
-import { MapPin, Phone, Music, MessageCircle } from "lucide-react";
+import { MapPin, Phone, Music, MessageCircle, Instagram } from "lucide-react";
 import Pretty from "@/components/icon/pretty/pretty";
-import { PHONE_DISPLAY, PHONE_TEL_HREF, WHATSAPP_HREF, TIKTOK_HREF } from "@/lib/contact";
+import {
+  INSTAGRAM_HREF,
+  PHONE_DISPLAY,
+  PHONE_TEL_HREF,
+  WHATSAPP_HREF,
+  TIKTOK_HREF,
+} from "@/lib/contact";
 
 export default function Footer() {
   const servicios = [
@@ -76,16 +82,28 @@ export default function Footer() {
               <h3 className="font-semibold mb-3">Síguenos</h3>
               <div className="flex items-center gap-4 text-muted-foreground">
                 <Link
+                  href={WHATSAPP_HREF}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-foreground"
+                >
+                  <MessageCircle size={20} />
+                </Link>
+                <Link
                   href={TIKTOK_HREF}
+                  target="_blank"
+                  rel="noreferrer"
                   className="hover:text-foreground"
                 >
                   <Music size={20} />
                 </Link>
                 <Link
-                  href={WHATSAPP_HREF}
+                  href={INSTAGRAM_HREF}
+                  target="_blank"
+                  rel="noreferrer"
                   className="hover:text-foreground"
                 >
-                  <MessageCircle size={20} />
+                  <Instagram size={20} />
                 </Link>
               </div>
             </div>

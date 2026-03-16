@@ -50,4 +50,11 @@ export const productsCatalog: Product[] = [
     category: "Accesorios",
     image: "/products/Vinchas_de_Felpa_con_Lentejuelas_af41r3.png",
   },
+  {
+    id: "pack-productos",
+    title: "Pack de productos",
+    description: "Incluye dermolimpiador, serum, fotoprotector y vincha para tu rutina facial.",
+    category: "Packs",
+    image: "/products/pack-productos.png",
+  },
 ];

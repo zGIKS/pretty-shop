@@ -12,3 +12,6 @@ export const WHATSAPP_HREF = `https://wa.me/${PHONE_NUMBER}`;
 
 /** URL del perfil de TikTok. */
 export const TIKTOK_HREF = "https://tiktok.com/@pretty.podoestetica";
+
+/** URL del perfil de Instagram. */
+export const INSTAGRAM_HREF = "https://www.instagram.com/pretty.studio.pe/";
