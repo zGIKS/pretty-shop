@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
@@ -99,10 +100,12 @@ export default async function ServicePage({ params }: PageProps) {
         <div className="grid gap-8 lg:grid-cols-2 items-start">
           {service.image ? (
             <div className="relative aspect-4/5 w-full overflow-hidden rounded-xl bg-muted/40">
-              <img
+              <Image
                 src={service.image}
                 alt={service.name}
-                className="h-full w-full object-cover"
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="object-cover"
               />
             </div>
           ) : null}

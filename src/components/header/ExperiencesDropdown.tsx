@@ -13,7 +13,6 @@ const experienceItems = [
 
 export function ExperiencesDropdown() {
   const pathname = usePathname();
-  const isActive = pathname === "/membresias" || pathname === "/paquetes";
 
   return (
     <div className="group relative pb-2">
