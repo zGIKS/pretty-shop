@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createPortal } from "react-dom";
-import { Briefcase, CreditCard, Mail, Package, Plus, Minus, Sparkles, X } from "lucide-react";
+import { Briefcase, CreditCard, Gift, Mail, Package, Plus, Minus, Sparkles, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import type { LucideIcon } from "lucide-react";
 
@@ -188,30 +188,43 @@ export default function MobileHeaderMenu({
                 experiencesOpen ? "grid-rows-[1fr] pb-4" : "grid-rows-[0fr]"
               }`}
             >
-              <div className="min-h-0 space-y-4">
-                <div className="space-y-2">
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-                    Membresías
-                  </p>
-                  <Link href="/membresias" onClick={handleClose} className="flex items-center gap-2 py-1 text-sm font-semibold text-foreground">
-                    <CreditCard className="h-4 w-4 text-primary" />
-                    Membresías
-                  </Link>
-                </div>
-                <div className="space-y-2">
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-                    Paquetes
-                  </p>
-                  <Link href="/paquetes" onClick={handleClose} className="block py-1 text-sm font-semibold text-foreground">
-                    Paquete Ozono
-                  </Link>
-                  <Link href="/paquetes" onClick={handleClose} className="block py-1 text-sm font-semibold text-foreground">
-                    Paquete Desintoxicación Iónica
-                  </Link>
-                  <Link href="/paquetes" onClick={handleClose} className="block py-1 text-sm font-semibold text-foreground">
-                    Paquete Peeling Facial
-                  </Link>
-                </div>
+              <div className="min-h-0">
+                <Link
+                  href="/membresias"
+                  onClick={handleClose}
+                  aria-current={pathname === "/membresias" ? "page" : undefined}
+                  className="flex items-start gap-3 py-3"
+                >
+                  <span className="rounded-full border border-border bg-primary/10 p-2 text-primary">
+                    <CreditCard className="h-4 w-4" />
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold text-foreground">
+                      Membresías
+                    </span>
+                    <span className="block text-xs leading-5 text-muted-foreground">
+                      Planes con beneficios y prioridad en citas.
+                    </span>
+                  </span>
+                </Link>
+                <Link
+                  href="/paquetes"
+                  onClick={handleClose}
+                  aria-current={pathname === "/paquetes" ? "page" : undefined}
+                  className="flex items-start gap-3 py-3"
+                >
+                  <span className="rounded-full border border-border bg-primary/10 p-2 text-primary">
+                    <Gift className="h-4 w-4" />
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold text-foreground">
+                      Paquetes
+                    </span>
+                    <span className="block text-xs leading-5 text-muted-foreground">
+                      Combos de tratamientos con precio especial.
+                    </span>
+                  </span>
+                </Link>
               </div>
             </div>
           </div>

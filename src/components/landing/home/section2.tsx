@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { serviceCategories } from "@/data/service-categories";
 
 export default function Section2() {
   return (
@@ -24,34 +23,66 @@ export default function Section2() {
 
           <div className="flex w-full flex-col space-y-3 md:w-[55%] md:space-y-4">
             <h3 className="mb-2 text-primary md:mb-4 md:text-2xl">
-              ¿Qué te gustaría realizarte hoy?
+              ¿Qué estás buscando hoy?
             </h3>
 
-            {serviceCategories.map((category) => (
-              <Link
-                key={category.slug}
-                href={`/servicios/${category.slug}`}
-                className="flex items-center justify-between rounded-lg border border-primary/25 bg-primary/10 p-3 transition-colors hover:bg-primary/20 md:p-4"
-              >
-                <div>
-                  <span className="block text-sm font-medium text-foreground md:text-lg">
-                    {category.title}
-                  </span>
-                  <span className="block text-xs text-muted-foreground md:text-sm">
-                    {category.summary}
-                  </span>
-                </div>
-                <ArrowRight className="h-4 w-4 text-primary md:h-5 md:w-5" />
-              </Link>
-            ))}
+            <Link
+              href="/servicios"
+              className="flex items-center justify-between rounded-lg border border-primary/25 bg-primary/10 p-3 transition-colors hover:bg-primary/20 md:p-4"
+            >
+              <div>
+                <span className="block text-sm font-medium text-foreground md:text-lg">
+                  Servicios
+                </span>
+                <span className="block text-xs text-muted-foreground md:text-sm">
+                  Tratamientos faciales, corporales y podología.
+                </span>
+              </div>
+              <ArrowRight className="h-4 w-4 text-primary md:h-5 md:w-5" />
+            </Link>
+
+            <Link
+              href="/membresias"
+              className="flex items-center justify-between rounded-lg border border-primary/25 bg-primary/10 p-3 transition-colors hover:bg-primary/20 md:p-4"
+            >
+              <div>
+                <span className="block text-sm font-medium text-foreground md:text-lg">
+                  Membresías
+                </span>
+                <span className="block text-xs text-muted-foreground md:text-sm">
+                  Cuidado constante con beneficios exclusivos.
+                </span>
+              </div>
+              <ArrowRight className="h-4 w-4 text-primary md:h-5 md:w-5" />
+            </Link>
+
+            <Link
+              href="/paquetes"
+              className="flex items-center justify-between rounded-lg border border-primary/25 bg-primary/10 p-3 transition-colors hover:bg-primary/20 md:p-4"
+            >
+              <div>
+                <span className="block text-sm font-medium text-foreground md:text-lg">
+                  Paquetes
+                </span>
+                <span className="block text-xs text-muted-foreground md:text-sm">
+                  Promociones y tratamientos completos.
+                </span>
+              </div>
+              <ArrowRight className="h-4 w-4 text-primary md:h-5 md:w-5" />
+            </Link>
 
             <Link
               href="/productos"
               className="flex items-center justify-between rounded-lg border border-primary/25 bg-primary/10 p-3 transition-colors hover:bg-primary/20 md:p-4"
             >
-              <span className="text-sm font-medium text-foreground md:text-lg">
-                Productos
-              </span>
+              <div>
+                <span className="block text-sm font-medium text-foreground md:text-lg">
+                  Productos
+                </span>
+                <span className="block text-xs text-muted-foreground md:text-sm">
+                  Lleva el cuidado profesional a tu hogar.
+                </span>
+              </div>
               <ArrowRight className="h-4 w-4 text-primary md:h-5 md:w-5" />
             </Link>
           </div>
