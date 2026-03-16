@@ -21,6 +21,8 @@ export default function Footer() {
 
   const navegacion = [
     { label: "Servicios", href: "/servicios" },
+    { label: "Membresías", href: "/membresias" },
+    { label: "Paquetes", href: "/paquetes" },
     { label: "Productos", href: "/productos" },
     { label: "Contacto", href: "/contacto" },
   ];
