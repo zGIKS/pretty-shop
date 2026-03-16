@@ -57,6 +57,8 @@
 
 :root {
   --radius: 0.625rem;
+  --site-header-offset: 6.5rem;
+  --site-header-gap: 1rem;
   --brand-rose: #c7b6a8;
   --brand-taupe: #9e8b7d;
   --brand-brown: #564a3e;
@@ -99,6 +101,13 @@
   --sidebar-accent-foreground: var(--brand-brown);
   --sidebar-border: #eadbcc;
   --sidebar-ring: var(--brand-gold);
+}
+
+@media (min-width: 640px) {
+  :root {
+    --site-header-offset: 7.5rem;
+    --site-header-gap: 1.5rem;
+  }
 }
 
 .dark {

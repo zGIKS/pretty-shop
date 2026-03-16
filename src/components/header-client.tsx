@@ -17,7 +17,7 @@ export default function HeaderClient({ fixed = true }: HeaderProps) {
 
   return (
     <div className={`${fixed ? "fixed top-0 left-0 right-0 z-50" : ""} shadow-md backdrop-blur-sm bg-background/95`}>
-      <header className="max-w-7xl mx-auto flex items-center justify-between p-6">
+      <header className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6 sm:py-5">
         <Link href="/" aria-label="Ir al inicio">
           <Pretty
             size="md"
@@ -25,7 +25,7 @@ export default function HeaderClient({ fixed = true }: HeaderProps) {
           />
         </Link>
         <NavigationMenu />
-        <div className="md:hidden flex items-center gap-2">
+        <div className="flex items-center gap-2 md:hidden">
           <Button
             variant="ghost"
             size="icon"

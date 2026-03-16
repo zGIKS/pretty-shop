@@ -1,10 +1,12 @@
 import Image from "next/image";
+import Link from "next/link";
 
 type ServiceTreatmentCardProps = {
   name: string;
   description: string;
   image?: string;
   sectionLabel?: string;
+  href?: string;
 };
 
 export function ServiceTreatmentCard({
@@ -12,8 +14,9 @@ export function ServiceTreatmentCard({
   description,
   image,
   sectionLabel,
+  href,
 }: ServiceTreatmentCardProps) {
-  return (
+  const content = (
     <article className="group flex h-full flex-col">
       {image ? (
         <div className="relative aspect-[4/5] w-full overflow-hidden rounded-xl bg-muted/40">
@@ -40,4 +43,14 @@ export function ServiceTreatmentCard({
       </div>
     </article>
   );
+
+  if (href) {
+    return (
+      <Link href={href} className="block">
+        {content}
+      </Link>
+    );
+  }
+
+  return content;
 }

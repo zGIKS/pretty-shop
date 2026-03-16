@@ -14,6 +14,17 @@ import {
   serviceCategories,
 } from "@/data/service-categories";
 
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+}
+
 type PageProps = {
   params: Promise<{
     category: string;
@@ -69,7 +80,11 @@ export default async function ServiceCategoryPage({ params }: PageProps) {
         {services.length > 0 ? (
           <section className="grid gap-x-6 gap-y-8 md:grid-cols-2 xl:grid-cols-3">
             {services.map((service) => (
-              <ServiceTreatmentCard key={service.name} {...service} />
+              <ServiceTreatmentCard
+                key={service.name}
+                {...service}
+                href={`/servicios/${categorySlug}/${slugify(service.name)}`}
+              />
             ))}
           </section>
         ) : null}

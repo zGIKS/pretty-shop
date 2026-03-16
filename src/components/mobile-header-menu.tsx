@@ -43,7 +43,7 @@ export default function MobileHeaderMenu({
 
   return createPortal(
     <div className="fixed inset-0 z-60 flex flex-col bg-background">
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between p-6">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-4 sm:px-6 sm:py-5">
         <Link href="/" onClick={handleClose} aria-label="Ir al inicio">
           <Pretty
             size="md"
@@ -62,7 +62,7 @@ export default function MobileHeaderMenu({
 
       <nav className="flex-1 overflow-y-auto border-t border-border">
         <div className="mx-auto w-full max-w-7xl divide-y divide-border">
-          <div className="px-6 py-2">
+          <div className="px-5 py-2 sm:px-6">
             <div className="flex items-center gap-3 py-4">
               <Link
                 href="/servicios"
@@ -128,7 +128,7 @@ export default function MobileHeaderMenu({
           <Link
             href="/productos"
             onClick={handleClose}
-            className="flex w-full items-center justify-between px-6 py-6"
+            className="flex w-full items-center justify-between px-5 py-6 sm:px-6"
           >
             <span className="flex items-center gap-3 text-lg font-semibold">
               <Package className="h-5 w-5" />
@@ -139,7 +139,7 @@ export default function MobileHeaderMenu({
           <Link
             href="/contacto"
             onClick={handleClose}
-            className="flex w-full items-center justify-between px-6 py-6"
+            className="flex w-full items-center justify-between px-5 py-6 sm:px-6"
           >
             <span className="flex items-center gap-3 text-lg font-semibold">
               <Mail className="h-5 w-5" />

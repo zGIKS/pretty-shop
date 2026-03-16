@@ -6,8 +6,8 @@ type ServicesPageShellProps = {
 
 export function ServicesPageShell({ children }: ServicesPageShellProps) {
   return (
-    <main className="bg-background pb-10 pt-32 sm:pb-12 sm:pt-36">
-      <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 sm:px-6 lg:px-8">
+    <main className="bg-background pb-10 pt-[calc(var(--site-header-offset)+var(--site-header-gap))] sm:pb-12">
+      <div className="mx-auto flex max-w-7xl flex-col gap-8 px-5 sm:px-6 lg:px-8">
         {children}
       </div>
     </main>

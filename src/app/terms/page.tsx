@@ -3,8 +3,8 @@ import Footer from "@/components/footer";
 export default function Terms() {
   return (
     <>
-      <main className="min-h-screen pt-32 md:pt-36 pb-16">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <main className="min-h-screen pb-16 pt-[calc(var(--site-header-offset)+var(--site-header-gap))]">
+        <div className="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8">
           <div className="mb-6">
             <h1>
               Términos y Condiciones
