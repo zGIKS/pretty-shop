@@ -42,7 +42,7 @@
 :root {
   --radius: 0.625rem;
   --site-header-offset: 6.5rem;
-  --site-header-gap: 2rem;
+  --site-header-gap: 2.5rem;
 
   /* Brand palette */
   --brand-rose: #c7b6a8;
@@ -89,7 +89,13 @@
 @media (min-width: 640px) {
   :root {
     --site-header-offset: 7.5rem;
-    --site-header-gap: 1.75rem;
+    --site-header-gap: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --site-header-gap: 3.5rem;
   }
 }
 

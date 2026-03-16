@@ -11,12 +11,9 @@ import {
 
 export default function Footer() {
   const servicios = [
-    { label: "Tratamientos Faciales", href: "/servicios/tratamientos-faciales" },
-    {
-      label: "Tratamientos Corporales",
-      href: "/servicios/tratamientos-corporales",
-    },
     { label: "Podología", href: "/servicios/podologia" },
+    { label: "Tratamientos Faciales", href: "/servicios/tratamientos-faciales" },
+    { label: "Tratamientos Corporales", href: "/servicios/tratamientos-corporales" },
   ];
 
   const navegacion = [

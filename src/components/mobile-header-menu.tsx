@@ -195,8 +195,8 @@ export default function MobileHeaderMenu({
                   aria-current={pathname === "/membresias" ? "page" : undefined}
                   className="flex items-start gap-3 py-3"
                 >
-                  <span className="rounded-full border border-border bg-primary/10 p-2 text-primary">
-                    <CreditCard className="h-4 w-4" />
+                  <span className="rounded-full border border-border p-2 text-[var(--brand-gold)]">
+                    <CreditCard className="h-4 w-4" strokeWidth={1.8} />
                   </span>
                   <span>
                     <span className="block text-sm font-semibold text-foreground">
@@ -213,8 +213,8 @@ export default function MobileHeaderMenu({
                   aria-current={pathname === "/paquetes" ? "page" : undefined}
                   className="flex items-start gap-3 py-3"
                 >
-                  <span className="rounded-full border border-border bg-primary/10 p-2 text-primary">
-                    <Gift className="h-4 w-4" />
+                  <span className="rounded-full border border-border p-2 text-[var(--brand-gold)]">
+                    <Gift className="h-4 w-4" strokeWidth={1.8} />
                   </span>
                   <span>
                     <span className="block text-sm font-semibold text-foreground">
