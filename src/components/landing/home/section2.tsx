@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -9,7 +7,7 @@ import { serviceCategories } from "@/data/service-categories";
 export default function Section2() {
   return (
     <section className="bg-background py-8 md:py-16">
-      <div className="mx-auto max-w-7xl px-4 md:px-6">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <div className="flex flex-col items-start justify-between gap-8 rounded-lg border border-border bg-card p-6 md:flex-row md:items-center md:p-16">
           <div className="w-full md:w-[45%]">
             <h2 className="mb-3 text-2xl font-bold text-primary md:mb-4 md:text-4xl">

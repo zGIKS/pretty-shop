@@ -28,7 +28,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Pretty Studio",
-  description: "Pretty Studio",
+  description:
+    "Pretty Studio — Estética y podología en Surquillo, Lima. Tratamientos faciales, corporales y podológicos con productos de calidad profesional.",
   icons: {
     icon: "/ico.svg",
     shortcut: "/ico.svg",

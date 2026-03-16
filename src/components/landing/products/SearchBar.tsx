@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 import type { Product } from "@/lib/products";
 import { getWhatsAppLink } from "@/lib/whatsapp";
 
@@ -60,10 +60,20 @@ export default function SearchBar({
       <Input
         type="text"
         placeholder="Buscar productos..."
-        className="pl-10"
+        className="pl-10 pr-10"
         value={searchQuery}
         onChange={(e) => onSearchChange(e.target.value)}
       />
+      {searchQuery.length > 0 && (
+        <button
+          type="button"
+          aria-label="Limpiar búsqueda"
+          onClick={() => onSearchChange("")}
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <X size={16} />
+        </button>
+      )}
 
       {showResults && searchResults.length > 0 && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-popover border rounded-lg shadow-lg max-h-96 overflow-y-auto z-50">

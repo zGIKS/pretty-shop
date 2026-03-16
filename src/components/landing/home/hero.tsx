@@ -4,7 +4,7 @@ import LotusFlower from "./flower-animation";
 
 export default function Hero() {
   return (
-    <section className="pb-8 pt-[calc(var(--site-header-offset)+var(--site-header-gap))] md:pb-12 lg:pb-16 lg:pt-[calc(var(--site-header-offset)+2.5rem)]">
+    <section className="pb-8 page-top md:pb-12 lg:pb-16 lg:pt-[calc(var(--site-header-offset)+2.5rem)]">
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 items-center">
           {/* Texto a la izquierda */}

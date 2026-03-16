@@ -5,7 +5,7 @@ import { Suspense } from "react";
 export default function Productos() {
   return (
     <>
-      <main className="min-h-screen pb-16 pt-[calc(var(--site-header-offset)+var(--site-header-gap))]">
+        <main className="min-h-screen pb-16 page-top">
         <Suspense fallback={null}>
           <ProductsSection />
         </Suspense>

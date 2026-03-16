@@ -3,7 +3,7 @@ import ContactInfo from "@/components/landing/contact/ContactInfo";
 
 export default function Contacto() {
   return (
-    <div className="flex min-h-screen flex-col pt-[calc(var(--site-header-offset)+var(--site-header-gap))]">
+    <div className="flex min-h-screen flex-col page-top">
       <main className="flex-1 flex items-start lg:items-center justify-center pb-10">
         <div className="mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">

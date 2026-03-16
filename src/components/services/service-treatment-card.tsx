@@ -32,7 +32,7 @@ export function ServiceTreatmentCard({
       ) : null}
       <div className="flex grow flex-col gap-3 px-1 pt-4">
         {sectionLabel ? (
-          <p className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+          <p className="text-xs font-medium uppercase tracking-label text-muted-foreground">
             {sectionLabel}
           </p>
         ) : null}

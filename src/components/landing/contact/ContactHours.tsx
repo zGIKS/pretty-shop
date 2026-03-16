@@ -52,13 +52,13 @@ export default function ContactHours() {
               <div className="text-right whitespace-nowrap">
                 <span className="text-muted-foreground">{currentStatus.time}</span>
                 <span className="text-muted-foreground"> - </span>
-                <span
-                  className={
-                    currentStatus.isOpen
-                      ? "text-green-600 font-semibold"
-                      : "text-red-600 font-semibold"
-                  }
-                >
+                  <span
+                    className={
+                      currentStatus.isOpen
+                        ? "font-semibold text-[var(--status-open)]"
+                        : "font-semibold text-[var(--status-closed)]"
+                    }
+                  >
                   {currentStatus.isOpen ? "Abierto" : "Cerrado"}
                 </span>
               </div>

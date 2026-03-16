@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createPortal } from "react-dom";
 import { Briefcase, ChevronDown, Mail, Package, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 import Pretty from "@/components/icon/pretty/pretty";
 import { getOrderedServiceCategories } from "@/data/service-categories";
@@ -20,6 +21,7 @@ export default function MobileHeaderMenu({
 }: MobileHeaderMenuProps) {
   const [servicesOpen, setServicesOpen] = useState(false);
   const orderedCategories = getOrderedServiceCategories();
+  const pathname = usePathname();
 
   const handleClose = () => {
     setServicesOpen(false);
@@ -105,6 +107,7 @@ export default function MobileHeaderMenu({
                       key={category.slug}
                       href={`/servicios/${category.slug}`}
                       onClick={handleClose}
+                      aria-current={pathname === `/servicios/${category.slug}` ? "page" : undefined}
                       className="flex items-start gap-3 py-3"
                     >
                       <span className="rounded-full border border-border p-2 text-foreground">

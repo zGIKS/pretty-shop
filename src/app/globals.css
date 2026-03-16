@@ -7,7 +7,6 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-body);
-  --font-mono: var(--font-geist-mono);
   --color-brand-rose: var(--brand-rose);
   --color-brand-taupe: var(--brand-taupe);
   --color-brand-brown: var(--brand-brown);
@@ -17,19 +16,6 @@
   --color-brand-blush: var(--brand-blush);
   --tracking-label: var(--label-tracking);
   --tracking-label-wide: var(--label-tracking-wide);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -58,7 +44,9 @@
 :root {
   --radius: 0.625rem;
   --site-header-offset: 6.5rem;
-  --site-header-gap: 1rem;
+  --site-header-gap: 2rem;
+
+  /* Brand palette */
   --brand-rose: #c7b6a8;
   --brand-taupe: #9e8b7d;
   --brand-brown: #564a3e;
@@ -66,10 +54,16 @@
   --brand-gold: #b98d4c;
   --brand-cream: #fdf8f4;
   --brand-blush: #f3ebe3;
+
+  /* Logo gradient */
   --logo-gradient-start: var(--brand-gold-light);
   --logo-gradient-end: var(--brand-gold);
+
+  /* Typography tracking */
   --label-tracking: 0.2em;
   --label-tracking-wide: 0.4em;
+
+  /* Semantic tokens */
   --background: var(--brand-cream);
   --foreground: var(--brand-brown);
   --card: #fffdfb;
@@ -88,25 +82,16 @@
   --border: #decfbe;
   --input: #decfbe;
   --ring: var(--brand-gold);
-  --chart-1: var(--brand-gold);
-  --chart-2: var(--brand-gold-light);
-  --chart-3: var(--brand-taupe);
-  --chart-4: #d7c6b7;
-  --chart-5: var(--brand-brown);
-  --sidebar: #fffdfb;
-  --sidebar-foreground: var(--brand-brown);
-  --sidebar-primary: var(--brand-gold);
-  --sidebar-primary-foreground: var(--brand-cream);
-  --sidebar-accent: #f3ebe3;
-  --sidebar-accent-foreground: var(--brand-brown);
-  --sidebar-border: #eadbcc;
-  --sidebar-ring: var(--brand-gold);
+
+  /* Status colors (used in ContactHours) */
+  --status-open: oklch(0.527 0.154 150.069);
+  --status-closed: oklch(0.577 0.245 27.325);
 }
 
 @media (min-width: 640px) {
   :root {
     --site-header-offset: 7.5rem;
-    --site-header-gap: 1.5rem;
+    --site-header-gap: 1.75rem;
   }
 }
 
@@ -129,21 +114,10 @@
   --border: #5d4b3e;
   --input: #5d4b3e;
   --ring: var(--brand-gold-light);
-  --chart-1: var(--brand-gold-light);
-  --chart-2: var(--brand-gold);
-  --chart-3: var(--brand-taupe);
-  --chart-4: #c9b7a7;
-  --chart-5: #fce6d9;
-  --sidebar: #332821;
-  --sidebar-foreground: #fdf8f4;
-  --sidebar-primary: var(--brand-gold-light);
-  --sidebar-primary-foreground: #2d241f;
-  --sidebar-accent: #4a3b31;
-  --sidebar-accent-foreground: #fdf8f4;
-  --sidebar-border: #5d4b3e;
-  --sidebar-ring: var(--brand-gold-light);
   --logo-gradient-start: #f1ca8b;
   --logo-gradient-end: #c89a54;
+  --status-open: oklch(0.627 0.154 150.069);
+  --status-closed: oklch(0.704 0.191 22.216);
 }
 
 @layer base {
@@ -170,5 +144,12 @@
   h3 {
     font-family: var(--font-display);
     @apply text-lg font-semibold text-foreground;
+  }
+}
+
+@layer utilities {
+  /* Offset para el header fijo — usar en cualquier page que necesite padding-top */
+  .page-top {
+    padding-top: calc(var(--site-header-offset) + var(--site-header-gap));
   }
 }

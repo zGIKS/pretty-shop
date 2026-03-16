@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import SignShampooIcon from "@/components/icon/shampoo";
 import { Button } from "@/components/ui/button";
@@ -7,7 +5,7 @@ import { Button } from "@/components/ui/button";
 export default function Section5() {
   return (
     <section className="py-10 md:py-16">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 flex flex-col gap-8 items-center text-center">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 flex flex-col gap-8 items-center text-center">
         <div className="flex justify-center">
           <SignShampooIcon className="h-64 w-64 md:h-96 md:w-96" />
         </div>
