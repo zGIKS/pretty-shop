@@ -106,7 +106,7 @@ export const serviceCategories: ServiceCategory[] = [
           },
           {
             name: "Dermaplaning",
-            image: encodeURI("/services/facial/Dermaplaning1.png"),
+            image: encodeURI("/services/facial/Dermaplaning.png"),
             description: "Técnica facial que elimina el vello fino del rostro.",
           },
         ],
@@ -149,7 +149,7 @@ export const serviceCategories: ServiceCategory[] = [
         services: [
           {
             name: "Acné Clear (Cóctel)",
-            image: encodeURI("/services/facial/Skin-Repair.png"),
+              image: encodeURI("/services/facial/acneclear.png"),
             description:
               "Ayuda a controlar el acné, reducir imperfecciones y cerrar poros.",
           },
