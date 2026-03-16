@@ -24,7 +24,7 @@ export default function Section2() {
 
           <div className="flex w-full flex-col space-y-3 md:w-[55%] md:space-y-4">
             <h3 className="mb-2 text-primary md:mb-4 md:text-2xl">
-              Servicios
+              ¿Qué te gustaría realizarte hoy?
             </h3>
 
             {serviceCategories.map((category) => (

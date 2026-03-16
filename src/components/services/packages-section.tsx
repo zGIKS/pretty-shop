@@ -1,4 +1,5 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { SectionHeader } from "@/components/ui/section-header";
 import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -13,7 +14,7 @@ const packages = [
     whatsappMessage: "Hola, me gustaría más información sobre el Paquete de Ozono por S/ 360.",
   },
   {
-    title: "Paquete de Desintoxicación Ionica",
+    title: "Paquete de Desintoxicación Iónica",
     price: "S/ 400",
     description: "Ayuda a eliminar toxinas y mejorar la circulación.",
     features: ["10 sesiones de Desintoxicación Iónica"],
@@ -25,8 +26,8 @@ const packages = [
     description: "Tratamiento intensivo para renovar y aclarar la piel.",
     features: [
       "4 sesiones de Peeling Facial",
-      "Protector Solar incluído",
-      "Crema Despigmentante incluída",
+      "Protector Solar incluido",
+      "Crema Despigmentante incluida",
     ],
     whatsappMessage: "Hola, me gustaría más información sobre el Paquete de Peeling Facial por S/ 530.",
   },
@@ -35,36 +36,32 @@ const packages = [
 export function PackagesSection() {
   return (
     <section className="space-y-12 py-12 md:py-20">
-      <div className="text-center w-full flex flex-col items-center">
-        <p className="text-sm font-medium uppercase tracking-[0.18em] text-foreground mb-4">
-          Promociones
-        </p>
-        <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground">
-          Nuestros Paquetes
-        </h2>
-        <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-          Aprovecha nuestras promociones exclusivas en paquetes de tratamiento
-          diseñados para brindarte los mejores resultados.
-        </p>
-      </div>
+      <SectionHeader
+        subtitle="Promociones"
+        title="Nuestros Paquetes"
+        description="Aprovecha nuestras promociones exclusivas en paquetes de tratamiento diseñados para brindarte los mejores resultados."
+      />
 
       <div className="grid gap-6 md:grid-cols-3 max-w-6xl mx-auto">
-        {packages.map((pkg, index) => (
-          <Card key={index} className="flex flex-col h-full bg-background relative overflow-hidden transition-all hover:shadow-md border border-muted/50">
-            <CardHeader className="text-center pb-8 pt-10">
+        {packages.map((pkg) => (
+          <Card
+            key={pkg.title}
+            className="relative flex h-full flex-col overflow-hidden border-border/70 bg-card py-0 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+          >
+            <CardHeader className="px-8 pb-6 pt-10 text-center">
               <CardTitle className="text-2xl font-semibold mb-2">{pkg.title}</CardTitle>
               <div className="mt-4 flex items-baseline justify-center gap-x-1">
-                <span className="text-5xl font-bold tracking-tighter">{pkg.price}</span>
+                <span className="text-5xl font-bold tracking-tight">{pkg.price}</span>
               </div>
-              <CardDescription className="mt-4 text-base px-2">
+              <CardDescription className="mt-4 text-base">
                 {pkg.description}
               </CardDescription>
             </CardHeader>
-            
-            <CardContent className="flex-grow px-8 pb-8">
+
+            <CardContent className="grow px-8 pb-8">
               <ul className="space-y-4">
-                {pkg.features.map((feature, i) => (
-                  <li key={i} className="flex gap-x-3 items-center">
+                {pkg.features.map((feature) => (
+                  <li key={feature} className="flex gap-x-3 items-center">
                     <CheckCircle2 className="h-5 w-5 flex-none text-primary" />
                     <span className="text-foreground text-sm">{feature}</span>
                   </li>
@@ -72,13 +69,17 @@ export function PackagesSection() {
               </ul>
             </CardContent>
 
-            <div className="mt-auto px-8 pb-8">
-              <Button asChild className="w-full text-base py-6">
-                <Link href={getWhatsAppLink(pkg.whatsappMessage)} target="_blank" rel="noopener noreferrer">
+            <CardFooter className="mt-auto px-8 pb-8">
+              <Button asChild className="h-11 w-full text-base">
+                <Link
+                  href={getWhatsAppLink(pkg.whatsappMessage)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Solicitar Paquete
                 </Link>
               </Button>
-            </div>
+            </CardFooter>
           </Card>
         ))}
       </div>

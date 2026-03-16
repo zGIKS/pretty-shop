@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
+import { SectionHeader } from "@/components/ui/section-header";
 import { getWhatsAppLink } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 
@@ -58,55 +59,51 @@ export default function Section6({
   return (
     <section className={cn("py-12 md:py-20 bg-muted/20", className)}>
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-        <div className="text-center w-full mb-12 flex flex-col items-center">
-          {subtitle && (
-            <p className="text-sm font-medium uppercase tracking-[0.18em] text-foreground mb-4">
-              {subtitle}
-            </p>
-          )}
-          {title && (
-            <h2 className="text-3xl md:text-4xl font-semibold mb-4 tracking-tight">
-              {title}
-            </h2>
-          )}
-          {description && (
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              {description}
-            </p>
-          )}
+        <div className="mb-12">
+          <SectionHeader title={title} subtitle={subtitle} description={description} />
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {memberships.map((plan) => (
-            <Card key={plan.name} className="flex flex-col h-full bg-background relative overflow-hidden transition-all hover:shadow-md border border-muted/50">
+            <Card
+              key={plan.name}
+              className="relative flex h-full flex-col overflow-hidden border-border/70 bg-card py-0 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+            >
               {plan.isPopular && (
-                <div className="absolute top-0 right-0 bg-foreground text-background px-4 py-1 text-xs font-semibold uppercase tracking-wider rounded-bl-lg">
+                <div className="absolute top-0 right-0 bg-foreground text-background px-4 py-1 text-xs font-semibold uppercase tracking-label rounded-bl-lg">
                   Popular
                 </div>
               )}
-              <CardHeader className="text-center pb-8 pt-10">
+              <CardHeader className="px-8 pb-6 pt-10 text-center">
                 <CardTitle className="text-2xl font-semibold">{plan.name}</CardTitle>
                 <div className="mt-4 flex items-baseline justify-center gap-x-1">
-                  <span className="text-5xl font-bold tracking-tighter">{plan.price}</span>
+                  <span className="text-5xl font-bold tracking-tight">{plan.price}</span>
                   <span className="text-sm font-semibold leading-6 text-muted-foreground">/mes</span>
                 </div>
-                <CardDescription className="mt-4 text-base px-4">
+                <CardDescription className="mt-4 text-base">
                   {plan.description}
                 </CardDescription>
               </CardHeader>
-              <CardContent className="grow pb-8 px-8">
+              <CardContent className="grow px-8 pb-8">
                 <ul className="space-y-4">
-                  {plan.features.map((feature, idx) => (
-                    <li key={idx} className="flex gap-x-3 items-center">
-                      <Check className="h-5 w-5 flex-none" />
+                  {plan.features.map((feature) => (
+                    <li key={feature} className="flex gap-x-3 items-center">
+                      <Check className="h-5 w-5 flex-none text-primary" />
                       <span className="text-foreground">{feature}</span>
                     </li>
                   ))}
                 </ul>
               </CardContent>
               <CardFooter className="mt-auto px-8 pb-8">
-                <Button asChild className="w-full text-base py-6" variant={plan.isPopular ? "default" : "outline"}>
-                  <Link href={getWhatsAppLink(plan.whatsappMessage)} target="_blank" rel="noopener noreferrer">
+                <Button
+                  asChild
+                  className="h-11 w-full text-base"
+                >
+                  <Link
+                    href={getWhatsAppLink(plan.whatsappMessage)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Adquirir Plan
                   </Link>
                 </Button>

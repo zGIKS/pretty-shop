@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 export default function Membresias() {
   return (
     <>
-      <div className="pt-24 min-h-screen flex flex-col">
-        <MembershipsSection className="flex-1 bg-background pt-12 pb-20" />
+      <div className="page-top min-h-screen flex flex-col bg-background">
+        <MembershipsSection className="flex-1 bg-background pt-0 pb-20" />
       </div>
       <Footer />
     </>

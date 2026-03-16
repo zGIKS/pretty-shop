@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function Paquetes() {
   return (
     <>
-      <div className="pt-24 pb-20 min-h-screen bg-background">
+        <div className="page-top pb-20 min-h-screen bg-background">
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <PackagesSection />
         </div>
