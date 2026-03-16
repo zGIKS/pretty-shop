@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createPortal } from "react-dom";
-import { Briefcase, ChevronDown, Mail, Package, X } from "lucide-react";
+import { Briefcase, Mail, Package, X, Plus, Minus, Star, Gift } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import Pretty from "@/components/icon/pretty/pretty";
@@ -84,11 +84,13 @@ export default function MobileHeaderMenu({
                     ? "Ocultar categorías de servicios"
                     : "Mostrar categorías de servicios"
                 }
-                className="rounded-md border border-border p-2 transition-colors hover:bg-muted"
+                className="p-2 text-muted-foreground transition-colors hover:bg-muted rounded-md"
               >
-                <ChevronDown
-                  className={`h-5 w-5 transition ${servicesOpen ? "rotate-180" : ""}`}
-                />
+                {servicesOpen ? (
+                  <Minus className="h-6 w-6 font-light" strokeWidth={1.5} />
+                ) : (
+                  <Plus className="h-6 w-6 font-light" strokeWidth={1.5} />
+                )}
               </button>
             </div>
 
@@ -127,6 +129,28 @@ export default function MobileHeaderMenu({
               </div>
             </div>
           </div>
+
+          <Link
+            href="/membresias"
+            onClick={handleClose}
+            className="flex w-full items-center justify-between px-5 py-6 sm:px-6"
+          >
+            <span className="flex items-center gap-3 text-lg font-semibold">
+              <Star className="h-5 w-5" />
+              Membresías
+            </span>
+          </Link>
+
+          <Link
+            href="/paquetes"
+            onClick={handleClose}
+            className="flex w-full items-center justify-between px-5 py-6 sm:px-6"
+          >
+            <span className="flex items-center gap-3 text-lg font-semibold">
+              <Gift className="h-5 w-5" />
+              Paquetes
+            </span>
+          </Link>
 
           <Link
             href="/productos"
