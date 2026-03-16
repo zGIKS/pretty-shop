@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
@@ -25,9 +25,10 @@ export default function SearchBar({
   onResultClick,
 }: SearchBarProps) {
   const searchRef = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   const normalizedQuery = searchQuery.trim().toLowerCase();
-  const showResults = searchQuery.trim().length > 0;
+  const showResults = isOpen && searchQuery.trim().length > 0;
 
   const searchResults = useMemo(() => {
     if (!normalizedQuery) return [];
@@ -41,16 +42,16 @@ export default function SearchBar({
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-        onSearchChange("");
+        setIsOpen(false);
       }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [onSearchChange]);
+  }, []);
 
   const handleResultClick = () => {
-    onSearchChange("");
+    setIsOpen(false);
     onResultClick?.();
   };
 
@@ -62,13 +63,20 @@ export default function SearchBar({
         placeholder="Buscar productos..."
         className="pl-10 pr-10"
         value={searchQuery}
-        onChange={(e) => onSearchChange(e.target.value)}
+        onFocus={() => setIsOpen(true)}
+        onChange={(e) => {
+          onSearchChange(e.target.value);
+          setIsOpen(true);
+        }}
       />
       {searchQuery.length > 0 && (
         <button
           type="button"
           aria-label="Limpiar búsqueda"
-          onClick={() => onSearchChange("")}
+          onClick={() => {
+            onSearchChange("");
+            setIsOpen(false);
+          }}
           className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
         >
           <X size={16} />
@@ -89,7 +97,6 @@ export default function SearchBar({
               <div className="flex-1">
                 <h3 className="text-sm">{product.title}</h3>
                 <p className="text-xs text-muted-foreground line-clamp-1">{product.description}</p>
-                <p className="text-sm font-semibold text-foreground mt-1">S/ {product.price}</p>
               </div>
               <Button asChild size="sm">
                 <Link

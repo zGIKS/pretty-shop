@@ -3,17 +3,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { Product } from "@/lib/products";
-import { getProducts } from "@/lib/products";
+import { productsCatalog } from "@/data/products";
 import ProductsGrid from "@/components/landing/products/ProductsGrid";
 import ProductsToolbar from "@/components/landing/products/ProductsToolbar";
-import { Button } from "@/components/ui/button";
-import { Spinner } from "@/components/ui/spinner";
 
 export default function ProductsSection() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
-  const [products, setProducts] = useState<Product[]>([]);
-  const [status, setStatus] = useState<"idle" | "loading" | "error">("loading");
+  const [products] = useState<Product[]>(productsCatalog);
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -21,22 +18,6 @@ export default function ProductsSection() {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setSelectedCategory(categoryParam || "all");
   }, [searchParams]);
-
-  const loadProducts = async () => {
-    setStatus("loading");
-    try {
-      const data = await getProducts();
-      setProducts(data);
-      setStatus("idle");
-    } catch {
-      setStatus("error");
-    }
-  };
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    loadProducts();
-  }, []);
 
   const visibleProducts = useMemo(() => {
     let filtered =
@@ -64,23 +45,7 @@ export default function ProductsSection() {
         onSearchChange={setSearchQuery}
       />
 
-      {status === "loading" && (
-        <div className="flex flex-col items-center gap-3 py-16 text-sm uppercase tracking-wide text-muted-foreground">
-          <Spinner size="lg" />
-          Cargando productos...
-        </div>
-      )}
-
-      {status === "error" && (
-        <div className="flex flex-col items-center gap-4 py-16 text-sm text-muted-foreground">
-          <p className="uppercase tracking-wide">No se pudieron cargar los productos.</p>
-          <Button onClick={loadProducts} variant="default">
-            Intentar de nuevo
-          </Button>
-        </div>
-      )}
-
-      {status === "idle" && visibleProducts.length === 0 && (
+      {visibleProducts.length === 0 && (
         <div className="flex flex-col items-center gap-4 py-16 text-sm text-muted-foreground">
           <p className="uppercase tracking-wide">
             {searchQuery.trim()

@@ -26,7 +26,9 @@ export default function ProductCard({ product }: ProductCardProps) {
       </div>
       <div className="flex flex-col grow pt-3 space-y-2">
         <h3>{product.title}</h3>
-        <p className="text-sm text-muted-foreground">S/ {product.price}</p>
+        <p className="text-sm leading-6 text-muted-foreground">
+          {product.description}
+        </p>
         <div className="mt-auto pt-2">
           <Button asChild className="w-full">
             <Link href={whatsappLink} target="_blank" rel="noopener noreferrer">
